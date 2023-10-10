@@ -1,3 +1,59 @@
+// Import Font
 
-// Colores
-$color_principal: blue;
+@font-face {
+    font-family: bricolage;
+    src: url(../assets/fonts/BricolageGrotesque.ttf);
+}
+
+// Fonts
+$font_principal: bricolage;
+
+// Size
+$font_size_menu: 1.3rem; 
+$font_size_menu_tablet: 3rem; 
+
+
+// Colors
+$color_menu: #A6A6A6;
+$color_white: #FFFFFF;
+$color_white_transparent: #ffffffc2;
+$color_principal: #212121;
+$color_hover_menu: #272727;
+$color_green:#37B34A;
+$color-transparent: rgba(255, 255, 255, 0);
+$color-lineas-menu: #DCDCDC;
+$color_green_dark: #237530;
+
+// Mixins
+
+@mixin devices($breakpoint) {
+  
+    // @if($breakpoint == laptop) {
+    //     @media only screen and ()
+    // }
+
+    @if $breakpoint == tablet {
+        @media only screen and (max-width: 900px) {
+            @content; 
+        }
+    }
+
+    @if $breakpoint == mobile {
+        @media only screen and (max-width: 600px) {
+            @content;
+        }
+    }
+}
+
+// Animation
+
+// Animation
+@mixin animate($name, $duration, $type, $loop){
+    animation: $name $duration $type $loop;
+}
+
+@mixin keyframes($name){
+    @keyframes #{$name}{
+        @content;
+    }
+}

@@ -1,9 +1,9 @@
-
-@import './variables';
-
 *,
 html,
 body{
     margin: 0px;    
     padding: 0px;
 }
+
+@import './variables';
+@import './components/header';
