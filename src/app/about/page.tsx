@@ -3,7 +3,7 @@ export default function About(){
 
     return (
         <>
-            <h1>Hola mudo</h1>
+            <h1>Pagina de about</h1>
         </>
     )
 
