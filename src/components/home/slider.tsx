@@ -48,7 +48,9 @@ function SliderHome(){
     return (
         <>
             
-            <section className='sliderHome'>
+            <section className='sliderHome' style={{
+                height: `${window.innerHeight - 75}px`
+            }}>
                 <Swiper
                     modules={[Pagination, EffectCoverflow, Autoplay]}
                     grabCursor={true}
