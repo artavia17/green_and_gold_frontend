@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 
 // Aqui vamos a utilizar la libreria de swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -44,12 +45,21 @@ function SliderHome(){
         },
     ]
 
+    const [heightWindow, setHeightWindow] = useState(0);
+
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setHeightWindow(window.innerHeight - 75);
+        }
+    }, []);
+
 
     return (
         <>
             
             <section className='sliderHome' style={{
-                height: `${window.innerHeight - 75}px`
+                height: `${heightWindow}px` 
             }}>
                 <Swiper
                     modules={[Pagination, EffectCoverflow, Autoplay]}
