@@ -1,0 +1,108 @@
+
+.sliderHome{
+
+    height: calc(100vh - 75px);
+    position: relative;
+
+    .item{
+        width: calc(100% - 200px) !important;
+        height: calc(100vh - 75px);
+        display: flex;
+        align-items: center;
+        padding: 0px 100px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+
+        @include devices(tablet){
+            width: calc(100% - 100px) !important;
+            padding: 0px 50px;
+            align-items: flex-end;
+        }
+
+        @include devices(mobile){
+            width: calc(100% - 20px) !important;
+            padding: 0px 10px;
+        }
+        
+        &::after{
+            content: "";
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: $color-negro-transparente;
+            z-index: -1;
+        }
+
+        .content{
+            padding-bottom: 70px;
+        }
+
+        h2{
+            color: $color_white;
+            font-size: $font-size-text-slider;
+            max-width: 800px;
+            margin-bottom: 30px;
+
+            @include devices(tablet){
+                font-size: $font_size_menu_tablet;
+            }
+
+            @include devices(mobile){
+                font-size: $font-size-mobile-slider;
+            }
+        }
+
+        a{
+            background-color: $color_green;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: $color_white;
+            font-family: $font_principal;
+            font-weight: bold;
+            font-size: $font-size-slider;
+            transition: .2s ease;
+
+            &:hover{
+                background-color: $color_principal;
+            }
+
+            @include devices(mobile){
+                font-size: $font-size-mobile-link-slider;
+
+                &:hover{
+                    background-color: $color_green;
+                }
+    
+            }
+        }
+
+    }
+
+    .swiper-pagination{
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        column-gap: 10px;
+
+        span{
+            width: 13px;
+            height: 13px;
+            background-color: $color_white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        span.swiper-pagination-bullet-active{
+            background-color: $color_green;
+            cursor: no-drop;
+        }
+    }
+
+}

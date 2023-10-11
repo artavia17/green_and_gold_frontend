@@ -6,6 +6,8 @@ header{
     width: calc(100% - 60px);
     padding: 15px 30px;
     align-items: center;
+    z-index: 9999;
+    position: relative;
 
 
     @include devices(mobile){
@@ -168,6 +170,11 @@ header{
             height: 100vh;
             opacity: 0;
             transition: .2s ease;
+            display: none;
+
+            @include devices(tablet){
+                display: block;
+            }
 
             @include devices(mobile){
                 background-color: $color_green;

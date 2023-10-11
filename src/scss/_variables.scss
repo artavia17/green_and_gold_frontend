@@ -11,6 +11,10 @@ $font_principal: bricolage;
 // Size
 $font_size_menu: 1.3rem; 
 $font_size_menu_tablet: 3rem; 
+$font-size-slider: 1.2rem;
+$font-size-text-slider: 4rem;
+$font-size-mobile-slider: 2rem;
+$font-size-mobile-link-slider: 1rem;
 
 
 // Colors
@@ -20,9 +24,10 @@ $color_white_transparent: #ffffffc2;
 $color_principal: #212121;
 $color_hover_menu: #272727;
 $color_green:#37B34A;
-$color-transparent: rgba(255, 255, 255, 0);
+$color-transparent: rgba(255, 255, 255, 0); 
 $color-lineas-menu: #DCDCDC;
 $color_green_dark: #237530;
+$color-negro-transparente: rgba(0, 0, 0, 0.24);
 
 // Mixins
 
