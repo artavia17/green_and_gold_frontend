@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { EffectCards } from "swiper/modules";
 import { motion } from "framer-motion"
 
@@ -40,14 +39,6 @@ function Cuidados(){
             img: ImagesTwo.src
         }
     ]
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".cuidados_home", {
-        scrollTrigger: ".cuidados_home", // start the animation when ".box" enters the viewport (once)
-        x: 500,
-    });
-
       
 
     return ( 
