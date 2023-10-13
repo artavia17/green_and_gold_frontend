@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from "react";
 
 
 
@@ -9,23 +8,12 @@ import SliderHome from "@/components/home/slider";
 
 export default function Home() {
 
-  useEffect(() => {
-    import("locomotive-scroll").then(locomotiveModule => {
-      const container : HTMLElement | null = document.querySelector('[data-scroll-container]');
-      if(container){
-        new locomotiveModule.default({
-          el: container,
-          smooth: true,
-          getSpeed: true,
-        })
-      }
-    })
-  }, [])
 
   return (
     <>
-      <section className="app" data-scroll-container>
+      <section className="app">
         <SliderHome/>
+        <Cuidados/>
         <Cuidados/>
       </section>
     </>

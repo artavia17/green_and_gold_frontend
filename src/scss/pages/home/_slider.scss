@@ -23,6 +23,7 @@
         @include devices(mobile){
             width: calc(100% - 20px) !important;
             padding: 0px 10px;
+            height: calc(100vh - 50px);
         }
         
         &::after{
