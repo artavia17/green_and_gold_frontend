@@ -84,6 +84,10 @@
             }
         }
 
+        ul{
+            transform: translateX(20px);
+        }
+
         p{
             &:last-of-type{
                 margin-bottom: 0px;

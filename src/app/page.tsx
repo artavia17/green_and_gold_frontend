@@ -5,6 +5,7 @@
 // Componentes
 import Cuidados from "@/components/home/cuaidados";
 import SliderHome from "@/components/home/slider";
+import ManagementComponent from "@/components/home/management";
 
 export default function Home() {
 
@@ -14,7 +15,7 @@ export default function Home() {
       <section className="app">
         <SliderHome/>
         <Cuidados/>
-        <Cuidados/>
+        <ManagementComponent/>
       </section>
     </>
   )
