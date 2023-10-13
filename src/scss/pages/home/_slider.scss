@@ -6,7 +6,7 @@
 
     .item{
         width: calc(100% - 200px) !important;
-        height: calc(100vh - 75px);
+        height: calc(100vh);
         display: flex;
         align-items: center;
         padding: 0px 100px;
@@ -37,14 +37,17 @@
         }
 
         .content{
-            padding-bottom: 70px;
+            padding-bottom: 140px;
         }
 
         h2{
             color: $color_white;
             font-size: $font-size-text-slider;
+            font-family: $font_principal;
             max-width: 800px;
             margin-bottom: 30px;
+            font-weight: 800;
+            line-height: 60px;
 
             @include devices(tablet){
                 font-size: $font_size_menu_tablet;
@@ -52,6 +55,7 @@
 
             @include devices(mobile){
                 font-size: $font-size-mobile-slider;
+                line-height: 30px;
             }
         }
 
@@ -85,7 +89,7 @@
     .swiper-pagination{
         position: absolute;
         width: 100%;
-        bottom: 10px;
+        bottom: 100px;
         z-index: 1;
         display: flex;
         justify-content: center;

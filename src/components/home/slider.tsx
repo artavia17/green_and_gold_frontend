@@ -58,7 +58,7 @@ function SliderHome(){
     return (
         <>
             
-            <section className='sliderHome' style={{
+            <section className='sliderHome' data-scroll-section style={{
                 height: `${heightWindow}px` 
             }}>
                 <Swiper
@@ -75,8 +75,6 @@ function SliderHome(){
                     autoplay={{
                         delay: 3000,
                     }}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
                 >
                     {
                         allSlider.map( (item, key) =>{
@@ -89,8 +87,8 @@ function SliderHome(){
                                     }}
                                 >
                                     <section className='content'>
-                                        <h2>{item.title}</h2>
-                                        <a href={item.linkButton} target={item.newTarget ? '_blank' : ''}>{item.textButton}</a>
+                                        <h2 data-scroll data-scroll-speed="1">{item.title}</h2>
+                                        <a href={item.linkButton} target={item.newTarget ? '_blank' : ''} data-scroll data-scroll-speed="1">{item.textButton}</a>
                                     </section>
                                 </SwiperSlide>
                             )

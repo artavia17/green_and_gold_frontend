@@ -8,6 +8,9 @@ header{
     align-items: center;
     z-index: 9999;
     position: relative;
+    background-color: $color_white;
+    position: sticky;
+    top: 0px;
 
 
     @include devices(mobile){
