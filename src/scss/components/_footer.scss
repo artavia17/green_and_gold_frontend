@@ -1,0 +1,251 @@
+footer{
+
+    .content{
+        background-color: $color-green-title;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
+        padding: 90px 0px;
+
+        @include devices(tablet){
+            border-top-right-radius: 35px;
+            border-top-left-radius: 35px;
+            padding: 10px 0px;
+        }
+    
+        @include devices(mobile){
+            height: auto;
+    
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+
+        .first-column{
+            display: flex;
+            flex-flow: row;
+            column-gap: 80px;
+            max-width: 1400px;
+            margin: auto;
+
+            @include devices(laptop){
+                max-width: 1100px;
+                column-gap: 20px;
+            }
+
+            @include devices(tablet){
+                column-gap: 0px;
+                width: calc(100% - 100px);
+                margin: 50px 50px 10px 50px;
+                flex-flow: column;
+                row-gap: 20px;
+            }
+
+            section{
+
+                display: flex;
+                flex-flow: row;
+                align-items: flex-start;
+                column-gap: 15px;
+                font-family: $font_principal;
+
+                @include devices(tablet){
+                    flex-flow: column;
+                    row-gap: 10px;
+                }
+
+                div{
+                    display: flex;
+                    flex-flow: column;
+
+                    a {
+                        font-weight: bold;
+                    }
+
+                }
+
+                img{
+                    width: 30px;
+                    height: auto;
+                    user-select: none;
+                    pointer-events: none;
+                }
+
+                a{
+                    text-decoration: none;
+                    color: $color_white;
+                    margin-bottom: 5px;
+                    font-size: $font-size-text-tablet;
+                    transition: .2s ease;
+
+                    &:hover{
+                        color: $color_hover_menu;                        
+                    }
+
+                }
+
+            }
+
+        }
+
+        .second_column{
+
+            display: flex;
+            flex-flow: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            max-width: 1400px;
+            margin: 0px auto;
+
+            @include devices(laptop){
+                max-width: 1100px;
+            }
+
+            @include devices(tablet){
+                column-gap: 0px;
+                width: calc(100% - 100px);
+                margin: 0px 50px 50px 50px;
+                flex-flow: row;
+                row-gap: 20px;
+            }
+
+            nav{
+
+                display: block;
+
+                @include devices(tablet){
+                    display: none;
+                }
+
+            }
+
+            ul{
+                display: flex;
+                flex-flow: row;
+                column-gap: 35px;
+                z-index: 999;
+        
+                @include devices(tablet){
+                    position: absolute;
+                    z-index: 999;
+                    background-color: $color_green;
+                    top: 0px;
+                    left: 0px;
+                    flex-flow: column;
+                    height: calc(100vh - 60px);
+                    max-width: 300px;
+                    width: calc(100% - 60px);
+                    padding: 30px;
+                    justify-content: center;
+                    transform: translateX(-100%);
+                    transition: .5s ease;
+                }
+    
+                @include devices(mobile){
+                    transition: .2s ease;
+                    max-width: 100vw;
+                    transform: translateX(0%);
+                    opacity: 0;
+                    background-color: transparent;
+                }
+        
+                li{
+                    list-style: none;
+        
+                    a{
+                        text-decoration: none;
+                        font-family: $font_principal;
+                        font-size: $font-size-text-tablet;
+                        color: $color_white;
+                        padding: 0px 0px;
+                        transition: .2s ease; 
+                        position: relative;
+        
+                        @include devices(tablet){
+                            color: $color_white;
+                            font-size: $font_size_menu_tablet;
+                            font-weight: bold;
+                        }
+        
+                        &::after,
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            width: 0%;
+                            height: 1px;
+                            bottom: 0px;
+                            background: $color_hover_menu;
+                        }
+        
+                        &::before{
+                            left: 0;
+                        }
+        
+                        &::after{
+                            right: 0;
+                            background: $color_hover_menu;
+                            transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    
+                        }
+        
+                        &:hover{
+        
+                            color: $color_hover_menu;
+                            
+    
+                            &::after{
+                                background: transparent;
+                                width: 100%;
+                                transition: 0s;
+                            }
+        
+                            &::before{
+                                background: $color_hover_menu;
+                                width: 100%;
+                                transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    
+                                @include devices(mobile){
+    
+                                    background: $color_green_dark;
+        
+                                }
+                            }
+                        }
+        
+                    }
+                }
+            }
+
+            .items_logo{
+
+                display: flex;
+                flex-flow: column;
+                align-items: flex-end;
+                font-family: $font_principal;
+                font-size: $font-size-text-tablet;
+                color: $color_white;
+                user-select: none;
+
+                @include devices(tablet){
+                    column-gap: 0px;
+                    width: 100%;
+                    flex-flow: row-reverse;
+                    justify-content: space-between;
+                    row-gap: 20px;
+                }
+
+                img{
+                    width: 70px;
+                    height: auto;
+                    margin-bottom: 15px;
+
+                    @include devices(tablet){
+                        margin-bottom: 0px;
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+}

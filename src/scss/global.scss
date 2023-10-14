@@ -3,10 +3,12 @@ html,
 body{
     margin: 0px;    
     padding: 0px;
+    scroll-behavior: smooth;
 }
 
 @import './variables';
 @import './components/header';
+@import './components/footer';
 @import './pages/home/slider';
 @import './pages/home/cuidados';
 @import './pages/home/managment';
