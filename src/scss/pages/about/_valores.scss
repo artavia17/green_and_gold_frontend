@@ -1,0 +1,112 @@
+.about-us{
+
+    .valores{
+
+        max-width: 1400px;
+        width: 85vw;
+        margin: 0px auto 0px auto;
+        padding: 20px 80px 100px 80px;
+        font-family: $font_principal;
+        // min-height: 100vh;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        @include devices(laptop){
+            max-width: 1100px;
+            width: 70vw;
+            padding: 50px;
+        }
+
+        @include devices(mobile){
+            width: 100%;
+            padding: 10px 10px 50px 10px;
+            max-width: calc(100% - 50px);
+            margin: 0px auto 0px auto;
+        }
+
+        h2{
+            font-size: $font-size-about-title-principal;
+            color: $color_green;
+            margin-bottom: 15px;
+
+            @include devices(mobile){
+                font-size: $font_size_menu_tablet;
+            }
+        }
+
+
+        p{
+
+            color: $color_white;
+            font-size: $font-size-slider;
+
+            @include devices(mobile){
+                font-size: $font-size-about-parrafo;
+            }
+        }
+
+
+    }
+
+    .icons{
+
+        width: 100%;
+        margin-top: 100px;
+
+        @include devices(tablet){
+            margin-top: 40px;
+        }
+
+        ul{
+            display: flex;
+            justify-content: space-around;
+            flex-flow: row wrap;
+            row-gap: 100px;
+            width: 100%;
+
+            li{
+                width: 25%;
+                display: grid;
+                place-items: center;
+                color: $color_white;
+                font-size: $font-size-text-tablet;
+                user-select: none;
+                pointer-events: none;
+
+
+                @include devices(laptop){
+                    width: 33.33%;
+                }
+
+                @include devices(tablet){
+                    width: 50%;
+                }
+
+
+                img{
+                    margin-bottom: 20px;
+                    width: 35px;
+                    height: auto;
+
+                    @include devices(mobile){
+                        width: 25px;
+                    }
+                }
+
+                h3{
+                    font-weight: bold;
+                    text-align: center;
+
+                    @include devices(mobile){
+                        font-size: $font-size-about-parrafo;
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+}

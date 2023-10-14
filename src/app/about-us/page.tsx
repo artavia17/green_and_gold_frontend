@@ -1,4 +1,5 @@
 import HistoryComponent from "@/components/about/history"
+import ValoresComponent from "@/components/about/valores"
 import WhoComponent from "@/components/about/who"
 
 
@@ -9,6 +10,7 @@ export default function About(){
             <section className="about-us">
                 <WhoComponent/>
                 <HistoryComponent/>
+                <ValoresComponent/>
             </section>  
         </>
     )

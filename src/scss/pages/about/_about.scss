@@ -6,10 +6,15 @@
 
 .content_history_vision{
 
-    min-height: 100vh;
+    // min-height: 100vh;
     display: flex;
     flex-flow: column;
     justify-content: center;
+    margin-bottom: 100px;
+
+    @include devices(tablet){
+        margin-bottom: 0px;
+    }
 
 
 }

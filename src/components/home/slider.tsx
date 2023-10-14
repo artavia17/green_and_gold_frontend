@@ -87,23 +87,10 @@ function SliderHome(){
                                         backgroundImage: `url(${item.img})`,
                                     }}
                                 >
-                                    <motion.div 
-                                        className='content'
-                                        initial={{
-                                            y: 200,
-                                            opacity: 0
-                                        }}
-                                        whileInView={{
-                                            y: 0,
-                                            opacity: 1,
-                                        }}
-                                        transition={{
-                                            type: 'spring'
-                                        }}
-                                    >
+                                    <div className='content'>
                                         <h2 data-scroll data-scroll-speed="1">{item.title}</h2>
                                         <a href={item.linkButton} target={item.newTarget ? '_blank' : ''} data-scroll data-scroll-speed="1">{item.textButton}</a>
-                                    </motion.div>
+                                    </div>
                                 </SwiperSlide>
                             )
                         })
