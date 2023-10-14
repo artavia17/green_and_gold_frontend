@@ -1,4 +1,7 @@
+'use client'
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 
 type propsType = {
@@ -18,7 +21,20 @@ export default function PropertyComponent( { reverse, content } : propsType ){
 
     return (
         <>
-            <section className={`property ` +  (reverse ? 'reverse' : '')}>
+            <motion.section 
+                className={`property ` +  (reverse ? 'reverse' : '')}
+                initial={{
+                    y: 200,
+                    opacity: 0
+                }}
+                whileInView={{
+                    y: 0,
+                    opacity: 1,
+                }}
+                transition={{
+                    type: 'spring'
+                }}
+            >
                 
                 <section className="image">
                     <Image src={content.image} alt="Imagen principal" title="Imagen title" width={100} height={100}/>
@@ -29,7 +45,7 @@ export default function PropertyComponent( { reverse, content } : propsType ){
                     <div className="content" dangerouslySetInnerHTML={{__html: content.content}}></div>
                 </section>
 
-            </section>
+            </motion.section>
         </>
     )
 

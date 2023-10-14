@@ -2,10 +2,13 @@
  * Desde este archivo enviamos mostramos el contenido de la seccion de servicios
  */
 
+'use client';
+
 import PropertyComponent from "@/components/services/properti";
 import ImageOne from '@/assets/img/test/servicios_one.png';
 import ImageTwo from '@/assets/img/test/servicios_two.png';
 import ImageThree from '@/assets/img/test/servicios_three.png';
+import { motion } from "framer-motion";
 
 function Services(){
 
@@ -130,8 +133,22 @@ function Services(){
         <>
 
             <section className="servicios">
-                <h4>Let us take care of everything</h4>
-                <h1>Our Services</h1>
+                <motion.section
+                    initial={{
+                        y: 200,
+                        opacity: 0
+                    }}
+                    whileInView={{
+                        y: 0,
+                        opacity: 1,
+                    }}
+                    transition={{
+                        type: 'spring'
+                    }}
+                >
+                    <h4>Let us take care of everything</h4>
+                    <h1>Our Services</h1>
+                </motion.section>
                 <PropertyComponent reverse={false} content={management}/>
                 <PropertyComponent reverse={true} content={rental}/>
                 <PropertyComponent reverse={false} content={concierge}/>
