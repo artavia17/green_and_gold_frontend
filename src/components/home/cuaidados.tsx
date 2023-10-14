@@ -47,24 +47,7 @@ function Cuidados(){
             <section className="cuidados_home" data-scroll-section>
                 <section className="max">
                     <section className="content">
-                        <motion.div
-                            initial={{
-                                y: 200,
-                                opacity: 0
-                            }}
-                            whileInView={{
-                                y: 0,
-                                opacity: 1,
-                            }}
-                            transition={{
-                                type: "spring",
-                                bounce: 0,
-                                duration: 0.8
-                            }}       
-
-                        >
-                            <h1>{ contentApi.title }</h1>
-                        </motion.div>
+                        <h1>{ contentApi.title }</h1>
                         <section dangerouslySetInnerHTML={{__html: contentApi.content}}></section>
                     </section>
                     <section className="contentSlider">

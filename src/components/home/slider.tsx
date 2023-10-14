@@ -51,7 +51,10 @@ function SliderHome(){
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            setHeightWindow(window.innerHeight - 75);
+            const header = document.querySelector('header');
+            if(header){
+                setHeightWindow(window.innerHeight - header?.offsetHeight);
+            }
         }
     }, []);
 
@@ -76,6 +79,9 @@ function SliderHome(){
                     autoplay={{
                         delay: 3000,
                     }}
+                    style={{
+                        height: `${heightWindow + 50}px` 
+                    }}
                 >
                     {
                         allSlider.map( (item, key) =>{
@@ -85,6 +91,7 @@ function SliderHome(){
                                     key={key}
                                     style={{
                                         backgroundImage: `url(${item.img})`,
+                                        height: `${heightWindow + 50}px`     
                                     }}
                                 >
                                     <div className='content'>

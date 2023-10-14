@@ -24,6 +24,7 @@
             width: calc(100% - 20px) !important;
             padding: 0px 10px;
             height: calc(100vh - 50px);
+            padding-bottom: 15px;
         }
         
         &::after{
@@ -38,7 +39,16 @@
         }
 
         .content{
-            padding-bottom: 160px;
+            // padding-bottom: 160px;
+
+            @include devices(tablet){
+                padding-bottom: 160px;
+            }
+
+            @include devices(mobile){
+                padding-bottom: 120px;
+            }
+
         }
 
         h2{
@@ -90,11 +100,19 @@
     .swiper-pagination{
         position: absolute;
         width: 100%;
-        bottom: 100px;
+        bottom: 70px;
         z-index: 1;
         display: flex;
         justify-content: center;
         column-gap: 10px;
+
+        @include devices(tablet){
+            bottom: 100px;
+        }
+
+        @include devices(mobile){
+            bottom: 70px;
+        }
 
         span{
             width: 13px;
