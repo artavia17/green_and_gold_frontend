@@ -16,7 +16,7 @@ function Footer(){
     let date = new Date();
     let year = date.getFullYear();
 
-    if(router == '/about-us'){
+    if(router == '/about-us' || router == '/services'){
         color = '#212121'
     }
 

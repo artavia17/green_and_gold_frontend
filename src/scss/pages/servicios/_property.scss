@@ -1,0 +1,155 @@
+.servicios {
+
+    .property{
+
+        max-width: 1400px;
+        width: 85vw;
+        border: 1px solid $color-border;
+        margin: 0px auto 80px auto;
+        padding: 40px;
+        display: grid;
+        grid-template-columns: calc(30% - 25px) calc(70% - 25px);
+        color: $color_white;
+        font-family: $font_principal;
+        grid-gap: 50px;
+        border-radius: 15px;
+
+        @include devices(laptop){
+            max-width: 1100px;
+            width: 70vw;
+            padding: 25px;
+            margin: 0px auto 0px auto;
+            grid-template-columns: 1fr;
+        }
+
+        @include devices(tablet){
+            row-gap: 30px;
+            margin: 0px auto 40px auto;
+        }
+
+        @include devices(mobile){
+            padding: 15px;
+            width: 100%;
+            max-width: calc(100% - 80px);
+            row-gap: 20px;
+            border-radius: 17px;
+        }
+
+        .second-item{
+            @include devices(laptop){
+                grid-area: 1;
+            }
+
+            @include devices(tablet){
+                grid-area: 1;
+            }
+        }
+
+        .image{
+            @include devices(laptop){
+                height: 400px;
+            }
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        h2{
+            font-size: $font-size-title-mobile;
+            margin-bottom: 20px;
+            font-weight: bold;
+
+            @include devices(tablet){
+                font-size: $font-size-title-mobile;
+            }
+
+            @include devices(mobile){
+                font-size: $font-size-mobile-slider;
+            }
+
+        }
+
+        .subcontent{
+
+            font-size: $font-size-slider;
+            font-weight: 300;
+            margin-bottom: 20px;
+
+            @include devices(mobile){
+                font-size: $font-size-about-parrafo;
+            }
+
+            ul{
+                transform: translateX(20px);
+            }
+
+        }
+
+        .content{
+
+            h5,
+            h4,
+            h3,
+            h2,
+            h1{
+                font-size: $font-size-about-title;
+                margin-bottom: 10px;
+
+                @include devices(mobile){
+                    font-size: $font_size_menu;
+                }
+    
+            }
+
+            h6{
+                font-weight: bold;
+                font-size: $font-size-text-tablet;
+
+                @include devices(mobile){
+                    font-size: $font-size-about-parrafo;
+                }
+            }
+
+            ul,
+            p{
+                margin-bottom: 10px;
+                font-size: $font-size-text-tablet;
+
+                @include devices(mobile){
+                    font-size: $font-size-about-parrafo;
+                }
+            }
+
+            ul{
+                transform: translateX(20px);
+            }
+
+            strong{
+                font-weight: bold;
+            }
+
+        }
+
+    }
+
+    .property.reverse{
+
+        grid-template-columns: calc(70% - 25px) calc(30% - 25px);
+
+        @include devices(laptop){
+            grid-template-columns: 1fr;
+        }
+
+        .second-item{
+            grid-area: 1;
+        }
+
+    }
+
+}

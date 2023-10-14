@@ -1,0 +1,43 @@
+.servicios {
+
+    background-color: $color_principal;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    @include devices(tablet){
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
+
+    h1,
+    h4 {
+        text-align: center;
+        font-family: $font_principal;
+        color: $color_white;
+    }
+
+    h2{
+        font-size: $font-size-about-title;
+        font-weight: 350;
+
+        @include devices(mobile){
+            font-size: $font-size-text-tablet;
+        }
+    }
+
+    h1{
+        padding-bottom: 80px;
+        font-size: $font-size-about-title-principal;
+        color: $color_green;
+
+        @include devices(tablet){
+            padding-bottom: 40px;
+        }
+    
+
+        @include devices(mobile){
+            font-size: $font_size_menu_tablet;
+        }
+    }
+
+}
