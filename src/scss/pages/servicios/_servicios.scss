@@ -19,6 +19,10 @@
     h4{
         font-size: $font-size-text-tablet;
         font-weight: 350;
+
+        @include devices(mobile){
+            font-size: $font-size-about-parrafo;
+        }
     }
 
     h2{
@@ -41,7 +45,7 @@
     
 
         @include devices(mobile){
-            font-size: $font_size_menu_tablet;
+            font-size: $font-size-mobile-slider;
         }
     }
 

@@ -25,6 +25,11 @@
             width: 60px;
             height: auto;
             margin-bottom: 15px;
+
+            @include devices(mobile){
+                width: 40px;
+            }
+
         }
 
         h2{
@@ -33,7 +38,7 @@
             margin-bottom: 15px;
 
             @include devices(mobile){
-                font-size: $font_size_menu_tablet;
+                font-size: $font-size-mobile-slider;
             }
         }
 
@@ -41,12 +46,12 @@
             color: $color_white;
             font-size: $font-size-slider;
 
+            @include devices(mobile){
+                font-size: $font-size-about-parrafo-mobile;
+            }
+
             p{
                 margin-bottom: 15px;
-
-                @include devices(mobile){
-                    font-size: $font-size-about-parrafo;
-                }
             }
         }
 

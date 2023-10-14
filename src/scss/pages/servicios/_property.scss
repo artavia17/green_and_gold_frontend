@@ -70,7 +70,7 @@
             }
 
             @include devices(mobile){
-                font-size: $font-size-mobile-slider;
+                font-size: $font-size-about-title-subtitle;
             }
 
         }
@@ -82,11 +82,12 @@
             margin-bottom: 20px;
 
             @include devices(mobile){
-                font-size: $font-size-about-parrafo;
+                font-size: $font-size-about-parrafo-mobile;
             }
 
             ul{
                 transform: translateX(20px);
+                width: calc(100% - 20px);
             }
 
         }
@@ -102,7 +103,7 @@
                 margin-bottom: 10px;
 
                 @include devices(mobile){
-                    font-size: $font_size_menu;
+                    font-size: $font-size-slider;
                 }
     
             }
@@ -112,7 +113,7 @@
                 font-size: $font-size-text-tablet;
 
                 @include devices(mobile){
-                    font-size: $font-size-about-parrafo;
+                    font-size: $font-size-about-parrafo-mobile;
                 }
             }
 
@@ -122,12 +123,13 @@
                 font-size: $font-size-text-tablet;
 
                 @include devices(mobile){
-                    font-size: $font-size-about-parrafo;
+                    font-size: $font-size-about-parrafo-mobile;
                 }
             }
 
             ul{
                 transform: translateX(20px);
+                width: calc(100% - 20px);
             }
 
             strong{

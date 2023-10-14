@@ -6,7 +6,7 @@
         align-items: center;
 
         @include devices(mobile){
-            padding: 30px 0px;
+            padding: 0px 0px;
         }
 
         .item{
@@ -59,7 +59,7 @@
                 font-size: $font-size-about-title-principal;
 
                 @include devices(mobile){
-                    font-size: $font_size_menu_tablet;
+                    font-size: $font-size-mobile-slider;
                 }
             }
 
@@ -73,7 +73,7 @@
                 }
 
                 @include devices(mobile){
-                    font-size: $font-size-about-parrafo;
+                    font-size: $font-size-about-parrafo-mobile;
                 }
             }
 

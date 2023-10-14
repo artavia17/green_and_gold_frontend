@@ -72,12 +72,10 @@ export default function ValoresComponent(){
                             {
                                 typeValores.map( (item, key) => {
                                     return (
-                                        <>
-                                            <li key={key}>
-                                                <Image src={item.img} title={`Image of ${item.title}`} alt={`Image of ${item.title}`} width={100} height={100} />                                           
-                                                <h3 title={item.title}>{item.title}</h3>
-                                            </li>                    
-                                        </>
+                                        <li key={key}>
+                                            <Image src={item.img} title={`Image of ${item.title}`} alt={`Image of ${item.title}`} width={100} height={100} />                                           
+                                            <h3 title={item.title}>{item.title}</h3>
+                                        </li>                    
                                     )
                                 })
                             }

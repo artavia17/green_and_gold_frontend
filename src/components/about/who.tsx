@@ -5,16 +5,21 @@ import { motion } from "framer-motion";
 
 const WhoComponent = () => {
 
-
     const [heightWindow, setHeightWindow] = useState(0);
     const backgroundStyle = {
         backgroundImage: `url(${BackgroundImage.src})`,
     }
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setHeightWindow(window.innerHeight - 75);
+
+        const header = document.querySelector('header');
+
+        if(header){
+            if (typeof window !== 'undefined') {
+                setHeightWindow(window.innerHeight - header.offsetHeight);
+            }
         }
+
     }, []);
 
     return (

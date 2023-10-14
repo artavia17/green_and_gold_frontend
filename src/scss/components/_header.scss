@@ -294,6 +294,17 @@ header{
                     }
     
                 }
+
+                a.active{
+                    color: $color_hover_menu;
+                    font-weight: bold;
+                    user-select: none;
+                    pointer-events: none;
+
+                    @include devices(mobile){
+                        color: $color_green_dark;
+                    }
+                }
             }
         }
     }

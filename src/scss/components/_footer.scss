@@ -39,6 +39,14 @@ footer{
                 row-gap: 20px;
             }
 
+            @include devices(mobile){
+                column-gap: 0px;
+                width: calc(100% - 80px);
+                margin: 50px 40px 10px 40px;
+                flex-flow: column;
+                row-gap: 20px;
+            }
+
             section{
 
                 display: flex;
@@ -80,6 +88,12 @@ footer{
                         color: $color_hover_menu;                        
                     }
 
+                    @include devices(mobile){
+
+                        font-size: $font-size-about-parrafo-mobile;
+
+                    }
+
                 }
 
             }
@@ -107,12 +121,24 @@ footer{
                 row-gap: 20px;
             }
 
+            @include devices(mobile){
+                width: calc(100% - 80px);
+                margin: 0px 40px 50px 40px;
+            }
+
             nav{
 
                 display: block;
 
                 @include devices(tablet){
                     display: none;
+                }
+
+                a.active{
+                    color: $color_hover_menu;
+                    font-weight: bold;
+                    pointer-events: none;
+                    user-select: none;
                 }
 
             }
@@ -232,6 +258,10 @@ footer{
                     row-gap: 20px;
                 }
 
+                @include devices(mobile){
+                    font-size: $font-size-about-parrafo-mobile;
+                }
+
                 img{
                     width: 70px;
                     height: auto;
@@ -240,6 +270,11 @@ footer{
                     @include devices(tablet){
                         margin-bottom: 0px;
                     }
+
+                    @include devices(tablet){
+                        width: 50px;
+                    }
+
                 }
 
             }

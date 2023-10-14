@@ -91,6 +91,7 @@
 
                     @include devices(mobile){
                         line-height: 40px;
+                        font-size: $font-size-mobile-slider;
                     }
 
                 }
@@ -100,6 +101,10 @@
                     font-family: $font_principal;
                     color: $color_white;
                     font-size: $font-size-slider;
+
+                    @include devices(mobile){
+                        font-size: $font-size-about-parrafo-mobile;
+                    }
 
                     ul{
                         margin-left: 25px;
@@ -136,6 +141,10 @@
                             position: relative;
                             right: 0px;
                             bottom: 0px;
+                        }
+
+                        @include devices(tablet){
+                            font-size: $font-size-about-parrafo-mobile;
                         }
                     }
                 }
