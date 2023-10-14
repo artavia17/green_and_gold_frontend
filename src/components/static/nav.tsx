@@ -21,7 +21,7 @@ const NavComponent = ({ clickEvent } : Props ) => {
                         <Link onClick={clickEvent} href="/services">Services</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="#contacto">Contacto</Link>
+                        <Link onClick={clickEvent} href="#contacto">Contact</Link>
                     </li>
                 </ul>
             </nav>
