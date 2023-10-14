@@ -142,7 +142,7 @@
 
     .property.reverse{
 
-        grid-template-columns: calc(70% - 25px) calc(30% - 25px);
+        grid-template-columns: calc(60% - 25px) calc(40% - 25px);
 
         @include devices(laptop){
             grid-template-columns: 1fr;
