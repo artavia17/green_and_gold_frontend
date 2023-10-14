@@ -1,7 +1,7 @@
 import ImagesTwo from '@/assets/img/test/cuidados_2.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 function ManagementComponent(){
 

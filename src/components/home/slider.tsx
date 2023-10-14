@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
+import { motion } from "framer-motion";
 
 // Imagenes de prueba
 import ImageBackgroundTest from '@/assets/img/test/background_swiper_test.png';
@@ -86,10 +87,23 @@ function SliderHome(){
                                         backgroundImage: `url(${item.img})`,
                                     }}
                                 >
-                                    <section className='content'>
+                                    <motion.div 
+                                        className='content'
+                                        initial={{
+                                            y: 200,
+                                            opacity: 0
+                                        }}
+                                        whileInView={{
+                                            y: 0,
+                                            opacity: 1,
+                                        }}
+                                        transition={{
+                                            type: 'spring'
+                                        }}
+                                    >
                                         <h2 data-scroll data-scroll-speed="1">{item.title}</h2>
                                         <a href={item.linkButton} target={item.newTarget ? '_blank' : ''} data-scroll data-scroll-speed="1">{item.textButton}</a>
-                                    </section>
+                                    </motion.div>
                                 </SwiperSlide>
                             )
                         })
