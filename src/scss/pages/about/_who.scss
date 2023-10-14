@@ -6,7 +6,7 @@
         align-items: center;
 
         @include devices(mobile){
-            padding: 15px 0px;
+            padding: 30px 0px;
         }
 
         .item{
@@ -14,7 +14,7 @@
             width: 85vw;
             background-color: $color_green;
             margin: auto;
-            padding: 80px;
+            padding: 25vh 80px;
             border-radius: 30px;
             background-size: cover;
             background-position: center;
@@ -36,11 +36,10 @@
                 display: flex;
                 flex-flow: column;
                 row-gap: 30px;
-                border-radius: 17px;
             }
     
             @include devices(mobile){
-                padding: 20px 20px;
+                padding: 30px 20px;
                 width: 100%;
                 max-width: calc(100% - 80px);
                 row-gap: 15px;
@@ -62,7 +61,6 @@
                 @include devices(mobile){
                     font-size: $font_size_menu_tablet;
                 }
-                
             }
 
             p{

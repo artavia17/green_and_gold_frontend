@@ -1,0 +1,61 @@
+.about-us{
+
+    .visionMision{
+        max-width: 1400px;
+        width: 85vw;
+        background-color: $color_green;
+        margin: 100px auto 0px auto;
+        padding: 10vh 80px;
+        border-radius: 30px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: grid;
+        grid-template-columns: calc(50% - 25px) calc(50% - 25px);
+        color: $color_white;
+        font-family: $font_principal;
+        grid-gap: 50px;
+
+        @include devices(laptop){
+            max-width: 1100px;
+            width: 70vw;
+            padding: 50px;
+            margin: 0px auto 0px auto;
+        }
+
+        @include devices(tablet){
+            display: flex;
+            flex-flow: column;
+            row-gap: 30px;
+            margin: 0px auto 70px auto;
+        }
+
+        @include devices(mobile){
+            padding: 30px 20px;
+            width: 100%;
+            max-width: calc(100% - 80px);
+            row-gap: 20px;
+            border-radius: 30px;
+        }
+
+        h2{
+            font-size: $font-size-title-mobile;
+            color: $color_principal;
+            margin-bottom: 20px;
+
+            @include devices(mobile){
+                margin-bottom: 0px;
+            }
+
+        }
+
+        p{
+            font-size: $font-size-slider;
+
+            @include devices(mobile){
+                font-size: $font-size-about-parrafo;
+            }
+        }
+    }
+
+}
