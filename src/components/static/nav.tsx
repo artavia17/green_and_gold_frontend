@@ -13,8 +13,6 @@ const NavComponent = ({ clickEvent } : Props ) => {
 
     const path = usePathname();
 
-    console.log(path);
-
     return ( 
         <>
             <nav>
@@ -29,7 +27,10 @@ const NavComponent = ({ clickEvent } : Props ) => {
                         <Link onClick={clickEvent} href="/services" className={ path == '/services' ? 'active' : '' }>Services</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="#contacto">Contact</Link>
+                        <Link onClick={clickEvent} href="/rental-home" className={ path == '/rental-home' ? 'active' : '' }>Rental Homes</Link>
+                    </li>
+                    <li>
+                        <Link onClick={clickEvent} href="#contacto">Contact Us</Link>
                     </li>
                 </ul>
             </nav>

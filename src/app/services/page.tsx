@@ -96,7 +96,7 @@ function Services(){
 
                     <h5>Dining:</h5>
                     <ul>
-                        <li>n-home dining arrangements and restaurant reservations.</li>                        
+                        <li>In-home dining arrangements and restaurant reservations.</li>                        
                     </ul>
 
                     <h5>Adventure:</h5>

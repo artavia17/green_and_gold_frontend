@@ -36,8 +36,8 @@ function Footer(){
                         <section className='contact'>
                             <Image src={Phone.src} alt='Logo del contacto' width={100} height={100}/> 
                             <div>
-                                <a href="" title='Phone +506 60414848'>+506 60414848</a>
-                                <a href="" title='Phone +506 83715061'>+506 83715061</a>
+                                <a href="" title='Phone CR: +506 60414848'>CR: +506 60414848</a>
+                                <a href="" title='Phone CR: +506 83715061'>CR: +506 83715061</a>
                                 <a href="" title='Phone US: +19195995281'>US: +19195995281</a>
                             </div>
                         </section>
@@ -50,7 +50,7 @@ function Footer(){
                         <NavComponent/>
                         <section className='items_logo'>
                             <Image src={LogoFooter.src} alt='Logo Green and Gold' width={100} height={100} title='Logo green and gold'/>
-                            <p title={`${year} © Green and gold`}>{ year } © Green and gold</p>
+                            <p title={`${year} © Green and gold`}>{ year } © Green and Gold</p>
                         </section>
                     </div>
                 </section>

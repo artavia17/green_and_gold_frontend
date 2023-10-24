@@ -1,0 +1,32 @@
+.filtes{
+
+    max-width: 1400px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: calc(40% - 25px) calc(60% - 25px);
+    color: $color_white;
+    font-family: $font_principal;
+    grid-gap: 50px;
+
+    @include devices(laptop){
+        max-width: 1100px;
+        width: 70vw;
+        padding: 25px;
+        margin: 0px auto 0px auto;
+        grid-template-columns: 1fr;
+    }
+
+    @include devices(tablet){
+        row-gap: 30px;
+        margin: 0px auto 40px auto;
+    }
+
+    @include devices(mobile){
+        padding: 15px;
+        width: 100%;
+        max-width: calc(100% - 80px);
+        row-gap: 20px;
+        border-radius: 17px;
+    }
+
+}

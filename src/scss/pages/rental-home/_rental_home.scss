@@ -1,0 +1,209 @@
+.rental-home{
+
+    padding-top: 80px;
+    padding-bottom: 80px;
+    max-width: 1400px;
+    margin: auto;
+
+    @include devices(laptop){
+        max-width: 1100px;
+        width: 70vw;
+    }
+
+    @include devices(mobile){
+        padding: 20px;
+        width: 100%;
+        max-width: calc(100% - 40px);
+    }
+
+    h1,
+    h2{
+        text-align: center;
+        font-family: $font_principal;
+
+        @include devices(mobile){
+            text-align: left;
+        }
+
+    }
+
+
+    h1{
+
+        font-size: $font-size-about-title-principal;
+        color: $color_green;    
+
+        @include devices(mobile){
+            font-size: $font-size-mobile-slider;
+        }
+    }
+
+    h2{
+        font-size: $font-size-text-tablet;
+        color: $color_principal;
+
+        @include devices(mobile){
+            font-size: $font-size-about-parrafo;
+        }
+    }
+
+    .content_filters{
+
+        @include devices(mobile){
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    .open_filters{
+        display: none;
+
+        @include devices(mobile){
+            display: flex;
+        }
+
+        button{
+
+            background-color: transparent;
+            border: none;
+
+            img{
+                width: 35px;
+                height: 35px;
+            }
+            
+        }
+
+    }
+
+    .filter_items{
+        margin-top: 50px;
+
+        @include devices(mobile){
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background-color: $color-filter-mobile;
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            margin: 0px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filters{
+            display: flex;
+            justify-content: center;
+            column-gap: 15px;
+
+            @include devices(mobile){
+                flex-flow: column;
+                row-gap: 15px;
+                background-color: white;
+                width: calc(80% - 25px);
+                padding: 25px;
+                border-radius: 15px;
+            }
+
+            .css-13cymwt-control{
+                border-color: $color_hover_menu;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: .2s ease;
+            }
+
+            path{
+                fill: $color_hover_menu;
+                transition: .5s ease;
+            }
+
+            .css-t3ipsp-control{
+                border-color: $color_green;
+                box-shadow: 0 0 0 1px $color_green;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: .2s ease;
+                z-index: 1;
+
+                path{
+                    fill: $color_green;
+                }
+
+                .css-1jqq78o-placeholder{
+                    color: $color_green;
+                }
+
+            }
+            
+            .css-1nmdiq5-menu{
+                background: $color_green;
+                padding-top: 20px;
+                transform: translateY(-20px);
+                z-index: 0;
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+                text-align: right;
+                overflow: hidden;
+
+                @include devices(mobile){
+                    z-index: 1;
+                    transform: translateY(0px);
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    padding-top: 0px;
+                }
+                
+                div{
+                    background: $color_green;
+
+                    div{
+                        cursor: pointer;
+                        color: $color_white;
+                        font-size: 1rem;
+                        color: $color_white;
+                        font-family: $font_principal;
+                        font-weight: 400;
+                        transition: .2s ease;
+
+                        &:hover{
+                            background-color: $color_green_dark;
+                        }
+
+                    }
+
+                }
+
+            }
+
+            .css-1jqq78o-placeholder{
+                color: $color_hover_menu;
+                font-family: $font_principal;
+                font-weight: 600;
+                font-size: 1.2rem;
+                transition: .2s ease;
+            }
+
+            .css-1dimb5e-singleValue{
+                color: $color_green;
+                font-family: $font_principal;
+                font-weight: 600;
+                font-size: 1.2rem;
+                transition: .2s ease;
+            }
+
+            .css-1u9des2-indicatorSeparator{
+                display: none;
+            }
+
+        }
+
+    }
+    
+
+}
