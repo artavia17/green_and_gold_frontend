@@ -18,16 +18,16 @@ const NavComponent = ({ clickEvent } : Props ) => {
             <nav>
                 <ul>
                     <li>
-                        <Link onClick={clickEvent} href="/" className={ path == '/' ? 'active' : '' }>Home</Link>
+                        <Link onClick={clickEvent} href="/" prefetch={true} className={ path == '/' ? 'active' : '' }>Home</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="/about-us" className={ path == '/about-us' ? 'active' : '' }>About Us</Link>
+                        <Link onClick={clickEvent} href="/about-us" prefetch={true} className={ path == '/about-us' ? 'active' : '' }>About Us</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="/services" className={ path == '/services' ? 'active' : '' }>Services</Link>
+                        <Link onClick={clickEvent} href="/services" prefetch={true} className={ path == '/services' ? 'active' : '' }>Services</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="/rental-home" className={ path == '/rental-home' ? 'active' : '' }>Rental Homes</Link>
+                        <Link onClick={clickEvent} href="/rental-home" prefetch={true} className={ path == '/rental-home' ? 'active' : '' }>Rental Homes</Link>
                     </li>
                     <li>
                         <Link onClick={clickEvent} href="#contacto">Contact Us</Link>
