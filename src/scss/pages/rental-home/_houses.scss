@@ -1,19 +1,19 @@
 .houses_component{
 
-    margin-top: 80px;
+    margin-top: 50px;
 
     @include devices(tablet){
-        margin-top: 60px;
+        margin-top: 50px;
     }
 
     @include devices(mobile){
-        margin-top: 60px;
+        margin-top: 50px;
     }
 
     .house{
         display: grid;
         grid-template-columns: 30% calc(70% - 50px);
-        width: 100%;
+        width: calc(100% - 30px);
         background-color: $color-casa;
         padding: 15px;
         border-radius: 40px;

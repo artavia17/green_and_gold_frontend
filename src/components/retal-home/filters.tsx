@@ -55,6 +55,7 @@ function FiltersComponent( { closeFilters } : FiltersComponentProps ){
 
                 setValueFilter(item, allFilters[item]);
 
+
                 if(item == 'price'){
 
                     price.forEach( (e, key) => {
@@ -96,9 +97,14 @@ function FiltersComponent( { closeFilters } : FiltersComponentProps ){
             });
             
         }
-    }, [actualesFilters, price, bedrooms, bathrooms, floors])
+
+    }, [actualesFilters, price, bedrooms, bathrooms, floors]);
+
 
     const loadSelect = (e : SingleValue<{ value: string; label: string;}>, type : string) => {
+
+
+
             closeFilters(true);
 
             const existeData : string  | null= localStorage.getItem('filters');
@@ -113,6 +119,8 @@ function FiltersComponent( { closeFilters } : FiltersComponentProps ){
             }else{
                 localStorage.setItem('filters', `{"${type}" : "${e?.value}" }`);
             }
+
+            setActualesFilters(localStorage.getItem('filters'));
 
             if(type == 'price' && !e?.value){
                 setPriceDefault({
