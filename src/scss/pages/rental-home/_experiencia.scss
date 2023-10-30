@@ -1,0 +1,100 @@
+.experiencia_component{
+
+    margin-top: 50px;
+
+
+    .starts{
+        display: flex;
+        justify-content: center;
+
+        img{
+            height: auto;
+            width: 200px;
+            pointer-events: none;
+            user-select: none;
+
+            @include devices(mobile){
+                width: 170px;
+            }
+
+        }
+
+    }
+
+    h3{
+        margin: auto;
+        margin-top: 40px;
+        text-align: center;
+        color: $color_green;
+        font-size: $font-size-title-mobile;
+        font-family: $font_principal;
+        font-weight: 700;
+        max-width: 800px;
+
+        @include devices(mobile){
+            font-size: $font-size-about-title;
+        }
+
+    }
+
+    .items{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        row-gap: 50px;
+        margin-top: 50px;
+
+        @include devices(mobile){
+            row-gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .item{
+            width: 30%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            row-gap: 20px;
+
+            @include devices(tablet){
+                width: 50%;
+            }
+
+            @include devices(mobile){
+                width: 100%;
+                row-gap: 10px;
+            }
+
+            img{
+                width: 50px;
+                height: auto;
+                pointer-events: none;
+                user-select: none;
+
+                @include devices(mobile){
+                    width: 30px;
+                }
+
+            }
+
+            section{
+                text-align: center;
+                font-family: $font_principal;
+                font-weight: 500;
+                font-size: $font_size_menu;
+
+                @include devices(mobile){
+                    font-size: $font-size-text-tablet;
+                }
+
+                strong{
+                    font-weight: 800;
+                }
+
+            }
+
+        }
+
+    }
+
+}

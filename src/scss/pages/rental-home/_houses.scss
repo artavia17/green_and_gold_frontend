@@ -32,6 +32,10 @@
             width: calc(100% - 30px);
         }
 
+        @include devices(mobile){
+            border-radius: 25px;
+        }
+
         .img{
 
             position: relative;
@@ -43,6 +47,11 @@
                 border-radius: 30px;
                 object-fit: cover;
                 z-index: -1;
+
+                @include devices(mobile){
+                    border-radius: 20px;
+                }
+
             }
 
             button{
@@ -171,7 +180,7 @@
                 text-decoration: none;
                 color: $color_white;
                 font-family: $font_principal;
-                font-weight: 400;
+                font-weight: 600;
                 font-size: 1.5rem;
                 transition: .2s ease;
 

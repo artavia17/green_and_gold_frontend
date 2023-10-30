@@ -11,6 +11,7 @@ import FilterImage from '@/assets/img/icons/filters.svg';
 
 import { useState } from "react";
 import HousesComponent from "@/components/retal-home/houses";
+import ExperienciaComponent from "@/components/retal-home/experiencia";
 
 function RetalHome(){
 
@@ -65,6 +66,7 @@ function RetalHome(){
                     </section>
                 </section>
                 <HousesComponent/>
+                <ExperienciaComponent/>
             </section>
         </>
     )
