@@ -1,0 +1,200 @@
+.houses_component{
+
+    margin-top: 80px;
+
+    @include devices(tablet){
+        margin-top: 60px;
+    }
+
+    @include devices(mobile){
+        margin-top: 60px;
+    }
+
+    .house{
+        display: grid;
+        grid-template-columns: 30% calc(70% - 50px);
+        width: 100%;
+        background-color: $color-casa;
+        padding: 15px;
+        border-radius: 40px;
+        grid-gap: 50px;
+        align-items: center;
+        position: relative;
+        margin-bottom: 20px;
+
+        @include devices(laptop){
+            grid-template-columns: 400px calc(100% - 450px);
+        }
+
+        @include devices(tablet){
+            grid-template-columns: 100%;
+            grid-gap: 15px;
+            width: calc(100% - 30px);
+        }
+
+        .img{
+
+            position: relative;
+            height: 350px;
+
+            .presentation{
+                width: 100%;
+                height: 100%;
+                border-radius: 30px;
+                object-fit: cover;
+                z-index: -1;
+            }
+
+            button{
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                width: 40px;
+                height: 40px;
+                transform: scale(1);
+                transition: .2s ease;
+                
+
+                &:active{
+                    transform: scale(0.9);
+                }
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+            }
+
+        }
+
+    }
+
+    .description{
+
+        @include devices(tablet){
+            padding: 0px 20px;
+        }
+
+        @include devices(mobile){
+            padding: 0px 10px;
+        }
+
+        h2{
+            text-align: left;
+            font-size: $font-size-about-title-principal;
+            line-height: 50px;
+
+            @include devices(mobile){
+                font-size: $font-size-mobile-slider;
+                line-height: 30px;
+            }
+
+        }
+
+
+        .caracteristicas{
+            display: flex;
+            margin-top: 30px;
+            column-gap: 30px;
+
+            @include devices(tablet){
+                margin-top: 20px;
+            }
+
+            @include devices(mobile){
+                column-gap: 10px;
+            }
+
+            section{
+
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+
+                img{
+
+                    width: 30px;
+                    height: 30px;
+                    pointer-events: none;
+                    user-select: none;
+
+                    @include devices(mobile){
+                        width: 25px;
+                        height: 25px;
+                    }
+
+    
+                }
+
+                span{
+                    font-family: $font_principal;
+                    font-weight: 400;
+                    font-size: $font-size-slider;
+
+                    @include devices(mobile){
+                        font-size: $font-size-about-parrafo-mobile;
+                    }
+
+                }
+
+
+            }
+
+        }
+
+        .view_more{
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+
+            @include devices(tablet){
+                position: relative;
+                right: 0px;
+                bottom: 0px;    
+                margin-top: 20px;
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+
+            a{
+                cursor: pointer;
+                background-color: $color_green;
+                padding: 10px 25px;
+                border-radius: 25px;
+                text-decoration: none;
+                color: $color_white;
+                font-family: $font_principal;
+                font-weight: 400;
+                font-size: 1.5rem;
+                transition: .2s ease;
+
+                &:hover{
+                    background-color: $color_principal;
+                }
+
+                @include devices(tablet){
+                    padding: 5px 30px;
+                    display: block;
+                    width: auto;
+                }
+
+                @include devices(mobile){
+                    font-size: $font-size-about-parrafo-mobile;
+                    padding: 10px 30px;
+                }
+
+            }
+
+        }
+
+
+    }
+
+}

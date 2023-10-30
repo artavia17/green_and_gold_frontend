@@ -1,7 +1,6 @@
 'use client';
 
 
-
 // Componentes
 import Cuidados from "@/components/home/cuaidados";
 import SliderHome from "@/components/home/slider";

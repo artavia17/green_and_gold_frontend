@@ -138,11 +138,18 @@
             display: flex;
             justify-content: center;
             column-gap: 15px;
+            position: sticky;
+            top: 100px;
+            z-index: 999;
+
+            @include devices(tablet){
+                top: 80px;
+            }
 
             @include devices(mobile){
                 flex-flow: column;
                 row-gap: 15px;
-                background-color: white;
+                background-color: $color_white;
                 width: calc(80% - 25px);
                 padding: 25px;
                 border-radius: 15px;

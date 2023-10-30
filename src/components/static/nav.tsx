@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MouseEventHandler } from 'react';
 
-
 type Props = {
     clickEvent? : MouseEventHandler
 };
@@ -12,10 +11,12 @@ type Props = {
 const NavComponent = ({ clickEvent } : Props ) => {
 
     const path = usePathname();
-
+    
     return ( 
         <>
+
             <nav>
+
                 <ul>
                     <li>
                         <Link onClick={clickEvent} href="/" prefetch={true} className={ path == '/' ? 'active' : '' }>Home</Link>
