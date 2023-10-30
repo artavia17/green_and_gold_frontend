@@ -39,9 +39,12 @@ function FiltersComponent( { closeFilters } : FiltersComponentProps ){
     const [bathroomsDefault, setBathroomsDefault] = useState({ value: '', label: '' });
     const [floorsDefault, setFloorsDefault] = useState({ value: '', label: '' });
 
-    const actualesFilters : string  | null= localStorage.getItem('filters');
+    const [actualesFilters, setActualesFilters] = useState<string | null>(null);
 
     useEffect(() => {
+
+        setActualesFilters(localStorage.getItem('filters'));
+
         if(actualesFilters){
 
             const allFilters = JSON.parse(actualesFilters);
