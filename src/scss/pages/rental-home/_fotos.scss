@@ -39,6 +39,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      max-width: 1400px;
+      margin: auto;
+      margin-bottom: 40px;
 
       @include devices(laptop) {
         max-width: 1100px;
@@ -52,12 +55,12 @@
       }
 
       h5{
-        display: none;
-        font-size: $font-size-mobile-slider;
+        font-size: $font-size-about-title-principal;
         font-family: $font_principal;
         color: $color_principal;
         @include devices(tablet) {
           display: block;
+          font-size: $font-size-mobile-slider;
         }
 
       }
@@ -65,9 +68,7 @@
     }
 
     .remove{
-        position: absolute;
-        top: 0px;
-        left: 50px;
+        
         display: flex;
         justify-content: center;
         align-items: center;
@@ -79,6 +80,7 @@
         transform: scale(1);
         transition: .2s ease;
         z-index: 999;
+        background-color: white;
 
         @include devices(tablet) {
           position: relative;
