@@ -39,14 +39,11 @@ $color-green-title: #178C4F;
 $color-border: #BBBBBB;
 $color-filter-mobile: rgba(255, 255, 255, 0.445);
 $color-casa: #DDD;
+$color-black-transparent: rgb(0 0 0 / 73%);
 
 // Mixins
 
 @mixin devices($breakpoint) {
-  
-    // @if($breakpoint == laptop) {
-    //     @media only screen and ()
-    // }
 
     @if $breakpoint == laptop {
         @media only screen and (max-width: 1400px) {

@@ -4,15 +4,18 @@ import CasaIcons from '@/assets/img/icons/casa.svg';
 import BookmarkIcons from '@/assets/img/icons/bookmark.svg';
 import SQIcons from '@/assets/img/icons/sq.svg';
 import Link from "next/link";
+import { use, useEffect, useState } from "react";
 
 // Images test
 import TestImageOne from '@/assets/img/test/casas/one_houses.jpg';
 import TestImageTwo from '@/assets/img/test/casas/two_houses.jpg';
 import TestImageThree from '@/assets/img/test/casas/three_houses.jpg';
+import FotosComponent from "./fotos";
 
 
 function HousesComponent(){
 
+    const [viewFotos, setViewFotos] = useState(false);
 
     const housesItems = [
         {   
@@ -44,6 +47,22 @@ function HousesComponent(){
         }
     ]
 
+    const openFotos = () => {
+
+        const main : HTMLElement | null = document.querySelector('body');
+
+        if(main){
+            if(viewFotos){
+                setViewFotos(false)
+                main.style.overflow = 'auto';
+            }else{
+                setViewFotos(true)
+                main.style.overflow = 'hidden';
+                console.log(main);
+            }
+        }
+    }
+
     return (
         <>
             <section className="houses_component">
@@ -58,7 +77,7 @@ function HousesComponent(){
                             <section className="house" key={key}>
                                 <section className="img">
                                     <Image className="presentation" src={item.img} alt={item.alt} width={1000} height={1000} />
-                                    <button>
+                                    <button onClick={openFotos}>
                                         <Image src={MorePhotosIcons.src} alt="Ver mas fotos" width={100} height={100}/>
                                     </button>
                                 </section>
@@ -87,6 +106,10 @@ function HousesComponent(){
                     })
                 }
             </section>
+            {
+                viewFotos ? <FotosComponent slug={'hola'} close={openFotos}/> : ''
+            }
+
         </>
     )
 
