@@ -1,99 +1,115 @@
-import { gsap } from "gsap";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { fethItem } from "@/hook/api";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-cards';
+import "swiper/css";
+import "swiper/css/effect-cards";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 
-// Images del test
-import ImagesOne from '@/assets/img/test/cuidados_1.png';
-import ImagesTwo from '@/assets/img/test/cuidados_2.png';
+type SliderType = {
+  url: string;
+  items: {
+    data: {
+      attributes: {
+        Caring_For_Your_Home_Title: string;
+        Caring_For_Your_Home_Content: string;
+        Caring_For_Your_Home_Slider: {
+          data: any[];
+        };
+      };
+    };
+  };
+};
 
-function Cuidados(){
+function Cuidados() {
 
-    const contentApi = {
-        title: 'Caring for Your Home as Our Own',
-        content: `<p><strong>Green and Gold</strong> is your trusted partner for property administration in the heart of the Península de Papagayo, Guanacaste. With over a decade in the business, we’ve perfected a comprehensive 24/7 service model that's tailored just for you.</p>
-        <div>
-            <strong>What We Offer:</strong> 
-            <ul>
-                <li><strong>Expert Administration:</strong> Guided by a legacy of combined administration, management, and maintenance expertise.</li>
-                <li><strong>Round-the-Clock Attention:</strong> Our dedicated team is on hand, ensuring your property remains in pristine condition.</li>
-                <li><strong>Tailored Services:</strong> Customized solutions for every unique property and homeowner need.</li>
-            </ul>
-        </div>
-        <p>Relish in the beauty and tranquility of your home, secure in the knowledge that a reliable team is tending to every detail. Experience the Green and Gold distinctive touch: where quality, dedication, and a personalized approach define every service. 
-        <strong>Place your trust—and your property—in hands that truly care.</strong></p>`
-    }
+  const [content, setContent] = useState<SliderType | null>(null);
 
-    const sliderApi = [
-        {
-            img: ImagesOne.src
-        },
-        {
-            img: ImagesTwo.src
-        }
-    ]
-      
+  useEffect(() => {
+    const dataFetch = async () => {
+      setContent(await fethItem("home"));
+    };
 
-    return ( 
-        <>
+    dataFetch();
+  }, []);
 
-            <section className="cuidados_home" data-scroll-section>
-                <section className="max">
-                    <section className="content">
-                        <h1>{ contentApi.title }</h1>
-                        <section dangerouslySetInnerHTML={{__html: contentApi.content}}></section>
-                    </section>
-                    <section className="contentSlider">
-                        <motion.div 
-                            className="slider"
-                            initial={{
-                                y: 200,
-                                opacity: 0
-                            }}
-                            whileInView={{
-                                y: 0,
-                                opacity: 1,
-                            }}
-                            transition={{
-                                type: 'spring'
-                            }}
-                        >
-                            <Swiper
-                                effect={'cards'}
-                                grabCursor={true}
-                                modules={[EffectCards]}
-                                className="mySwiper"
-                            >
-                                 {
-                                    sliderApi.map( (item, key) =>{
-                                        return (
-                                            <SwiperSlide 
-                                                className='slider' 
-                                                key={key}
-                                            >
-                                                <div>
-                                                    <Image fill={true} src={item.img} alt="" />
-                                                </div>
-                                            </SwiperSlide> 
-                                        )
-                                    })
+  return (
+    <>
+      <section className="cuidados_home" data-scroll-section>
+        <section className="max">
+          <section className="content">
+            <h1 title={content?.items.data.attributes.Caring_For_Your_Home_Title}>{content?.items.data.attributes.Caring_For_Your_Home_Title}</h1>
+            <section
+              dangerouslySetInnerHTML={{
+                __html: content?.items.data.attributes
+                  .Caring_For_Your_Home_Content
+                  ? content?.items.data.attributes.Caring_For_Your_Home_Content
+                  : "",
+              }}
+            ></section>
+          </section>
+          <section className="contentSlider">
+            <motion.div
+              className="slider"
+              initial={{
+                y: 200,
+                opacity: 0,
+              }}
+              whileInView={{
+                y: 0,
+                opacity: 1,
+              }}
+              transition={{
+                type: "spring",
+              }}
+            >
+              <Swiper
+                effect={"cards"}
+                grabCursor={true}
+                modules={[EffectCards]}
+                className="mySwiper"
+              >
+                {content &&
+                content?.items.data.attributes.Caring_For_Your_Home_Slider.data
+                  .length > 0
+                  ? content?.items.data.attributes.Caring_For_Your_Home_Slider.data.map(
+                      (item, key) => {
+
+                        return (
+                          <SwiperSlide className="slider" key={key}>
+                            <div>
+                              <Image
+                                fill={true}
+                                src={`${content.url}${item.attributes.url}`}
+                                title={
+                                  item.attributes.alternativeText
+                                    ? item.attributes.alternativeText
+                                    : item.attributes.name
                                 }
-                            </Swiper>
-                        </motion.div>
-                    </section>
-                </section>
-            </section>
-
-        </>
-    )
-
+                                alt={
+                                  item.attributes.alternativeText
+                                    ? item.attributes.alternativeText
+                                    : item.attributes.name
+                                }
+                              />
+                            </div>
+                          </SwiperSlide>
+                        );
+                      }
+                    )
+                  : ""}
+              </Swiper>
+            </motion.div>
+          </section>
+        </section>
+      </section>
+    </>
+  );
 }
 
 export default Cuidados;

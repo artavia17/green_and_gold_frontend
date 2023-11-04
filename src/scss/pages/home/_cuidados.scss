@@ -71,11 +71,12 @@
         }
 
         p,
-        div{
+        div,
+        ul{
             color: $color_white;
             font-family: $font_principal;
             font-size: $font-size-slider;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: lighter;
 
             @include devices(tablet){

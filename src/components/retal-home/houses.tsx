@@ -58,7 +58,6 @@ function HousesComponent(){
             }else{
                 setViewFotos(true)
                 main.style.overflow = 'hidden';
-                console.log(main);
             }
         }
     }
