@@ -70,8 +70,6 @@ function ExperienciaComponent() {
     contentItems();
   }, []);
 
-  console.log(content);
-
   return (
     <>
       <section className="experiencia_component">

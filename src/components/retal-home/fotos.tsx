@@ -116,10 +116,6 @@ function FotosComponent( { slug, close } : PropsData ){
 
 
                 setImages(imageItems);
-
-                // if(photoElements.current && photoElements.current.length){
-                //     calcularEspacioVacios(fatherElement.current, photoElements.current);
-                // }
     
     
             };
@@ -128,8 +124,6 @@ function FotosComponent( { slug, close } : PropsData ){
         }
 
     },  [slug, images]);
-
-    console.log(images);
 
 
     const addPhoto = (el : HTMLElement) => {
@@ -168,9 +162,7 @@ function FotosComponent( { slug, close } : PropsData ){
                                     return (
                                         <section className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5     == 0 ? 'big' : '')} key={key} ref={addPhoto}>
                                             <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={500} height={500}/>
-                                            {/* <section className="title">
-                                                <h4>{item.alt}</h4>
-                                            </section> */}   
+                                           
                                         </section>
                                     )
                                 })
@@ -184,37 +176,6 @@ function FotosComponent( { slug, close } : PropsData ){
 
 }
 
-// function calcularEspacioVacios(father : HTMLElement | null, childs : HTMLElement[]){
-
-//     if(father){
-
-//         const widthElementFather = father.offsetWidth;
-    
-
-//         childs.forEach( (e, key) => {
-
-//             const tagImg : HTMLImageElement | null = e.querySelector('img');
-
-//             if(tagImg){
-
-//                 tagImg.onload = () => {
-
-//                     const widthElememt = tagImg.naturalWidth;
-
-//                     if(window.innerWidth > 1400){
-//                         if(widthElememt > 1400){
-//                             e.classList.add('big');
-//                         }
-//                     }
-
-//                 }
-
-//             }
-            
-//         })
-        
-//     }
-// }
 
 
 export default FotosComponent;

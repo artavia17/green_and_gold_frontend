@@ -13,6 +13,7 @@
     "gsap": "^3.12.2",
     "gsap-trial": "^3.12.2",
     "locomotive-scroll": "^4.1.4",
+    "lodash": "^4.17.21",
     "next": "13.5.4",
     "number-to-words": "^1.2.4",
     "react": "^18",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/locomotive-scroll": "^4.1.1",
+    "@types/lodash": "^4.14.200",
     "@types/node": "^20",
     "@types/number-to-words": "^1.2.2",
     "@types/react": "^18",

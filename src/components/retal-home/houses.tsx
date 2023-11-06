@@ -4,7 +4,13 @@ import CasaIcons from "@/assets/img/icons/casa.svg";
 import BookmarkIcons from "@/assets/img/icons/bookmark.svg";
 import SQIcons from "@/assets/img/icons/sq.svg";
 import Link from "next/link";
-import { useEffect, useState, forwardRef, useImperativeHandle, Ref} from "react";
+import {
+  useEffect,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  Ref,
+} from "react";
 import { fethItem } from "@/hook/api";
 import FotosComponent from "./fotos";
 
@@ -37,40 +43,26 @@ type arrayItems = {
   };
 };
 
-
 export interface RefType {
-    updateFilter: () => void
+  updateFilter: () => void;
 }
 
 export interface PropsType {}
 
-
 function HousesComponent(props: PropsType, ref: Ref<RefType>) {
-
-
   const [viewFotos, setViewFotos] = useState(false);
   const [content, setContent] = useState<FiltersItems>();
   const [slug, setSlug] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const [filter, serFilter] = useState<string>('');
+  const [filter, setFilter] = useState<boolean>(false);
 
-  useEffect(() => {
-    fetchContent(null);   
-  }, []);
-
-
-  const fetchContent = async (filters : string | null) => {
-
-    filter ? setUpdate(true) : '';
-
+  const fetchContent = async (filters: string | null) => {
     setContent(await fethItem(`rental-homes`, filters));
 
-    filter ? setUpdate(false) : setLoad(true);
-
-
+    setLoad(true);
+    setUpdate(false);
   };
-
 
   const openFotos = (slug: string) => {
     const main: HTMLElement | null = document.querySelector("body");
@@ -87,57 +79,65 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
     }
   };
 
-
   const updateFilter = () => {
-    
+
     const queryParams = new URLSearchParams(window.location.search);
-    const price = queryParams.get('price');
-    const bedrooms = queryParams.get('bedrooms');
-    const bathrooms = queryParams.get('bathrooms');
-    const floors = queryParams.get('floors');
-    let filter = '&';
-    
+    const price = queryParams.get("price");
+    const bedrooms = queryParams.get("bedrooms");
+    const bathrooms = queryParams.get("bathrooms");
+    const floors = queryParams.get("floors");
+    let filter = "&";
 
-    if(price){
-        filter += `filters[Price]=${price}&`
+    if (!price && !bedrooms && !bathrooms && !floors) {
+      fetchContent(filter);
+      setFilter(false);
+    } else {
+
+      if (price) {
+        filter += `filters[Price]=${price}&`;
+      }
+
+      if (bedrooms) {
+        filter += `filters[Bedrooms]=${bedrooms}&`;
+      }
+
+      if (bathrooms) {
+        filter += `filters[Bathrooms]=${bathrooms}&`;
+      }
+
+      if (floors) {
+        filter += `filters[Floors]=${floors}&`;
+      }
+
+      fetchContent(filter);
+      setFilter(true);
+      setUpdate(true);
     }
+  };
 
-    if(bedrooms){
-        filter += `filters[Bedrooms]=${bedrooms}&`
-    }
+  useImperativeHandle(ref, () => ({ updateFilter }));
 
-    if(bathrooms){
-        filter += `filters[Bathrooms]=${bathrooms}&`
-    }
 
-    if(bathrooms){
-        filter += `filters[Bathrooms]=${bathrooms}&`
-    }
+  // useEffect(() => {
+  //   updateFilter();
+  // }, []);
 
-    if(floors){
-        filter += `filters[Floors]=${floors}&`
-    }
-
-    fetchContent(filter);
-
-  }
-
-  useImperativeHandle( ref, () => ( { updateFilter } ));
-  
 
   return (
-
     <div>
       <section className="houses_component">
-        {content?.items.data.length && load && !update? (
+        {content?.items.data.length && load ? (
           content.items.data.map((item: arrayItems, key) => {
-
             const attributes = item.attributes;
             const title = attributes.Title;
             const words = title.split(" ");
-            const newWord = words.slice(0, 1).join(" ") + "<br/>" + words.slice(1).join(" ");
+            const newWord =
+              words.slice(0, 1).join(" ") + "<br/>" + words.slice(1).join(" ");
             const principalImage = attributes.Principal_Image;
-            const alternativeText = principalImage?.data?.attributes?.alternativeText || principalImage?.data?.attributes?.name || "";
+            const alternativeText =
+              principalImage?.data?.attributes?.alternativeText ||
+              principalImage?.data?.attributes?.name ||
+              "";
             const imageUrl = principalImage?.data?.attributes?.url || "";
 
             return (
@@ -229,10 +229,14 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
               </section>
             );
           })
-        ) : load ? (
+        ) : load && content == undefined && !filter ? (
           <h5 className="not_house">Currently, no homes available.</h5>
+        ) : filter && !update ? (
+          <h5 className="not_house">No houses matching the applied filters found.</h5>
+        ) : !update ? (
+          <h5 className="not_house">Loading...</h5>
         ) : (
-          !update ? <h5 className="not_house">Loading...</h5> : <h5 className="not_house">Searching...</h5>
+          <h5 className="not_house">Searching...</h5>
         )}
       </section>
       {viewFotos ? (

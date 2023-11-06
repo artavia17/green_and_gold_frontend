@@ -4,6 +4,7 @@ import Select, { SingleValue } from 'react-select';
 import { fethItem } from '@/hook/api';
 import NumberToWords from 'number-to-words';
 
+
 type FiltersComponentProps = {
     closeFilters: ( arg : boolean ) => void;
     updateFilter: () => void;
@@ -38,8 +39,11 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
     const [filterBedrooms, setFilterBedrooms] = useState<any[]>([]);
     const [filterBathrooms, setFilterBathrooms] = useState<any[]>([]);
     const [filterFloors, setFilterFloors] = useState<any[]>([]);
+    const [updateFiltersHome, setUpdateFiltersHome] = useState<boolean>(false);
+
 
     useEffect(() => {
+
 
         setActualesFilters(localStorage.getItem('filters'));
 
@@ -149,54 +153,57 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
         filter();
 
     }, [actualesFilters, filterPrice, filterBedrooms, filterBathrooms, filterFloors]);
-    
 
     const loadSelect = (e : SingleValue<{ value: string; label: string;}>, type : string) => {
 
-            closeFilters(true);
+        closeFilters(true);
 
-            const existeData : string  | null= localStorage.getItem('filters');
-            
-            if(existeData){
+        const existeData : string  | null= localStorage.getItem('filters');
+        
+        if(existeData){
 
-                const jsonData = JSON.parse(existeData);
+            const jsonData = JSON.parse(existeData);
 
-                jsonData[type] = e?.value;
-                localStorage.setItem('filters', JSON.stringify(jsonData));
+            jsonData[type] = e?.value;
+            localStorage.setItem('filters', JSON.stringify(jsonData));
 
-            }else{
-                localStorage.setItem('filters', `{"${type}" : "${e?.value}" }`);
-            }
+        }else{
+            localStorage.setItem('filters', `{"${type}" : "${e?.value}" }`);
+        }
 
-            setActualesFilters(localStorage.getItem('filters'));
+        setActualesFilters(localStorage.getItem('filters'));
 
-            if(type == 'price' && !e?.value){
-                setPriceDefault({
-                    value: '',
-                    label: ''
-                })
-            }else if(type == 'bedrooms' && !e?.value){
-                setBedroomsDefault({
-                    value: '',
-                    label: ''
-                })
-            }else if(type == 'bathrooms' && !e?.value){
-                setBathroomsDefault({
-                    value: '',
-                    label: ''
-                })
-            }else if(type == 'floors' && !e?.value){
-                setFloorsDefault({
-                    value: '',
-                    label: ''
-                })
-            }
+        if(type == 'price' && !e?.value){
+            setPriceDefault({
+                value: '',
+                label: ''
+            })
+        }else if(type == 'bedrooms' && !e?.value){
+            setBedroomsDefault({
+                value: '',
+                label: ''
+            })
+        }else if(type == 'bathrooms' && !e?.value){
+            setBathroomsDefault({
+                value: '',
+                label: ''
+            })
+        }else if(type == 'floors' && !e?.value){
+            setFloorsDefault({
+                value: '',
+                label: ''
+            })
+        }
 
+        setValueFilter(type, e?.value);
+        updateFilter();
 
-            setValueFilter(type, e?.value);
+}
 
-    }
-
+    useEffect(() => {
+        updateFilter();
+    }, [loadSelect])
+    
 
     const setValueFilter = (type: string, value: string | undefined) => {
         const actualUrl = window.location.href;
@@ -211,7 +218,12 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
 
         window.history.replaceState(null, "", url); 
 
-        updateFilter();
+        // if(!updateFiltersHome){
+        //     updateFilter();
+        // }
+
+
+        // setUpdateFiltersHome(true);
 
     }
 

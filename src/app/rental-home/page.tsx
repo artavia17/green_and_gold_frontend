@@ -8,7 +8,6 @@
 import FiltersComponent from "@/components/retal-home/filters";
 import Image from "next/image";
 import FilterImage from '@/assets/img/icons/filters.svg';
-
 import { useState, useRef } from "react";
 import HousesComponent, { RefType } from "@/components/retal-home/houses";
 import ExperienciaComponent from "@/components/retal-home/experiencia";
@@ -44,7 +43,7 @@ function RetalHome(){
     }
 
     const updateFilter = () => {
-        
+
         if(HouseRef.current){
             HouseRef.current.updateFilter();
         }
