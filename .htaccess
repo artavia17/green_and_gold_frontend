@@ -1,0 +1,7 @@
+#Eliminamos todas las extenciones de los archivos
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Todo error 404 lo enviamos al archivo 404.html
+ErrorDocument 404 /404.html
