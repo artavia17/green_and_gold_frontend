@@ -9,14 +9,15 @@ import FiltersComponent from "@/components/retal-home/filters";
 import Image from "next/image";
 import FilterImage from '@/assets/img/icons/filters.svg';
 
-import { useState } from "react";
-import HousesComponent from "@/components/retal-home/houses";
+import { useState, useRef } from "react";
+import HousesComponent, { RefType } from "@/components/retal-home/houses";
 import ExperienciaComponent from "@/components/retal-home/experiencia";
 
 function RetalHome(){
 
     const [viewFilter, setViewFilter] = useState(false);
     const [removeFilter, setRemoveFilter] = useState(false);
+    const HouseRef = useRef<RefType>(null);
 
     const openFilters = ( ) => {
 
@@ -42,6 +43,14 @@ function RetalHome(){
         }
     }
 
+    const updateFilter = () => {
+        
+        if(HouseRef.current){
+            HouseRef.current.updateFilter();
+        }
+
+    }
+
     return(
         <>
             <section className="rental-home">
@@ -61,11 +70,11 @@ function RetalHome(){
                                 <hr />
                                 <hr />
                             </button>
-                            <FiltersComponent closeFilters={closeFilter}/>
+                            <FiltersComponent closeFilters={closeFilter} updateFilter={updateFilter}/>
                         </section>
                     </section>
                 </section>
-                <HousesComponent/>
+                <HousesComponent ref={HouseRef}/>
                 <ExperienciaComponent/>
             </section>
         </>

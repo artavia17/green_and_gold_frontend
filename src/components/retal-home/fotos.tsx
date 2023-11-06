@@ -9,13 +9,46 @@ import Image3 from '@/assets/img/test/fotos/3.png';
 import Image4 from '@/assets/img/test/fotos/4.png';
 import Image5 from '@/assets/img/test/fotos/5.png';
 import Image6 from '@/assets/img/test/fotos/6.png';
+import { fethItem } from "@/hook/api";
 
 type PropsData = {
     slug: string,
     close: () =>  void
 }
 
+type FiltersItems = {
+    url: string;
+    items: {
+      data: {
+        attributes: {
+            Principal_Image: {
+                data: {
+                    attributes: {
+                        alternativeText : string,
+                        name: string,
+                        url: string
+                    }
+                }
+            },
+            Images: {
+                data: any[]
+            }
+        }
+      };
+    };
+};
+
+type ImageItems =  {
+    attributes: {
+        alternativeText: string,
+        name: string,
+        url: string
+    }
+}
+
 function FotosComponent( { slug, close } : PropsData ){
+
+    const [images, setImages] = useState<any[]>();
 
     const data = [
         {
@@ -51,11 +84,53 @@ function FotosComponent( { slug, close } : PropsData ){
 
     useEffect( () => {
 
-        if(photoElements.current && photoElements.current.length){
-            calcularEspacioVacios(fatherElement.current, photoElements.current);
+
+        if(!images?.length){
+
+            const fetchContent = async () => {
+                const fethItems : FiltersItems = await fethItem(`rental-homes/${slug}`);
+                const allImages : ImageItems[] = fethItems.items.data.attributes.Images.data;
+                let imageItems = [
+                    {
+                        img:  fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+                        name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
+                        alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
+                    }
+                ]
+
+                setImages([{
+                    img:  fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+                    name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
+                    alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
+                }]);
+
+                allImages.forEach( e => {
+
+
+                    imageItems = [...imageItems, {
+                        img: fethItems.url + e.attributes.url,
+                        name: e.attributes.name,
+                        alt: e.attributes.alternativeText
+                    }]
+                })
+
+
+                setImages(imageItems);
+
+                // if(photoElements.current && photoElements.current.length){
+                //     calcularEspacioVacios(fatherElement.current, photoElements.current);
+                // }
+    
+    
+            };
+          
+            fetchContent();
         }
 
-    });
+    },  [slug, images]);
+
+    console.log(images);
+
 
     const addPhoto = (el : HTMLElement) => {
         if(el && !photoElements.current.includes(el)){
@@ -79,25 +154,27 @@ function FotosComponent( { slug, close } : PropsData ){
                             }, 200)
 
                             }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
-                                <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                             </svg>
                         </button>
                     </section>
 
                     <section className="galery" ref={fatherElement}>
                         {
-                            data.map( (item, key) => {
+                            images ? (
+                                images.map( (item, key) => {
 
-                                return (
-                                    <section className="photo" key={key} ref={addPhoto}>
-                                        <Image src={item.img} alt={item.alt} width={500} height={500}/>
-                                        {/* <section className="title">
-                                            <h4>{item.alt}</h4>
-                                        </section> */}   
-                                    </section>
-                                )
-                            })
+                                    return (
+                                        <section className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5     == 0 ? 'big' : '')} key={key} ref={addPhoto}>
+                                            <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={500} height={500}/>
+                                            {/* <section className="title">
+                                                <h4>{item.alt}</h4>
+                                            </section> */}   
+                                        </section>
+                                    )
+                                })
+                            ) : ''
                         }
                     </section>
                 </section>
@@ -107,37 +184,37 @@ function FotosComponent( { slug, close } : PropsData ){
 
 }
 
-function calcularEspacioVacios(father : HTMLElement | null, childs : HTMLElement[]){
+// function calcularEspacioVacios(father : HTMLElement | null, childs : HTMLElement[]){
 
-    if(father){
+//     if(father){
 
-        const widthElementFather = father.offsetWidth;
+//         const widthElementFather = father.offsetWidth;
     
 
-        childs.forEach( (e, key) => {
+//         childs.forEach( (e, key) => {
 
-            const tagImg : HTMLImageElement | null = e.querySelector('img');
+//             const tagImg : HTMLImageElement | null = e.querySelector('img');
 
-            if(tagImg){
+//             if(tagImg){
 
-                tagImg.onload = () => {
+//                 tagImg.onload = () => {
 
-                    const widthElememt = tagImg.naturalWidth;
+//                     const widthElememt = tagImg.naturalWidth;
 
-                    if(window.innerWidth > 1400){
-                        if(widthElememt > 1400){
-                            e.classList.add('big');
-                        }
-                    }
+//                     if(window.innerWidth > 1400){
+//                         if(widthElememt > 1400){
+//                             e.classList.add('big');
+//                         }
+//                     }
 
-                }
+//                 }
 
-            }
+//             }
             
-        })
+//         })
         
-    }
-}
+//     }
+// }
 
 
 export default FotosComponent;

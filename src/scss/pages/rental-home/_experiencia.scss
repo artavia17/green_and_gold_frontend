@@ -68,8 +68,6 @@
             img{
                 width: 50px;
                 height: auto;
-                pointer-events: none;
-                user-select: none;
 
                 @include devices(mobile){
                     width: 30px;

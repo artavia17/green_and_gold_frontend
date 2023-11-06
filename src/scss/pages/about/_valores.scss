@@ -71,8 +71,7 @@
                 place-items: center;
                 color: $color_white;
                 font-size: $font-size-text-tablet;
-                user-select: none;
-                pointer-events: none;
+                cursor: default;
 
 
                 @include devices(laptop){

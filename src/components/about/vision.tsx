@@ -1,6 +1,32 @@
+'use client';
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { fethItem } from "@/hook/api";
+
+type ContentType = {
+    url: string,
+    items: {
+      data: {
+        attributes: {
+          Our_Mission: string;
+          Our_Vision: string;
+        };
+      };
+    };
+  };
+
 
 export default function VisionMisionComponent(){
+
+    const [content, setContent] = useState<ContentType>();
+
+    useEffect(() => {
+        const contentSection = async () => {
+          setContent(await fethItem("about"));
+        };
+    
+        contentSection();
+      }, []);
 
     return (
         <>
@@ -19,12 +45,12 @@ export default function VisionMisionComponent(){
                 }}
             >
                 <section className="item">
-                    <h2>Our Vision</h2>
-                    <p>To be the leader company in the management of luxury property in Península Papagayo by providing safety, comfort and support to our customers and their families.</p>
+                    <h2 title="Our Vision">Our Vision</h2>
+                    <section dangerouslySetInnerHTML={{__html: content?.items.data.attributes.Our_Vision ? content?.items.data.attributes.Our_Vision : ''}}></section>
                 </section>
                 <section className="item">
-                    <h2>Our Mission</h2>
-                    <p>To manage our customer’s properties with transparency, commitment and quality and provide a customized service to fulfill the highest expectations of each one of our customers.</p>
+                    <h2 title="Our Mission">Our Mission</h2>
+                    <section dangerouslySetInnerHTML={{__html: content?.items.data.attributes.Our_Mission ? content?.items.data.attributes.Our_Mission : ''}}></section>
                 </section>
             </motion.div>
         </>

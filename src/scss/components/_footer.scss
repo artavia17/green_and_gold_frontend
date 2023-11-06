@@ -64,7 +64,8 @@ footer{
                     display: flex;
                     flex-flow: column;
 
-                    a {
+                    a,
+                    span {
                         font-weight: bold;
                     }
 
@@ -94,6 +95,21 @@ footer{
 
                     }
 
+                }
+
+                span{
+                    text-decoration: none;
+                    color: $color_white;
+                    margin-bottom: 5px;
+                    font-size: $font-size-text-tablet;
+                    transition: .2s ease;
+                    cursor: default;
+
+                    @include devices(mobile){
+
+                        font-size: $font-size-about-parrafo-mobile;
+
+                    }
                 }
 
             }
