@@ -12,7 +12,7 @@ const NavComponent = ({ clickEvent } : Props ) => {
 
     const path = usePathname();
 
-    console.log(path)
+    const isRentalHomeActive = /^\/rental-home(\/.*)?$/.test(path);
     
     return ( 
         <>
@@ -30,7 +30,7 @@ const NavComponent = ({ clickEvent } : Props ) => {
                         <Link onClick={clickEvent} href="/services" prefetch={true} className={ path == '/services/' ? 'active' : '' }>Services</Link>
                     </li>
                     <li>
-                        <Link onClick={clickEvent} href="/rental-home" prefetch={true} className={ path == '/rental-home/' ? 'active' : '' }>Rental Homes</Link>
+                        <Link onClick={clickEvent}  href="/rental-home" prefetch={true} className={ (isRentalHomeActive ? 'rental' : '') + ' ' + (path == '/rental-home/' || isRentalHomeActive ? 'active' : '') }>Rental Homes</Link>
                     </li>
                     <li>
                         <Link onClick={clickEvent} href="#contacto">Contact Us</Link>

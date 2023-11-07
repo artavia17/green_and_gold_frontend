@@ -7,7 +7,7 @@
     }
 
     @include devices(mobile){
-        margin-top: 50px;
+        margin-top: 40px;
     }
 
     .house{
@@ -224,6 +224,7 @@
 
         font-size: $font-size-about-title;
         text-align: center;
+        font-family: $font_principal;
 
         @include devices(mobile){
             font-size: $font-size-about-title;

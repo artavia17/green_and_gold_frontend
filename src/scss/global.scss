@@ -24,3 +24,9 @@ body{
 @import './pages/rental-home/houses';
 @import './pages/rental-home/experiencia';
 @import './pages/rental-home/fotos';
+@import './pages/rental-home/individual/individual';
+@import './components/404';
+
+body{
+    background-color: $color-background-body;
+}

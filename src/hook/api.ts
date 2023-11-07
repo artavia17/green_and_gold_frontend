@@ -12,6 +12,7 @@ const fethItem : Function = async (item: string, filters?: string | null ) => {
         const response = await fetch(apiURL);
 
         const data = await response.json();
+
         return {
             url: img,
             items: data

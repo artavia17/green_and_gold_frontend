@@ -1,0 +1,50 @@
+.page_not_found{
+
+    height: 80vh;
+    width: 100%;
+    background-color: $color-background-body;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+
+    h1{
+        font-size: $font-size-text-slider;
+        font-family: $font_principal;
+        font-weight: 700;
+
+        @include devices(mobile){
+            font-size: $font-size-mobile-slider;
+        }
+
+
+        font-size: $font-size-text-slider;
+        color: $color-green-title;
+        font-family: $font_principal;
+
+        @include devices(tablet){
+            font-size: $font_size_menu_tablet;
+            margin-bottom: 10px;
+        }
+
+        @include devices(mobile){
+            font-size: $font-size-mobile-slider;
+            margin-bottom: 20px;
+        }
+
+    }
+
+    span{
+        font-family: $font_principal;
+        font-weight: bold;
+        font-size: $font-size-title-mobile;
+        color: $color_principal;
+        margin-bottom: 25px;
+
+        @include devices(mobile){
+            line-height: 40px;
+            font-size: $font-size-mobile-slider;
+        }
+
+    }
+}

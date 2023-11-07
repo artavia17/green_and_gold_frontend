@@ -24,12 +24,12 @@ type FooterType = {
 
 function Footer() {
   const router: string = usePathname();
-  let color: string = "white";
+  let color: string = "#EBEBEB";
   let date = new Date();
   let year = date.getFullYear();
   const [footer, setFooter] = useState<FooterType>();
 
-  if (router == "/about-us" || router == "/services") {
+  if (router == "/about-us/" || router == "/services/") {
     color = "#212121";
   }
 

@@ -12,6 +12,7 @@
 
     @include devices(mobile){
         padding: 20px;
+        padding-top: 40px;
         width: 100%;
         max-width: calc(100% - 40px);
     }
@@ -149,7 +150,7 @@
             @include devices(mobile){
                 flex-flow: column;
                 row-gap: 15px;
-                background-color: $color_white;
+                background-color: $color-background-body;
                 width: calc(80% - 25px);
                 padding: 25px;
                 border-radius: 15px;
@@ -160,6 +161,7 @@
                 border-radius: 10px;
                 cursor: pointer;
                 transition: .2s ease;
+                background-color: $color-background-body;
             }
 
             path{
@@ -174,6 +176,7 @@
                 cursor: pointer;
                 transition: .2s ease;
                 z-index: 1;
+                background-color: $color-background-body;
 
                 path{
                     fill: $color_green;

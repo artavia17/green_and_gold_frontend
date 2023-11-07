@@ -305,6 +305,56 @@ header{
                         color: $color_green_dark;
                     }
                 }
+
+                a.active.rental{
+                    user-select: initial;
+                    pointer-events: initial;
+
+                    &::after{
+
+                        background: transparent;
+                        width: 100%;
+                        transition: 0s;
+
+                    }
+
+                    &::before{
+
+                        background: transparent;
+                        transition: initial;
+
+                        @include devices(mobile){
+                            background: transparent;
+                        }
+
+                    }
+
+
+                    &:hover{
+
+
+                        &::after{
+
+                            background: transparent;
+                            width: 100%;
+                            transition: 0s;
+
+                        }
+    
+                        &::before{
+
+                            background: transparent;
+                            transition: initial;
+
+                            @include devices(mobile){
+                                background: transparent;
+                            }
+
+                        }
+                    }
+
+                }
+
             }
         }
     }
