@@ -107,4 +107,196 @@
 
     }
 
+    .row.descriptrion{
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+
+        @include devices(tablet){
+            margin-top: 20px;
+        }
+    
+        @include devices(mobile){
+            margin-top: 20px;
+            flex-flow: column;
+            row-gap: 20px;
+        }
+
+        .caracteristicas{
+
+            display: flex;
+            column-gap: 20px;
+
+
+            @include devices(tablet){
+                column-gap: 10px;
+            }
+
+            @include devices(mobile){
+                // justify-content: space-between;
+                width: 100%;
+            }
+
+
+            section{
+
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+
+                @include devices(tablet){
+                    column-gap: 5px;
+                }
+
+                img{
+
+                    width: 30px;
+                    height: 30px;
+                    pointer-events: none;
+                    user-select: none;
+
+                    @include devices(tablet){
+                        width: 25px;
+                        height: 25px;
+                    }
+
+                    // @include devices(mobile){
+                    //     width: 25px;
+                    //     height: 25px;
+                    // }
+
+    
+                }
+
+                span{
+                    font-family: $font_principal;
+                    font-weight: bold;
+                    font-size: $font-size-slider;
+
+                    @include devices(tablet){
+                        font-size: $font-size-about-parrafo;
+                    }
+
+                    @include devices(mobile){
+                        font-size: $font-size-about-caracteristicas_mobiles;
+                    }
+
+                }
+            }
+
+        }
+        
+    }
+
+
+    .availability_button{
+
+        
+        @include devices(mobile){
+            width: 100%;
+        }
+
+        button{
+            padding: 10px 35px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background-color: $color_green;
+            color: $color_white;
+            font-family: $font_principal;
+            font-weight: bold;
+            font-size: $font-size-about-title;
+            transform: scale(1);
+            transition: .3s ease;
+            display: none;
+            
+            &:hover{
+                background-color: $color_principal;
+            }
+            
+            &:active{
+                transform: scale(0.95);
+            }
+
+            @include devices(tablet){
+                display: block;
+                font-size: $font-size-about-parrafo;
+                padding: 8px 30px;
+            }
+
+            @include devices(mobile){
+                width: 100%;
+                padding: 10px 30px;
+                font-size: $font-size-text-tablet;
+            }
+
+        }
+
+    }
+
+    .row.content{
+
+        display: grid;
+        grid-template-columns: 70% calc(30% - 20px);
+        grid-gap: 20px;
+        margin-top: 20px;
+
+        @include devices(tablet){
+            margin-top: 20px;
+            grid-gap: 0px;
+            grid-template-columns: 100%;
+        }
+    
+        @include devices(mobile){
+            margin-top: 20px;
+        }
+
+        .house_description{
+
+            p,
+            div,
+            ul{
+                color: $color-content-rental;
+                font-family: $font_principal;
+                font-size: $font-size-slider;
+                margin-bottom: 20px;
+                // font-weight: lighter;
+
+                @include devices(tablet){
+                    font-size: $font-size-text-tablet;
+                }
+
+                @include devices(mobile){
+                    font-size: $font-size-about-parrafo-mobile;
+                }
+            }
+
+            em{
+                color: $color-green-title;
+                font-style: initial;
+            }
+
+        }
+
+        .availability_button{
+
+            display: flex;
+            justify-content: center;
+
+            button {
+
+                display: block;
+
+                @include devices(tablet){
+                    display: none;
+                }
+
+            }
+
+        }
+
+    }
+
 }

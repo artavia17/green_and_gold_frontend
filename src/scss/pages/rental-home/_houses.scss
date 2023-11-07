@@ -122,7 +122,7 @@
         .caracteristicas{
             display: flex;
             margin-top: 30px;
-            column-gap: 30px;
+            column-gap: 20px;
 
             @include devices(tablet){
                 margin-top: 20px;

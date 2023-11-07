@@ -1,8 +1,7 @@
 'use client';
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import FotosComponent from '@/components/retal-home/fotos';
-import Icon from '@/assets/img/icons/arrow_galery.svg'
 
 type Images = {
     attributes: {
