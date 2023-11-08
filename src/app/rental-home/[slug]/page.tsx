@@ -1,11 +1,10 @@
-"use client ";
-
 import { fethItem } from "@/hook/api";
 import FotosComponent from "@/components/retal-home/individual/fotos";
 import { notFound } from "next/navigation";
 import CaracteristicasComponent from '@/components/retal-home/individual/caracteristicas';
 import AvailabilityComponent from "@/components/retal-home/individual/availability";
 import CommentsComponent from "@/components/retal-home/individual/comments";
+
 
 type PageProps = {
   params: {
@@ -26,6 +25,10 @@ type Images = {
     url: string;
   };
 };
+
+type UnavailableProps = {
+  Date: string
+}
 
 type SlugItems = {
   url: string;
@@ -49,7 +52,9 @@ type SlugItems = {
         Baths: string,
         SQ_FT: string,
         Content: string,
-        Comments: CommentsData[] 
+        Comments: CommentsData[],
+        updatedAt: string,
+        Unavailable: UnavailableProps[]
       };
     };
     error: {
@@ -63,9 +68,16 @@ async function data(slug: string) {
   return items;
 }
 
-async function SlugPage({ params: { slug } }: PageProps) {
+function viewModal() {
 
+  alert("Hola");
+
+}
+
+
+async function SlugPage({ params: { slug } }: PageProps) {
   const items = data(slug);
+
 
   if ((await items).items.error) {
     return notFound();
@@ -90,9 +102,11 @@ async function SlugPage({ params: { slug } }: PageProps) {
             <AvailabilityComponent/>
           </section>
         </section>
-        <section className="row comments">
-            <CommentsComponent items={await items}/>
-        </section>
+      
+        <CommentsComponent items={await items}/>
+
+        
+
       </section>
     );
   }
