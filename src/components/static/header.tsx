@@ -44,7 +44,7 @@ function Header(){
     return (
         <>
             <header>
-                <Link href="/" title="Volver a inicio">
+                <Link href="/" title="Volver a inicio" className='logo'>
                     <Image
                         src={Logo}
                         alt='Logo de Green and Gold'

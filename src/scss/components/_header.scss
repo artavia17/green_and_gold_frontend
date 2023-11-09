@@ -17,6 +17,10 @@ header{
         padding: 15px 15px;
     }
 
+    .logo{
+        z-index: 9999;
+    }
+
 
     .menu_item{
 
@@ -179,7 +183,7 @@ header{
             }
 
             @include devices(mobile){
-                background-color: $color_green;
+                background-color: $color_principal;
                 width: 10vh;
                 height: 10vh;
                 border-radius: 50%;
@@ -199,7 +203,7 @@ header{
             @include devices(tablet){
                 position: absolute;
                 z-index: 999;
-                background-color: $color_green;
+                background-color: $color_principal;
                 top: 0px;
                 left: 0px;
                 flex-flow: column;
@@ -234,8 +238,28 @@ header{
     
                     @include devices(tablet){
                         color: $color_white;
-                        font-size: $font_size_menu_tablet;
+                        font-size: $font-size-title-mobile;
                         font-weight: bold;
+                        // display: flex;
+                        // align-items: center;
+                        // column-gap: 15px;
+                    }
+
+                    svg{
+
+                        display: none;
+                        width: 25px;
+                        height: 25px;
+                        margin-right: 15px;
+
+                        @include devices(tablet){
+                            display: initial;
+                        }
+
+                        path{
+                            transition: .2s ease;
+                        }
+
                     }
     
                     &::after,
@@ -246,6 +270,7 @@ header{
                         height: 1px;
                         bottom: 0px;
                         background: $color_hover_menu;
+
                     }
     
                     &::before{
@@ -257,21 +282,28 @@ header{
                         background: $color_hover_menu;
                         transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
-                        @include devices(mobile){
+                        @include devices(tablet){
 
-                            background: $color_green_dark;
+                            background: $color_green;
 
                         }
+                        
                     }
     
                     &:hover{
     
                         color: $color_hover_menu;
                         
-                        @include devices(mobile){
+                        @include devices(tablet){
 
-                            color: $color_green_dark;
+                            color: $color_green;
 
+                        }
+
+                        svg{
+                            path{
+                                fill: $color_green;
+                            }
                         }
 
                         &::after{
@@ -285,9 +317,9 @@ header{
                             width: 100%;
                             transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 
-                            @include devices(mobile){
+                            @include devices(tablet){
 
-                                background: $color_green_dark;
+                                background: $color_green;
     
                             }
                         }
@@ -301,9 +333,16 @@ header{
                     user-select: none;
                     pointer-events: none;
 
-                    @include devices(mobile){
-                        color: $color_green_dark;
+                    @include devices(tablet){
+                        color: $color-green-title;
                     }
+
+                    svg{
+                        path{
+                            fill: $color-green-title;
+                        }
+                    }
+
                 }
 
                 a.active.rental{
@@ -380,6 +419,11 @@ header{
                 left: -100%;
             }
 
+            @include devices(mobile){
+                background-color: $color_principal;
+            }
+
+
         }
 
         ul{
@@ -412,7 +456,7 @@ header{
         .capa_close{
             opacity: 0;
             @include devices(mobile){
-                background-color: $color_green;
+                background-color: $color_principal;
                 width: 10vh;
                 height: 10vh;
                 border-radius: 50%;

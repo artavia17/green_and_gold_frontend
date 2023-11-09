@@ -48,7 +48,7 @@ export default function HistoryComponent (){
                         type: 'spring'
                     }}
                 >
-                    <Image src={HeardIcon.src} width={100} height={100} title='Icono de corazon' alt="Icono de corazon" />    
+                    {/* <Image src={HeardIcon.src} width={100} height={100} title='Icono de corazon' alt="Icono de corazon" />     */}
                     <h2 title="History">History</h2>
                     <div className='content' dangerouslySetInnerHTML={{__html: (content?.items.data.attributes.History ? content?.items.data.attributes.History : '')}}></div>
                 </motion.div >

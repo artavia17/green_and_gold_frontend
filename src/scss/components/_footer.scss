@@ -84,10 +84,12 @@ footer{
                     margin-bottom: 5px;
                     font-size: $font-size-text-tablet;
                     transition: .2s ease;
+                    font-weight: bold;
 
                     &:hover{
                         color: $color_hover_menu;                        
                     }
+
 
                     @include devices(mobile){
 
@@ -104,6 +106,7 @@ footer{
                     font-size: $font-size-text-tablet;
                     transition: .2s ease;
                     cursor: default;
+                    font-weight: bold;
 
                     @include devices(mobile){
 
@@ -148,6 +151,12 @@ footer{
 
                 @include devices(tablet){
                     display: none;
+                }
+
+                a{
+                    svg{
+                        display: none;
+                    }
                 }
 
                 a.active{

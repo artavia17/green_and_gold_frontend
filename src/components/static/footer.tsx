@@ -5,6 +5,7 @@ import Map from "@/assets/img/icons/map.svg";
 import Phone from "@/assets/img/icons/phone.circle.svg";
 import Email from "@/assets/img/icons/envelope.svg";
 import LogoFooter from "@/assets/img/icons/logo_footer.png";
+import Instagram from "@/assets/img/icons/instagram.svg";
 import Image from "next/image";
 import NavComponent from "./nav";
 import { useState, useEffect } from "react";
@@ -51,6 +52,23 @@ function Footer() {
       <footer id="contacto" style={styleFooter}>
         <section className="content">
           <div className="first-column">
+            <section className="map">
+              <Image
+                src={Instagram.src}
+                alt="Logo del map"
+                width={100}
+                height={100}
+                title="Address"
+              />
+              <a
+                href="https://www.instagram.com/gngcostarica/"
+                target="_black"
+                className="address"
+                title="gngcostarica"
+              >
+                gngcostarica
+              </a>
+            </section>
             <section className="map">
               <Image
                 src={Map.src}
