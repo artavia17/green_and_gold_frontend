@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 
 // Aqui vamos a utilizar la libreria de swiper
@@ -8,49 +7,60 @@ import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/scss/navigation';
 
-// Fetch
-import { fethItem } from '@/hook/api';
 
+// Import height screen;
+import HeightScreen from '@/hook/screens/height';
 
-// Type data
-
-type SliderType = {
-    url: string,
-    items: {
-        data : any[]
+type ImageData = {
+    attributes: {
+        Title: string,
+        Action: string,
+        updatedAt: string,
+        Button: string,
+        Tab: boolean,
+        Background: {
+          data: {
+            attributes: {
+              name: string,
+              alternativeText: string,
+              url: string,
+            }
+          }
+        }
     }
 }
+  
+type SliderType = {
+    url: string;
+    items: {
+        data: ImageData[];
+    };
+};
 
-function SliderHome(){
+type DataProps = {
+    content: SliderType
+}
 
-    const [heightWindow, setHeightWindow] = useState(0);
-    const [slider, setSlider] = useState<SliderType | null>(null);
+
+
+
+
+function SliderHome({ content } : DataProps){
+
+    const [height, setHeight] = useState<number>(0);
 
 
     useEffect(  () => {
 
-        if (typeof window !== 'undefined') {
-            const header = document.querySelector('header');
-            if(header){
-                setHeightWindow(window.innerHeight - header?.offsetHeight);
-            }
-        }
-
-        const dataFetch = async () => {
-
-            setSlider(await fethItem('home-sliders'));
-        }
-
-        dataFetch();
+        setHeight(HeightScreen());
 
     }, []);
-
 
     return (
         <>
             
-            <section className='sliderHome' data-scroll-section style={{
-                height: `${heightWindow}px` 
+            <section className='sliderHome top_screen' data-scroll-section style={{
+                height: `${height}px` 
             }}>
                 <Swiper
                     modules={[Pagination, EffectCoverflow, Autoplay]}
@@ -67,19 +77,19 @@ function SliderHome(){
                         delay: 3000,
                     }}
                     style={{
-                        height: `${heightWindow + 50}px` 
+                        height: `${height + 50}px` 
                     }}
                 >
                     {
-                        slider && slider.items.data.length > 0 ? (
-                            slider.items.data.map( (item, key) =>{
+                        content && content.items.data.length > 0 ? (
+                            content.items.data.map( (item, key) =>{
                                 return (
                                     <SwiperSlide 
                                         className='item' 
                                         key={key}
                                         style={{
-                                            backgroundImage: `url(${slider.url + item.attributes.Background.data.attributes.url})`,
-                                            height: `${heightWindow + 50}px`     
+                                            backgroundImage: `url(${content.url + item.attributes.Background.data.attributes.url})`,
+                                            height: `${height + 50}px`     
                                         }}
                                         title={item.attributes.Background.data.attributes.alternativeText ? item.attributes.Background.data.attributes.alternativeText : item.attributes.Background.data.attributes.name}
                                     >

@@ -1,8 +1,8 @@
+'use client'
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { fethItem } from "@/hook/api";
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,29 +26,23 @@ type SliderType = {
   };
 };
 
-function Cuidados() {
+type HomeProps = {
+  content: SliderType
+}
 
-  const [content, setContent] = useState<SliderType | null>(null);
+function Cuidados({ content } : HomeProps) {
 
-  useEffect(() => {
-    const dataFetch = async () => {
-      setContent(await fethItem("home"));
-    };
-
-    dataFetch();
-  }, []);
 
   return (
     <>
       <section className="cuidados_home" data-scroll-section>
         <section className="max">
           <section className="content">
-            <h1 title={content?.items.data.attributes.Caring_For_Your_Home_Title}>{content?.items.data.attributes.Caring_For_Your_Home_Title}</h1>
+            <h1 title={content.items.data.attributes.Caring_For_Your_Home_Title}>{content.items.data.attributes.Caring_For_Your_Home_Title}</h1>
             <section
               dangerouslySetInnerHTML={{
-                __html: content?.items.data.attributes
-                  .Caring_For_Your_Home_Content
-                  ? content?.items.data.attributes.Caring_For_Your_Home_Content
+                __html: content.items.data.attributes.Caring_For_Your_Home_Content
+                  ? content.items.data.attributes.Caring_For_Your_Home_Content
                   : "",
               }}
             ></section>
@@ -75,9 +69,9 @@ function Cuidados() {
                 className="mySwiper"
               >
                 {content &&
-                content?.items.data.attributes.Caring_For_Your_Home_Slider.data
+                content.items.data.attributes.Caring_For_Your_Home_Slider.data
                   .length > 0
-                  ? content?.items.data.attributes.Caring_For_Your_Home_Slider.data.map(
+                  ? content.items.data.attributes.Caring_For_Your_Home_Slider.data.map(
                       (item, key) => {
 
                         return (
@@ -96,6 +90,8 @@ function Cuidados() {
                                     ? item.attributes.alternativeText
                                     : item.attributes.name
                                 }
+                                sizes="(max-width: 500px) 600px, 700px"
+                                priority
                               />
                             </div>
                           </SwiperSlide>

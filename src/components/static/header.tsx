@@ -48,6 +48,7 @@ function Header(){
                     <Image
                         src={Logo}
                         alt='Logo de Green and Gold'
+                        priority
                     />
                 </Link>
                 <button className={`menu_item ${activeMenu ? 'active' : ''} ${activeRemove ? 'remove_menu_item' : ''}`} onClick={handleMenuClick}>

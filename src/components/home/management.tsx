@@ -1,11 +1,10 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { fethItem } from "@/hook/api";
 
-type SliderType = {
+type HomeType = {
   url: string;
   items: {
     data: {
@@ -28,16 +27,12 @@ type SliderType = {
   };
 };
 
-function ManagementComponent() {
-  const [content, setContent] = useState<SliderType | null>(null);
 
-  useEffect(() => {
-    const dataFetch = async () => {
-      setContent(await fethItem("home"));
-    };
+type PlusProps = {
+  content: HomeType
+}
 
-    dataFetch();
-  }, []);
+function ManagementComponent({ content } : PlusProps) {
 
   return (
     <>
@@ -68,8 +63,8 @@ function ManagementComponent() {
                           .Full_Management_Plus_Image.data.attributes.url
                       : ""
                   }`}
-                  width={100}
-                  height={100}
+                  width={500}
+                  height={500}
                   alt={
                     content?.items.data.attributes.Full_Management_Plus_Image
                       .data.attributes.name

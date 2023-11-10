@@ -68,12 +68,6 @@ async function data(slug: string) {
   return items;
 }
 
-function viewModal() {
-
-  alert("Hola");
-
-}
-
 
 async function SlugPage({ params: { slug } }: PageProps) {
   const items = data(slug);
