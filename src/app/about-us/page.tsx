@@ -1,16 +1,98 @@
+// Metas
+import type { Metadata } from "next";
+
 import HistoryComponent from "@/components/about/history"
 import ValoresComponent from "@/components/about/valores"
 import WhoComponent from "@/components/about/who"
+import { fethItem } from "@/hook/api";
 
 
-export default function About(){
+export const metadata: Metadata = {
+    title: {
+      template: 'Green and Gold: Experienced Property Management with a Commitment to Sustainability',
+      default: 'Green and Gold: Experienced Property Management with a Commitment to Sustainability',
+      absolute: 'Green and Gold: Experienced Property Management with a Commitment to Sustainability'
+    },
+    description: 'Discover worry-free living with Green and Gold Property Management in Papagayo, Costa Rica. Our experienced team is dedicated to providing comprehensive and sustainable property management services, handling everything from payments to housekeeping. Immerse yourself in the beauty of Guanacaste while we take care of the details. Committed to environmental respect, we minimize our impact, champion sustainable growth, and ensure your home coexists harmoniously with the rich ecosystems of the Península de Papagayo.',
+    metadataBase: new URL('https://www.gngcr.com'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/',
+      },
+    },
+    openGraph: {
+      title: 'Green and Gold: Experienced Property Management with a Commitment to Sustainability',
+      description: 'Discover worry-free living with Green and Gold Property Management in Papagayo, Costa Rica. Our experienced team is dedicated to providing comprehensive and sustainable property management services, handling everything from payments to housekeeping. Immerse yourself in the beauty of Guanacaste while we take care of the details. Committed to environmental respect, we minimize our impact, champion sustainable growth, and ensure your home coexists harmoniously with the rich ecosystems of the Península de Papagayo.',
+      url: 'https://www.gngcr.com',
+      siteName: 'Green and Gold',
+      locale: 'en_US',
+      type: 'website',
+    },
+    generator: 'Green and Gold',
+    applicationName: 'Green and Gold',
+    referrer: 'origin-when-cross-origin',
+    keywords: ['House rentals', 'About' ,'Houses for rent in Costa Rica', 'Properties for rent in Guanacaste', 'Apartment rentals', 'Vacation rentals', 'Luxury home rentals', 'Affordable home rentals'],
+    category: 'House rentals'
+};
+
+
+type ContentType = {
+    url: string,
+    items: {
+        data: {
+            attributes: {
+                Description: string;
+                Title: string;
+                Background: {
+                    data: {
+                        attributes: {
+                            url: string;
+                            alternativeText: string;
+                            name: string;
+                        };
+                    };
+                };
+                History: string;
+                Our_Mission: string;
+                Our_Values: string;
+                Our_Values_Items: any[];
+                Our_Vision: string;
+            };
+        };
+    };
+};
+
+
+async function ContentData(){
+    const items : ContentType = await fethItem(`about`);
+    return items;
+}
+  
+
+export default  async function About(){
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        url: 'https://www.gngcr.com',
+        name: 'Green and Gold: Experienced Property Management with a Commitment to Sustainability',
+        image: '/favicon.ico',
+        description: 'Discover worry-free living with Green and Gold Property Management in Papagayo, Costa Rica. Our experienced team is dedicated to providing comprehensive and sustainable property management services, handling everything from payments to housekeeping. Immerse yourself in the beauty of Guanacaste while we take care of the details. Committed to environmental respect, we minimize our impact, champion sustainable growth, and ensure your home coexists harmoniously with the rich ecosystems of the Península de Papagayo.',
+    }
 
     return (
         <>
             <section className="about-us">
-                <WhoComponent/>
-                <HistoryComponent/>
-                <ValoresComponent/>
+
+                <script
+                    type="application/ld+json" 
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+
+                <WhoComponent content={await ContentData()} />
+                <HistoryComponent content={await ContentData()} />
+                <ValoresComponent content={await ContentData()} />
             </section>  
         </>
     )

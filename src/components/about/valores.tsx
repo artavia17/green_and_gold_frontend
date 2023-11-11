@@ -2,10 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { fethItem } from "@/hook/api";
 
-type ContentType = {
+type ContentData = {
   url: string;
   items: {
     data: {
@@ -31,17 +29,14 @@ type ContentType = {
   };
 };
 
-export default function ValoresComponent() {
+type ContentProps = {
 
-  const [content, setContent] = useState<ContentType>();
+  content: ContentData
 
-  useEffect(() => {
-    const contentSection = async () => {
-      setContent(await fethItem("about"));
-    };
+}
 
-    contentSection();
-  }, []);
+export default function ValoresComponent( { content } : ContentProps ) {
+
 
 
   return (

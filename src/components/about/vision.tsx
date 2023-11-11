@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { fethItem } from "@/hook/api";
 
-type ContentType = {
+type itemsType = {
     url: string,
     items: {
       data: {
@@ -16,17 +16,13 @@ type ContentType = {
   };
 
 
-export default function VisionMisionComponent(){
+  type itemsProps = {
+    items: itemsType
+  }
 
-    const [content, setContent] = useState<ContentType>();
 
-    useEffect(() => {
-        const contentSection = async () => {
-          setContent(await fethItem("about"));
-        };
-    
-        contentSection();
-      }, []);
+export default function VisionMisionComponent( { items } : itemsProps ){
+
 
     return (
         <>
@@ -46,11 +42,11 @@ export default function VisionMisionComponent(){
             >
                 <section className="item">
                     <h2 title="Our Vision">Our Vision</h2>
-                    <section dangerouslySetInnerHTML={{__html: content?.items.data.attributes.Our_Vision ? content?.items.data.attributes.Our_Vision : ''}}></section>
+                    <section dangerouslySetInnerHTML={{__html: items?.items.data.attributes.Our_Vision ? items?.items.data.attributes.Our_Vision : ''}}></section>
                 </section>
                 <section className="item">
                     <h2 title="Our Mission">Our Mission</h2>
-                    <section dangerouslySetInnerHTML={{__html: content?.items.data.attributes.Our_Mission ? content?.items.data.attributes.Our_Mission : ''}}></section>
+                    <section dangerouslySetInnerHTML={{__html: items?.items.data.attributes.Our_Mission ? items?.items.data.attributes.Our_Mission : ''}}></section>
                 </section>
             </motion.div>
         </>

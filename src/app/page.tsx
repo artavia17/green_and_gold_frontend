@@ -1,7 +1,6 @@
 // Metas
 import type { Metadata } from "next";
-import Script from "next/script";
-import Head from "next/head";
+
 
 // Componentes
 import Cuidados from "@/components/home/cuaidados";
@@ -133,9 +132,6 @@ async function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* <Head>
-          
-        </Head> */}
 
         <SliderHome content={ await sliderData() }/>
         <Cuidados content={await homeData()}/>

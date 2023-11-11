@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { fethItem } from "@/hook/api";
+import SreeenHeight from "@/hook/screens/height";
 
 type ContentType = {
   url: string,
@@ -22,24 +22,17 @@ type ContentType = {
   };
 };
 
-const WhoComponent = () => {
+type ContentProps = {
+  content: ContentType
+}
+
+const WhoComponent = ( { content } : ContentProps ) => {
   const [heightWindow, setHeightWindow] = useState(0);
-  const [content, setContent] = useState<ContentType>();
 
-  useEffect(() => {
-    const header = document.querySelector("header");
+  useEffect(  () => {
 
-    if (header) {
-      if (typeof window !== "undefined") {
-        setHeightWindow(window.innerHeight - header.offsetHeight);
-      }
-    }
+    setHeightWindow(SreeenHeight());
 
-    const contentSection = async () => {
-      setContent(await fethItem("about"));
-    };
-
-    contentSection();
   }, []);
 
 
