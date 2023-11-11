@@ -28,6 +28,13 @@ export const metadata: Metadata = {
       siteName: 'Green and Gold',
       locale: 'en_US',
       type: 'website',
+      images: [
+        {
+            url: 'https://green-and-gold-frontend.vercel.app/favicon.ico',
+            width: 250,
+            height: 250
+        }
+     ]
     },
     generator: 'Green and Gold',
     applicationName: 'Green and Gold',
@@ -81,6 +88,8 @@ export default  async function About(){
         description: 'Discover worry-free living with Green and Gold Property Management in Papagayo, Costa Rica. Our experienced team is dedicated to providing comprehensive and sustainable property management services, handling everything from payments to housekeeping. Immerse yourself in the beauty of Guanacaste while we take care of the details. Committed to environmental respect, we minimize our impact, champion sustainable growth, and ensure your home coexists harmoniously with the rich ecosystems of the Península de Papagayo.',
     }
 
+    const content = await ContentData();
+
     return (
         <>
             <section className="about-us">
@@ -90,9 +99,9 @@ export default  async function About(){
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
 
-                <WhoComponent content={await ContentData()} />
-                <HistoryComponent content={await ContentData()} />
-                <ValoresComponent content={await ContentData()} />
+                <WhoComponent content={content} />
+                <HistoryComponent content={content} />
+                <ValoresComponent content={content} />
             </section>  
         </>
     )

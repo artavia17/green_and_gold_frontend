@@ -32,6 +32,13 @@ export const metadata: Metadata = {
     siteName: 'Green and Gold',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+          url: 'https://green-and-gold-frontend.vercel.app/favicon.ico',
+          width: 250,
+          height: 250
+      }
+   ]
   },
   generator: 'Green and Gold',
   applicationName: 'Green and Gold',
@@ -124,6 +131,9 @@ async function Home() {
     description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
   }
 
+  const sliderItem = await sliderData();
+  const homeItems = await homeData();
+
   return (
     <>
       <section className="app">
@@ -133,9 +143,9 @@ async function Home() {
         />
 
 
-        <SliderHome content={ await sliderData() }/>
-        <Cuidados content={await homeData()}/>
-        <ManagementComponent content={await homeData()}/>
+        <SliderHome content={ sliderItem }/>
+        <Cuidados content={ homeItems }/>
+        <ManagementComponent content={ homeItems }/>
       </section>
     </>
   )
