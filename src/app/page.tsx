@@ -130,7 +130,7 @@ async function Home() {
     <>
       <section className="app">
         <script
-          type="application/ld+json"
+          type="application/ld+json" 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
