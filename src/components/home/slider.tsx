@@ -42,9 +42,6 @@ type DataProps = {
 }
 
 
-
-
-
 function SliderHome({ content } : DataProps){
 
     const [height, setHeight] = useState<number>(0);
@@ -56,8 +53,10 @@ function SliderHome({ content } : DataProps){
 
     }, []);
 
+
     return (
-        <>
+        
+        <>  
             
             <section className='sliderHome top_screen' data-scroll-section style={{
                 height: `${height}px` 

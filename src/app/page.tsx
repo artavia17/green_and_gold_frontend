@@ -1,5 +1,7 @@
 // Metas
 import type { Metadata } from "next";
+import Script from "next/script";
+import Head from "next/head";
 
 // Componentes
 import Cuidados from "@/components/home/cuaidados";
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
     default: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.',
     absolute: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.'
   },
-  description: "Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!",
+  description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
   metadataBase: new URL('https://www.gngcr.com'),
   alternates: {
     canonical: '/',
@@ -114,9 +116,28 @@ async function homeData(){
 }
 
 async function Home() {
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    url: 'https://www.gngcr.com',
+    name: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.',
+    image: '/favicon.ico',
+    description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
+  }
+
   return (
     <>
       <section className="app">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* <Head>
+          
+        </Head> */}
+
         <SliderHome content={ await sliderData() }/>
         <Cuidados content={await homeData()}/>
         <ManagementComponent content={await homeData()}/>
