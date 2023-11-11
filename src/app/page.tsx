@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       }
    ]
   },
-  generator: 'Green and Gold',
+  generator: 'Green and Gold', 
   applicationName: 'Green and Gold',
   referrer: 'origin-when-cross-origin',
   keywords: ['House rentals', 'Houses for rent in Costa Rica', 'Properties for rent in Guanacaste', 'Apartment rentals', 'Vacation rentals', 'Luxury home rentals', 'Affordable home rentals'],
