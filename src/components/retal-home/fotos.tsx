@@ -5,32 +5,32 @@ import { fethItem } from "@/hook/api";
 
 type PropsData = {
     slug: string,
-    close: () =>  void
+    close: () => void
 }
 
 type FiltersItems = {
     url: string;
     items: {
-      data: {
-        attributes: {
-            Principal_Image: {
-                data: {
-                    attributes: {
-                        alternativeText : string,
-                        name: string,
-                        url: string
+        data: {
+            attributes: {
+                Principal_Image: {
+                    data: {
+                        attributes: {
+                            alternativeText: string,
+                            name: string,
+                            url: string
+                        }
                     }
+                },
+                Images: {
+                    data: any[]
                 }
-            },
-            Images: {
-                data: any[]
             }
-        }
-      };
+        };
     };
 };
 
-type ImageItems =  {
+type ImageItems = {
     attributes: {
         alternativeText: string,
         name: string,
@@ -38,7 +38,7 @@ type ImageItems =  {
     }
 }
 
-function FotosComponent( { slug, close } : PropsData ){
+function FotosComponent({ slug, close }: PropsData) {
 
     const [images, setImages] = useState<any[]>();
 
@@ -48,29 +48,29 @@ function FotosComponent( { slug, close } : PropsData ){
     const [remove, setRemove] = useState(false);
 
 
-    useEffect( () => {
+    useEffect(() => {
 
 
-        if(!images?.length){
+        if (!images?.length) {
 
             const fetchContent = async () => {
-                const fethItems : FiltersItems = await fethItem(`rental-homes/${slug}`);
-                const allImages : ImageItems[] = fethItems.items.data.attributes.Images.data;
+                const fethItems: FiltersItems = await fethItem(`rental-homes/${slug}`);
+                const allImages: ImageItems[] = fethItems.items.data.attributes.Images.data;
                 let imageItems = [
                     {
-                        img:  fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+                        img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
                         name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
                         alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
                     }
                 ]
 
                 setImages([{
-                    img:  fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+                    img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
                     name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
                     alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
                 }]);
 
-                allImages.forEach( e => {
+                allImages.forEach(e => {
 
 
                     imageItems = [...imageItems, {
@@ -82,24 +82,24 @@ function FotosComponent( { slug, close } : PropsData ){
 
 
                 setImages(imageItems);
-    
-    
+
+
             };
-          
+
             fetchContent();
         }
 
-    },  [slug, images]);
+    }, [slug, images]);
 
 
-    const addPhoto = (el : HTMLElement) => {
-        if(el && !photoElements.current.includes(el)){
+    const addPhoto = (el: HTMLElement) => {
+        if (el && !photoElements.current.includes(el)) {
             photoElements.current.push(el);
-        }   
+        }
     }
 
-    return(
-        <>  
+    return (
+        <>
             <section className={'fotosComponent' + ' ' + (remove ? 'remove' : '')} key={slug}>
 
                 <section className="items">
@@ -112,20 +112,19 @@ function FotosComponent( { slug, close } : PropsData ){
                                 close();
                             }, 200)
 
-                            }}>
-                            <Image src={Icon.src} alt="Volver" width={100} height={100}/>
+                        }}>
+                            <Image src={Icon.src} alt="Volver" width={100} height={100} />
                         </button>
                     </section>
 
                     <section className="galery" ref={fatherElement}>
                         {
                             images ? (
-                                images.map( (item, key) => {
+                                images.map((item, key) => {
 
                                     return (
-                                        <section className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5     == 0 ? 'big' : '')} key={key} ref={addPhoto}>
-                                            <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={500} height={500}/>
-                                           
+                                        <section className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
+                                            <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={1000} height={1000} priority  />
                                         </section>
                                     )
                                 })

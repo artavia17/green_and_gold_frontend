@@ -76,7 +76,7 @@ function CommentsComponent({ items } : CommentsProps ) {
                     {
                         items.items.data.attributes.Comments.map((item, key) => {
 
-                            const startsString = item.Starts;
+                            const startsString = item.Starts ? item.Starts : 'five';
                             const starts = wordsToNumbers(startsString);
                             let svgHTML = ''
 

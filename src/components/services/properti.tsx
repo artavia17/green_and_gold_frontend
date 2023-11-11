@@ -59,8 +59,6 @@ export default function PropertyComponent({ content }: ContentType) {
         {
                     content.items.data.attributes.All_Services.map( (item : ArrayServices, key : number ) => {
 
-                        console.log(item.Image.data.attributes.url)
-
                         return (
                             <motion.section 
                                 className={`property ` +  ((key + 1) % 2 == 0  ? 'reverse' : '')}

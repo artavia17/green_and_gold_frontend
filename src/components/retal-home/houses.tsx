@@ -5,7 +5,6 @@ import BookmarkIcons from "@/assets/img/icons/bookmark.svg";
 import SQIcons from "@/assets/img/icons/sq.svg";
 import Link from "next/link";
 import {
-  useEffect,
   useState,
   forwardRef,
   useImperativeHandle,
@@ -13,13 +12,6 @@ import {
 } from "react";
 import { fethItem } from "@/hook/api";
 import FotosComponent from "./fotos";
-
-type FiltersItems = {
-  url: string;
-  items: {
-    data: any[];
-  };
-};
 
 type arrayItems = {
   attributes: {
@@ -43,6 +35,14 @@ type arrayItems = {
   };
 };
 
+type ContentItems = {
+  url: string;
+  items: {
+    data: arrayItems[];
+  };
+};
+
+
 export interface RefType {
   updateFilter: () => void;
 }
@@ -51,7 +51,7 @@ export interface PropsType {}
 
 function HousesComponent(props: PropsType, ref: Ref<RefType>) {
   const [viewFotos, setViewFotos] = useState(false);
-  const [content, setContent] = useState<FiltersItems>();
+  const [content, setContent] = useState<ContentItems>();
   const [slug, setSlug] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
@@ -118,11 +118,6 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
   useImperativeHandle(ref, () => ({ updateFilter }));
 
 
-  // useEffect(() => {
-  //   updateFilter();
-  // }, []);
-
-
   return (
     <div>
       <section className="houses_component">
@@ -150,6 +145,7 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
                     title={alternativeText}
                     width={1000}
                     height={1000}
+                    priority
                   />
                   <button
                     title="Galery"
@@ -160,6 +156,7 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
                       alt="Ver mas fotos"
                       width={100}
                       height={100}
+                      priority
                     />
                   </button>
                 </section>
@@ -179,6 +176,7 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
                           alt="Icono de casa"
                           width={100}
                           height={100}
+                          priority
                         />
                         <span>{attributes.Beds} beds</span>
                       </section>
@@ -196,6 +194,7 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
                           alt="Icono de marcas de libro"
                           width={100}
                           height={100}
+                          priority
                         />
                         <span>{attributes.Baths} baths</span>
                       </section>
@@ -213,6 +212,7 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
                           alt="Icono de SQ"
                           width={100}
                           height={100}
+                          priority
                         />
                         <span>{attributes.SQ_FT} sq ft</span>
                       </section>

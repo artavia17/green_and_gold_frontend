@@ -26,15 +26,15 @@ function CaracteristicasComponent({ items } : CaracteristicasItems){
     return (
         <>
             <section className="caracteristicas">
-                <section className="item">
+                <section className="item" title={`${items.items.data.attributes.Beds} beds`}>
                     <Image src={BedGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
                     <span>{items.items.data.attributes.Beds} beds</span>
                 </section>
-                <section className="item">
+                <section className="item" title={`${items.items.data.attributes.Baths} baths`}>
                     <Image src={TagGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
                     <span>{items.items.data.attributes.Baths} baths</span>
                 </section>
-                <section className="item">
+                <section className="item" title={`${items.items.data.attributes.SQ_FT} sq ft`}>
                     <Image src={SQGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
                     <span>{items.items.data.attributes.SQ_FT} sq ft</span>
                 </section>

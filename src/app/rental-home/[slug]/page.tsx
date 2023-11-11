@@ -1,3 +1,6 @@
+// Meta Data
+import { Metadata } from "next";
+
 import { fethItem } from "@/hook/api";
 import FotosComponent from "@/components/retal-home/individual/fotos";
 import { notFound } from "next/navigation";
@@ -54,7 +57,8 @@ type SlugItems = {
         Content: string,
         Comments: CommentsData[],
         updatedAt: string,
-        Unavailable: UnavailableProps[]
+        Unavailable: UnavailableProps[],
+        Meta_description: string
       };
     };
     error: {
@@ -68,39 +72,78 @@ async function data(slug: string) {
   return items;
 }
 
+export async function generateMetadata({ params : {slug} } : PageProps ) {
+
+  const items = await data(slug);
+  `${items.items.data.attributes.Title} | Green and Gold`
+  return {
+    title: {
+      template: `${items.items.data.attributes.Title} | Green and Gold`,
+      default: `${items.items.data.attributes.Title} | Green and Gold`,
+      absolute: `${items.items.data.attributes.Title} | Green and Gold`,
+    },
+    description: items.items.data.attributes.Meta_description,
+    metadataBase: new URL('https://www.gngcr.com'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'en-US': '/',
+      },
+    },
+    openGraph: {
+      title: `${items.items.data.attributes.Title} | Green and Gold`,
+      description: items.items.data.attributes.Meta_description,
+      url: 'https://www.gngcr.com',
+      siteName: 'Green and Gold',
+      locale: 'en_US',
+      type: 'website',
+      images: [`${items.url}${items.items.data.attributes.Principal_Image.data.attributes.url}`, '/favicon.ico'],
+    },
+    generator: 'Green and Gold',
+    applicationName: 'Green and Gold',
+    referrer: 'origin-when-cross-origin',
+    keywords: ['House rentals', 'About' ,'Houses for rent in Costa Rica', 'Properties for rent in Guanacaste', 'Apartment rentals', 'Vacation rentals', 'Luxury home rentals', 'Affordable home rentals'],
+    category: 'Product'
+  }
+}
+
 
 async function SlugPage({ params: { slug } }: PageProps) {
-  const items = data(slug);
+  const items = await data(slug);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    url: 'https://www.gngcr.com',
+    name: `${items.items.data.attributes.Title} | Green and Gold`,
+    image: '/favicon.ico',
+    description:  items.items.data.attributes.Meta_description,
+}
 
-  if ((await items).items.error) {
+  if (items.items.error) {
     return notFound();
-  } else if ((await items).items.data) {
+  } else if (items.items.data) {
     return (
       <section className="rental_individual">
         <h1>
-          {(await items).items.data.attributes.Title}
+          {items.items.data.attributes.Title}
         </h1>
-        {(await items) && (await items).items ? (
-          <FotosComponent items={await items} params={slug} />
+        {items && items.items ? (
+          <FotosComponent items={items} params={slug} />
         ) : (
           ""
         )}
         <section className="row descriptrion">
-          <CaracteristicasComponent items={await items}/>
+          <CaracteristicasComponent items={items}/>
           <AvailabilityComponent/>
         </section>
         <section className="row content">
-          <section className="house_description" dangerouslySetInnerHTML={{__html: (await items).items.data.attributes.Content}}></section>
+          <section className="house_description" dangerouslySetInnerHTML={{__html: (items).items.data.attributes.Content}}></section>
           <section className="button">
             <AvailabilityComponent/>
           </section>
-        </section>
-      
-        <CommentsComponent items={await items}/>
-
-        
-
+        </section>      
+        <CommentsComponent items={items}/>
       </section>
     );
   }

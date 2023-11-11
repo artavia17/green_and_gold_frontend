@@ -1,7 +1,5 @@
-import { Console } from "console";
-
 const api : string = 'https://green-and-gold-api.alonsocr.com/api/';
-const img : string = 'https://green-and-gold-api.alonsocr.com/';
+const img : string = 'https://green-and-gold-api.alonsocr.com';
 
 const fethItem : Function = async (item: string, filters?: string | null ) => {
 

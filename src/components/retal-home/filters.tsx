@@ -1,31 +1,33 @@
 'use client';
 import React, { useId, useEffect, useState } from 'react';
 import Select, { SingleValue } from 'react-select';
-import { fethItem } from '@/hook/api';
 import NumberToWords from 'number-to-words';
 
-
-type FiltersComponentProps = {
-    closeFilters: ( arg : boolean ) => void;
-    updateFilter: () => void;
+type FilterProbs = {
+    attributes: {
+        Bathrooms: string,
+        Bedrooms: string,
+        Price: string,
+        Floors: string,
+        Type_of_currency: string
+    }
 }
 
 type FiltersItems = {
     url: string,
     items: {
-        data: any[];
+        data: FilterProbs[];
     }
 }
 
-type FilterProbs = {
-    Bathrooms: string,
-    Bedrooms: string,
-    Price: string,
-    Floors: string,
-    Type_of_currency: string
+
+type FiltersComponentProps = {
+    closeFilters: ( arg : boolean ) => void;
+    updateFilter: () => void;
+    filters: FiltersItems
 }
 
-function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProps ){
+function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComponentProps ){
 
     const [priceDefault, setPriceDefault] = useState({ value: '', label: '' });
     const [bedroomsDefault, setBedroomsDefault] = useState({ value: '', label: '' });
@@ -39,7 +41,6 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
     const [filterBedrooms, setFilterBedrooms] = useState<any[]>([]);
     const [filterBathrooms, setFilterBathrooms] = useState<any[]>([]);
     const [filterFloors, setFilterFloors] = useState<any[]>([]);
-    const [updateFiltersHome, setUpdateFiltersHome] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -99,19 +100,20 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
             
         }
 
-        const filter = async () => {
+        const filter = () => {
 
-            const { items } : FiltersItems = await fethItem('rental-homes');
-            const dataArray = items.data;
+            // const { items } : FiltersItems = await fethItem('rental-homes');
+            const dataArray = filters.items.data;
 
-            dataArray.forEach( e => {
+            dataArray.forEach( (e : FilterProbs) => {
 
-                const attributes : FilterProbs = e.attributes;
-                const prices : string = attributes.Price;
-                const bedrooms : string = attributes.Bedrooms;
-                const bathrooms : string = attributes.Bathrooms;
-                const floors : string = attributes.Floors;
-                const type_currency : string = attributes.Type_of_currency;
+
+                // const attributes = e.attributes;
+                const prices : string = e.attributes.Price;
+                const bedrooms : string = e.attributes.Bedrooms;
+                const bathrooms : string = e.attributes.Bathrooms;
+                const floors : string = e.attributes.Floors;
+                const type_currency : string = e.attributes.Type_of_currency;
 
                 if(!filterPrice.some(item => item.value === prices)){
                     const arrayPrices = [...filterPrice, {
@@ -152,7 +154,7 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
 
         filter();
 
-    }, [actualesFilters, filterPrice, filterBedrooms, filterBathrooms, filterFloors]);
+    }, [actualesFilters, filterPrice, filterBedrooms, filterBathrooms, filterFloors, filters]);
 
     const loadSelect = (e : SingleValue<{ value: string; label: string;}>, type : string) => {
 
@@ -217,13 +219,6 @@ function FiltersComponent( { closeFilters, updateFilter } : FiltersComponentProp
         }
 
         window.history.replaceState(null, "", url); 
-
-        // if(!updateFiltersHome){
-        //     updateFilter();
-        // }
-
-
-        // setUpdateFiltersHome(true);
 
     }
 

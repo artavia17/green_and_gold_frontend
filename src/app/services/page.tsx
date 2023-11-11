@@ -22,7 +22,6 @@ type ArrayImage = {
 type ArrayServices = {
     Title: string,
     Image: ArrayImage,
-    // subContent: string,
     Content: string
 }
 
@@ -96,6 +95,11 @@ async function Services(){
 
     return (
         <>
+            <script
+                type="application/ld+json" 
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
             <PropertyComponent  content={content}/>
         </>
     )   
