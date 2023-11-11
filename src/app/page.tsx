@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     siteName: 'Green and Gold',
     locale: 'en_US',
     type: 'website',
-    images: ['/favicon.ico'],
   },
   generator: 'Green and Gold',
   applicationName: 'Green and Gold',
