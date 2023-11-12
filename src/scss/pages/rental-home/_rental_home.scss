@@ -12,10 +12,10 @@
     }
 
     @include devices(mobile){
-        padding: 20px 30px;
+        padding: 20px 0px;
         padding-top: 40px;
         width: 100%;
-        max-width: calc(100% - 60px);
+        max-width: calc(100% - 0px);
     }
 
     h1,
@@ -55,6 +55,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: calc(100% - 60px);
+            margin: auto;
         }
     }
 
