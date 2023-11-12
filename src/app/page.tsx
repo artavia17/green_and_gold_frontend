@@ -116,6 +116,7 @@ type HomeType = {
 };
 
 async function homeData(){
+
   const items : HomeType = await fethItem(`home`);
   return items;
 }

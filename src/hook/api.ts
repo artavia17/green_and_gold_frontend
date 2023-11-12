@@ -7,7 +7,7 @@ const fethItem : Function = async (item: string, filters?: string | null ) => {
 
         const apiURL = filters ? `${api}${item}?populate=deep${filters}` : `${api}${item}?populate=deep`
 
-        const response = await fetch(apiURL);
+        const response = await fetch(apiURL, { cache: 'reload', next: { revalidate  : 1800} });
 
         const data = await response.json();
 

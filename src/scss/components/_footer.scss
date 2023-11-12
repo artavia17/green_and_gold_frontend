@@ -20,7 +20,7 @@ footer{
 
         .first-column{
             display: grid;
-            grid-template-columns: calc(25% - 80px) 25% calc(25% - 80px) calc(25% - 80px);
+            grid-template-columns: calc(20% - 80px) 30% calc(25% - 80px) calc(25% - 80px);
             flex-flow: row;
             column-gap: 80px;
             max-width: 1400px;

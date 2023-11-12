@@ -86,9 +86,9 @@ function Fotos( {items, params} : SlugItems){
                                 .attributes.name
                         }
 
-                        width={600}
+                        width={800}
 
-                        height={600}
+                        height={800}
 
                         />
                     </section>
