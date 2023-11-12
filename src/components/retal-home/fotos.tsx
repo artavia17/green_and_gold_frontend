@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import Icon from '@/assets/img/icons/arrow_galery.svg';
 import Image from "next/image";
 import { fethItem } from "@/hook/api";
+import SliderComponent from "./slider";
+
 
 type PropsData = {
     slug: string,
@@ -38,14 +40,22 @@ type ImageItems = {
     }
 }
 
+type ImageNewProps = {
+    img: string,
+    alt: string,
+    name: string
+}
+
 function FotosComponent({ slug, close }: PropsData) {
 
-    const [images, setImages] = useState<any[]>();
-
+    const [images, setImages] = useState<ImageNewProps[]>();
+    const [imagesName, setImagesName] = useState<string>('');
 
     const photoElements = useRef<HTMLElement[]>([]);
     const fatherElement = useRef<HTMLElement>(null);
     const [remove, setRemove] = useState(false);
+    const [viewSlider, setViewSlider] = useState(false);
+    const [closeSliderAnimation, setCloseSliderAnimation] = useState(false);
 
 
     useEffect(() => {
@@ -87,14 +97,29 @@ function FotosComponent({ slug, close }: PropsData) {
             };
 
             fetchContent();
+
         }
 
     }, [slug, images]);
 
 
+
     const addPhoto = (el: HTMLElement) => {
         if (el && !photoElements.current.includes(el)) {
             photoElements.current.push(el);
+        }
+    }
+
+    const openModal = (imgName : string | null) => {
+        if(viewSlider){
+            setCloseSliderAnimation(true);
+            setTimeout(() => {
+                setCloseSliderAnimation(false);
+                setViewSlider(false)
+            }, 200)
+        }else{
+            imgName ? setImagesName(imgName) : null;
+            setViewSlider(true)
         }
     }
 
@@ -123,7 +148,7 @@ function FotosComponent({ slug, close }: PropsData) {
                                 images.map((item, key) => {
 
                                     return (
-                                        <section className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
+                                        <section onClick={() => openModal(item.name)} className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
                                             <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={1000} height={1000} priority  />
                                         </section>
                                     )
@@ -133,6 +158,11 @@ function FotosComponent({ slug, close }: PropsData) {
                     </section>
                 </section>
             </section>
+            {
+                viewSlider ? (<section className={`slider_item ${closeSliderAnimation ? 'remove' : ''}`} onClick={() => openModal(null)}>
+                                <SliderComponent name={imagesName} images={images} />
+                            </section>) : ''
+            }
         </>
     )
 

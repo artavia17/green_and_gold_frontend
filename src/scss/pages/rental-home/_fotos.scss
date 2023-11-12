@@ -171,6 +171,10 @@
           width: calc(100% - 7.5px);
         }
 
+        @include devices(mobile){
+          width: 100%;
+        }
+
 
         &:hover {
           img {
@@ -243,4 +247,270 @@
 
 .fotosComponent.remove{
   opacity: 0;
+}
+
+.view_individual_photo{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding-top: 75px;
+  height: calc(100vh - 75px);
+  background-color: $color-negro-transparente;
+  backdrop-filter: blur(4px);
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scrollbar-gutter: auto;
+  // display: none;
+
+  @include devices(tablet) {
+    padding-top: 75px;
+    height: calc(100vh - 75px);
+  }
+
+  .item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .remove_item{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: auto;
+    margin-bottom: 40px;
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+    top: calc(10% - 50px);
+
+    @include devices(laptop) {
+      max-width: 1100px;
+      width: 70vw;
+      margin-bottom: 0px;
+      top: 23px;
+    }
+
+    @include devices(tablet){
+      top: calc(10% - 65px);
+      width: 90vw;
+    }
+
+    @include devices(mobile) {
+      padding: 0px 20px;
+      top: 3.5%;
+      width: 100%;
+      max-width: 95%;
+    }
+
+    h5{
+      font-size: $font-size-about-title-principal;
+      font-family: $font_principal;
+      color: $color_principal;
+      @include devices(tablet) {
+        display: block;
+        font-size: $font-size-mobile-slider;
+      }
+
+    }
+
+
+    .remove{
+        
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transform: scale(1);
+      transition: .2s ease;
+      z-index: 999;
+      border: none;
+      background-color: transparent;
+
+      img{
+        width: 100%;
+        height: 100%;
+      }
+
+      @include devices(tablet) {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 40px;
+        height: 40px;
+
+        // svg{
+        //   width: 25px;
+        //   height: 25px;
+        // }
+
+      }
+
+
+      svg{
+          fill: $color_principal;
+          transition: .2s ease;
+
+          @include devices(tablet) {
+            fill: $color_principal;
+          }
+
+      }
+
+      &:hover{
+          background-color: $color_principal;
+      }
+
+      &:active{
+          transform: scale(0.9);
+      }
+  }
+
+  }
+
+  .content{
+    width: 100%;
+    max-width: 1400px;
+    height: calc(80% - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0px 5%;
+
+    @include devices(laptop) {
+      max-width: 1100px;
+      width: 70vw;
+    }
+
+    @include devices(tablet) {
+      max-width: 1100px;
+      width: 90vw;
+      height: 80%;
+    }
+
+    @include devices(mobile) {
+      padding: 30px;
+      width: 100%;
+      max-width: 100%;
+      padding-top: 0px;
+      height: 100%;
+      border-radius: 0px;
+      padding: 0px;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+      background-color: $background-location;
+      border-radius: 15px;
+
+      @include devices(mobile) {
+        border-radius: 0px;
+      }
+
+    }
+    
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      /* Center slide text vertically */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      // max-width: 90%;
+    }
+    
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      max-width: 80%;
+      max-height: 80%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 30px;
+
+      @include devices(mobile){
+        max-width: 95%;
+        max-height: 95%;
+      }
+
+    }
+
+    .swiper-pagination-current,
+    .swiper-pagination-total,
+    .swiper-pagination{
+      font-family: $font_principal;
+      font-weight: 500;
+      color: $background-location;
+      mix-blend-mode: difference;
+    }
+
+    .swiper-button-prev, .swiper-button-next{
+      color:  $background-location;
+      mix-blend-mode: difference;
+      opacity: 1;
+      transition: .2s ease;
+
+      @include devices(mobile){
+        display: none;
+      }
+
+    }
+
+    .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled{
+      opacity: 0;
+    }
+
+  }
+
+}
+
+
+.slider_item{
+
+  .view_individual_photo{
+    opacity: 1;
+    transition: .2s ease;
+  
+    @include keyframes(open_modal_slider){
+        0%{
+            opacity: 0;
+        }
+        100%{
+          opacity: 1;
+        }
+    }
+    @include animate(open_modal_slider, .2s, ease, 1);
+  }
+
+}
+
+.slider_item.remove{
+  .view_individual_photo{
+    opacity: 0;
+    transition: .2s ease;
+  
+    @include keyframes(close_modal_slider){
+        0%{
+            opacity: 1;
+        }
+        100%{
+          opacity: 0;
+        }
+    }
+    @include animate(close_modal_slider, .2s, ease, 1);
+  }
 }

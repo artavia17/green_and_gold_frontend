@@ -101,6 +101,10 @@ function DateComponent({ items } : CalendarItems){
 
     }
 
+    const openMessages = () => {
+        alert("Hola")
+    }
+
 
     return (
         <>
@@ -139,7 +143,7 @@ function DateComponent({ items } : CalendarItems){
                         <section className="content">
                             <p>Availability last updated on { resentUpdate(items.items.data.attributes.updatedAt, true) }. For the most recent updates, please send us a message.</p>
                             <section className="bottoms">
-                                <button>Send message</button>
+                                <button onClick={openMessages}>Send message</button>
                                 <button className="close" onClick={open_modal}>Close</button>
                             </section>
                         </section>
