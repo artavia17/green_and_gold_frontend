@@ -11,12 +11,17 @@
     @include devices(tablet){
         border-top-right-radius: 35px;
         border-top-left-radius: 35px;
+        height: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 
     @include devices(mobile){
         height: auto;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .max{
@@ -43,9 +48,9 @@
         }
 
         @include devices(mobile){
-            padding: 30px 10px;
+            padding: 30px 30px;
             width: 100%;
-            max-width: calc(100% - 20px);
+            max-width: calc(100% - 60px);
             overflow: hidden;
         }
 

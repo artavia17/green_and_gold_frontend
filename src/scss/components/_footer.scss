@@ -14,13 +14,13 @@ footer{
     
         @include devices(mobile){
             height: auto;
-    
             border-top-right-radius: 20px;
             border-top-left-radius: 20px;
         }
 
         .first-column{
-            display: flex;
+            display: grid;
+            grid-template-columns: calc(25% - 80px) 25% calc(25% - 80px) calc(25% - 80px);
             flex-flow: row;
             column-gap: 80px;
             max-width: 1400px;
@@ -29,20 +29,22 @@ footer{
             @include devices(laptop){
                 max-width: 1100px;
                 column-gap: 20px;
+                grid-template-columns: calc(20% - 20px) 30% calc(30% - 20px) calc(20% - 20px);
             }
 
             @include devices(tablet){
                 column-gap: 0px;
                 width: calc(100% - 100px);
                 margin: 50px 50px 10px 50px;
+                display: flex;
                 flex-flow: column;
                 row-gap: 20px;
             }
 
             @include devices(mobile){
                 column-gap: 0px;
-                width: calc(100% - 80px);
-                margin: 50px 40px 10px 40px;
+                width: calc(100% - 60px);
+                margin: 50px 30px 10px 30px;
                 flex-flow: column;
                 row-gap: 20px;
             }
@@ -141,8 +143,8 @@ footer{
             }
 
             @include devices(mobile){
-                width: calc(100% - 80px);
-                margin: 0px 40px 50px 40px;
+                width: calc(100% - 60px);
+                margin: 0px 30px 50px 30px;
             }
 
             nav{

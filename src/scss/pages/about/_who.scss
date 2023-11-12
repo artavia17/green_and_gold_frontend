@@ -5,8 +5,14 @@
         justify-content: center;
         align-items: center;
 
+        @include devices(tablet){
+            min-height: auto !important;
+            padding-top: 60px;
+        }
+
         @include devices(mobile){
-            padding: 0px 0px;
+            padding-top: 50px;
+            padding-bottom: 35px;
         }
 
         .item{
@@ -41,7 +47,8 @@
             @include devices(mobile){
                 padding: 30px 20px;
                 width: 100%;
-                max-width: calc(100% - 80px);
+                margin: 0px 10px;
+                max-width: calc(100% - 20px);
                 row-gap: 15px;
             }
 

@@ -22,9 +22,10 @@
 
         @include devices(mobile){
             width: calc(100% - 20px) !important;
-            padding: 0px 10px;
+            padding: 0px 30px;
             height: calc(100vh - 50px);
             padding-bottom: 15px;
+            max-width: calc(100% - 60px);
         }
         
         &::after{

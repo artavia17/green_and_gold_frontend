@@ -59,7 +59,7 @@
         padding: 0px 20px;
         top: 10px;
         width: 100%;
-        max-width: calc(100% - 60px);
+        max-width: calc(100% - 77px);
       }
 
       h5{
@@ -150,9 +150,9 @@
       }
 
       @include devices(mobile) {
-        padding: 20px;
+        padding: 30px;
         width: 100%;
-        max-width: calc(100% - 40px);
+        max-width: calc(100% - 60px);
         padding-top: 0px;
       }
 

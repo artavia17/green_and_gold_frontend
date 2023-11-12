@@ -14,11 +14,16 @@
             padding: 50px;
         }
 
+        @include devices(tablet){
+            margin: 0px auto 0px auto;
+        }
+
         @include devices(mobile){
             width: 100%;
-            padding: 10px 10px 50px 10px;
-            max-width: calc(100% - 50px);
-            margin: 0px auto 0px auto;
+            margin: 0px 10px;
+            padding: 10px 20px 40px 20px;
+            max-width: calc(100% - 20px);
+            // margin: 0px auto 0px auto;
         }
 
         img{ 

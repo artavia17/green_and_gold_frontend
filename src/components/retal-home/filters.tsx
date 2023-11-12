@@ -226,7 +226,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
     return (
         <>
             <section className="filters" onClick={ ( event : React.MouseEvent ) => event.stopPropagation() }>
-                <section className='filter'>
+                {/* <section className='filter'>
                     <Select
                         placeholder="Price"
                         value={priceDefault?.value ? priceDefault : null}
@@ -235,7 +235,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                         options={filterPrice}
                         onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'price') }
                     />
-                </section>
+                </section> */}
 
                 <section className='filter'>
                     <Select

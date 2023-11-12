@@ -1,8 +1,12 @@
 .servicios {
 
     background-color: $color_principal;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+
+    @include devices(laptop){
+        padding-top: 50px;
+    }
 
     @include devices(tablet){
         padding-top: 45px;
@@ -35,12 +39,16 @@
     }
 
     h1{
-        padding-bottom: 80px;
+        padding-bottom: 60px;
         font-size: $font-size-about-title-principal;
         color: $color_green;
 
-        @include devices(tablet){
+        @include devices(laptop){
             padding-bottom: 40px;
+        }
+
+        @include devices(tablet){
+            padding-bottom: 35px;
         }
     
 

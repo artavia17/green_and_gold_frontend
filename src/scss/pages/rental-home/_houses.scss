@@ -1,6 +1,10 @@
 .houses_component{
 
-    margin-top: 50px;
+    margin-top: 71px;
+
+    @include devices(laptop){
+        margin-top: 50px;
+    }
 
     @include devices(tablet){
         margin-top: 50px;

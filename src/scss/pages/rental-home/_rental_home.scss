@@ -1,20 +1,21 @@
 .rental-home{
 
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     max-width: 1400px;
     margin: auto;
 
     @include devices(laptop){
         max-width: 1100px;
         width: 70vw;
+        padding-top: 40px;
     }
 
     @include devices(mobile){
-        padding: 20px;
+        padding: 20px 30px;
         padding-top: 40px;
         width: 100%;
-        max-width: calc(100% - 40px);
+        max-width: calc(100% - 60px);
     }
 
     h1,
@@ -79,7 +80,7 @@
     }
 
     .filter_items{
-        margin-top: 50px;
+        margin-top: 20px;
 
         @include devices(mobile){
             position: fixed;
@@ -151,7 +152,7 @@
                 flex-flow: column;
                 row-gap: 15px;
                 background-color: $color-background-body;
-                width: calc(80% - 25px);
+                width: calc(100% - 120px);
                 padding: 25px;
                 border-radius: 15px;
             }

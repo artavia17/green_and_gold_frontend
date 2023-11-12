@@ -31,7 +31,7 @@
         }
 
         @include devices(laptop){
-            max-width: 90%;
+            max-width: calc(100% - 60px);
         }
 
         .content_background{
