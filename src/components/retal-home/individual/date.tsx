@@ -27,6 +27,11 @@ type CalendarItems = {
     }   
 };
 
+type DateDisponibleProps = {
+    date: string,
+    availability: boolean
+}
+
 function DateComponent({ items } : CalendarItems){
 
 
@@ -38,15 +43,71 @@ function DateComponent({ items } : CalendarItems){
     const [endDateString, setEndDateString] = useState('');
     const [dateUnavailable, setDateUnavailable] = useState<Date[]>([new Date()])
     const [viewMessage, setViewMessage] = useState<boolean>(false);
+    const [viewMessageItem, setViewMessageItem] = useState<boolean>(false);
     const [removeMessage, setRemoveMessage] = useState<boolean>(false);
+    const [removeMessageItem, setRemoveMessageItem] = useState<boolean>(false);
     const [alertCalendar, setAlertCalendar] = useState<boolean>(false);
+    const [validarDisponibilidad, setValidarDisponibilidad] = useState<boolean>(false);
     const [consultText, setConsultText] = useState<string>('Send message')
+    const [consultTextView, setConsultTextView] = useState<string>('Send message')
+    const [diasNoDisponibles, setDiasNoDisponibles] = useState<DateDisponibleProps[]>([])
     const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     const onChange = (dates : any) => {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
+
+        if(end){
+
+            const arrayDate : DateDisponibleProps[] = [];
+            const validateStartDate = new Date(start);
+            const validateEndDate = new Date(end);
+            const currentDate = new Date(start);
+
+            while(currentDate <= validateEndDate){
+
+                const currentDateString = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`;
+                let disponibilidadDate = true;
+
+                items.items.data.attributes.Unavailable.forEach(e => {
+                    const date = new Date(e.Date);
+                    date.setDate(date.getDate() + 1);
+                    const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+                
+                    if (dateString === currentDateString) {
+                        disponibilidadDate = false;
+                        return;
+                    }
+
+                    disponibilidadDate = true;
+                });
+
+                arrayDate.push({
+                    date: currentDateString,
+                    availability: disponibilidadDate
+                });
+
+                currentDate.setDate(currentDate.getDate() + 1);
+
+            }
+
+            // items.items.data.attributes.Unavailable.forEach( e => {
+            //     const fechaConsulta = new Date(e.Date);
+            //     fechaConsulta.setDate(fechaConsulta.getDate() + 1);
+
+            //     if(fechaConsulta > validateStartDate && fechaConsulta < validateEndDate){
+            //         arrayDate.push(`${fechaConsulta.getDate()}/${fechaConsulta.getMonth()}/${fechaConsulta.getFullYear()}`)
+            //     }
+
+            // })
+
+
+            setDiasNoDisponibles(arrayDate);
+            setValidarDisponibilidad(true);
+
+        }
+
     };
 
 
@@ -78,7 +139,8 @@ function DateComponent({ items } : CalendarItems){
             const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
             arrayUnavailable.push(setNewDate);
             
-        })
+        });
+
 
         setDateUnavailable(arrayUnavailable);
 
@@ -126,6 +188,15 @@ function DateComponent({ items } : CalendarItems){
         }
     }
 
+    const viewSendMessage = () => {
+        if(viewMessageItem){
+            exitConsultView();
+        }else{
+            setViewMessageItem(true);
+            setConsultTextView('Close message')
+        }
+    }
+
 
     const exitConsult = () => {
         setRemoveMessage(true);
@@ -137,10 +208,20 @@ function DateComponent({ items } : CalendarItems){
         }, 200)
     }
 
+    const exitConsultView = () => {
+        setRemoveMessageItem(true);
+        setConsultTextView('Send message')
+
+        setTimeout(() => {
+            setRemoveMessageItem(false);
+            setViewMessageItem(false);
+        }, 200)
+    }
+
     const sendWhatsapp = () => {
 
         const phone : string = '+50683715061';
-        const message : string = `Hello, what is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? Thank you. \n\n ${window.location}`;
+        const message : string = `Hello, what is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? Thank you. \n\n${window.location}`;
         let enlace : string = '';
         enlace = `https://wa.me/${phone}?text=${encodeURI(message)}`;
 
@@ -163,9 +244,14 @@ function DateComponent({ items } : CalendarItems){
 
             setTimeout(() => {
                 setAlertCalendar(false);
-            }, 500)
+            }, 500);
 
         }
+    }
+
+    const regresar = () => {
+        setValidarDisponibilidad(false);
+        exitConsultView();
     }
 
 
@@ -218,18 +304,72 @@ function DateComponent({ items } : CalendarItems){
                             }
                         </section>
                         <section className={`calendario ${alertCalendar ? 'active' : ''}`}>
-                            <DatePicker
-                                selected={startDate}
-                                onChange={onChange}
-                                startDate={startDate}
-                                minDate={new Date()}
-                                endDate={endDate}
-                                excludeDates={dateUnavailable}
-                                selectsRange
-                                inline
-                                monthsShown={2}
-                                showDisabledMonthNavigation
-                            />
+                            <div className={`item_calendar ${validarDisponibilidad ? 'remove' : ''}`}>
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={onChange}
+                                    startDate={startDate}
+                                    minDate={new Date()}
+                                    endDate={endDate}
+                                    excludeDates={dateUnavailable}
+                                    selectsRange
+                                    inline
+                                    monthsShown={2}
+                                    showDisabledMonthNavigation
+                                />
+                            </div>
+                            <div className={`disponibilidad ${!validarDisponibilidad ? 'remove' : ''}`}>
+
+                                {
+                                    diasNoDisponibles.length ? (
+                                        <section>
+                                            <div className="title">
+                                                <button onClick={regresar} title="close">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                                        <path fillRule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                                                    </svg>
+                                                </button> 
+                                                <h3> 
+                                                    Available days
+                                                </h3>
+                                            </div>
+                                            <p>Availability last updated on Sat 11/11/2023. For the most recent updates, please send us a message.</p>
+                                            <div className="consultar">
+                                                <button className="consult" onClick={viewSendMessage}>{consultTextView}</button>
+                                                {
+                                                    viewMessageItem ? (
+                                                        <section className={`contact_message ${removeMessageItem ? 'remove' : ''}`}>
+                                                            <p>Consult by:</p> <button onClick={sendWhatsapp} title="Send message by whatsapp">Whatsapp</button> <button onClick={sendEmail} title="Send email">Email</button>
+                                                        </section>
+                                                    ) : ''
+                                                }
+                                            </div>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Day</th>
+                                                        <th>Availability</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        diasNoDisponibles.map( (e, key) => {
+                                                            return (
+                                                                <tr key={key} className={!e.availability ? 'unavailable' : ''}>
+                                                                    <td>{e.date}</td>
+                                                                    <td>{e.availability ? 'Available' : 'Unavailable'}</td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                    ) : (
+                                        <h1>Todos los dias disponibesl</h1>
+                                    )
+                                }
+                            </div>
                         </section>
                     </section>
                 </section>

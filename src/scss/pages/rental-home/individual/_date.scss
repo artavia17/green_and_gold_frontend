@@ -271,9 +271,232 @@
                 padding: 15px;
                 border-radius: 20px;
                 transition: .5s ease;
+                overflow: hidden;
+                position: relative;
 
                 @include devices(tablet){
                     grid-area: 1;
+                }
+
+                .item_calendar{
+                    transform: translateX(0%);
+                    transition: .5s ease;
+                    opacity: 1;
+                }
+
+                .item_calendar.remove{
+                    transform: translateX(-110%);
+                    opacity: 0;
+                }
+
+                .disponibilidad{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0px;
+                    left: 0px;
+                    left: 0%;
+                    transition: .5s ease;
+                    opacity: 1;
+                    overflow: auto;
+
+                    section{
+                        position: relative;
+                    }
+
+                    .title{
+                        position: relative;
+
+                        button{
+                            position: absolute;
+                            left: 0px;
+                            margin-left: 2.5%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: none;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            background-color: $color-green-title;
+                            color: $color_white;
+                            transform: scale(1);
+                            transition: .3s ease;
+                            
+                            &:hover{
+                                background-color: $color_principal;
+                            }
+                            
+                            &:active{
+                                transform: scale(0.95);
+                            }
+
+                        }
+                    }
+
+                    h3{
+                        text-align: center;
+                        margin: 15px 0px;
+                        font-family: $font_principal;
+                        font-weight: 700;
+                        font-size: $font_size_menu;
+                        
+
+                        @include devices(tablet){
+                            font-size: $font-size-text-tablet;
+                        }
+
+                        @include devices(mobile){
+                            font-size: $font-size-about-title;
+                        }
+
+                    }
+
+                    p{
+                        width: 95%;
+                        margin: auto;
+                        margin-bottom: 15px;
+                        font-family: $font_principal;
+                        font-weight: 400;
+                    }
+
+                    table, th, td {
+                        border: 1px solid $color-border;
+                        border-collapse: collapse;
+                    }
+
+                    table{
+                        width: 95%;
+                        margin: auto;
+                        margin-bottom: 15px;
+
+                        th{
+                            font-family: $font_principal;
+                            font-weight: 700;
+                            padding: 10px;
+                        }
+
+                        td{
+                            text-align: center;
+                            padding: 7px;
+                            font-family: $font_principal;
+                            font-weight: 400;
+                        }
+
+                        tr.unavailable{
+                            background-color: $color_error;
+                            color: $background-location;
+                        }
+
+                    }
+
+                    .consultar{
+                        width: 95%;
+                        margin: auto;
+                        margin-bottom: 10px;
+                        // display: flex;
+                        // flex-flow: column;
+                        column-gap: 10px;
+                        
+                        button.consult{
+                            padding: 6px 25px;
+                            border-radius: 25px;
+                            width: auto;
+                            border: none;
+                            cursor: pointer;
+                            background-color: $color-green-title;
+                            color: $color_white;
+                            font-family: $font_principal;
+                            font-weight: bold;
+                            font-size: $font-size-about-parrafo;
+                            transform: scale(1);
+                            transition: .3s ease;
+                            margin-bottom: 15px;
+                            
+                            &:hover{
+                                background-color: $color_principal;
+                            }
+                            
+                            &:active{
+                                transform: scale(0.95);
+                            }
+                        }
+
+                        .contact_message{
+
+                            display: flex;
+                            margin-bottom: 15px;
+                            align-items: center;
+
+                            opacity: 1;
+                            transition: .2s ease;
+
+                            @include keyframes(open_contact){
+                                0%{
+                                    opacity: 0;
+                                }
+                                100%{
+                                opacity: 1;
+                                }
+                            }
+                            @include animate(open_contact, .2s, ease, 1);
+
+                            p{
+                                width: auto;
+                                margin: 0px;
+                                margin-right: 10px;
+                            }
+
+                            button{
+
+                                text-decoration: none;
+                                padding: 5px 10px;
+                                background-color: $background-location;
+                                border-radius: 7px;
+                                color: $color_principal;
+                                transition: .2s ease;
+                                font-size: $font-size-about-parrafo;
+                                border: none;
+                                cursor: pointer;
+                                font-family: $font_principal;
+                                font-weight: bold;
+                                transform: scale(1);
+                                transition: 0.2s ease;
+        
+                                &:hover{
+                                    color: $background-location;
+                                    background-color: $color_principal;
+                                }
+                                
+                                &:active{
+                                    transform: scale(0.95);
+                                }
+        
+                                @include devices(tablet){
+                                    font-size: $font-size-about-parrafo;
+                                }
+
+                                &:first-of-type{
+                                    margin-right: 10px;
+                                }
+                            }
+
+                        }
+
+                        .contact_message.remove{
+                            opacity: 0;
+                        }
+
+                    }
+
+                }
+
+
+
+                .disponibilidad.remove{
+                    left: 110%;
+                    opacity: 0;
                 }
 
                 .react-datepicker{
