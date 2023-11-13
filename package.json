@@ -23,6 +23,7 @@
     "react-dom": "^18",
     "react-select": "^5.7.7",
     "swiper": "^10.3.1",
+    "twilio": "^3.84.1",
     "words-to-numbers": "^1.5.1"
   },
   "devDependencies": {

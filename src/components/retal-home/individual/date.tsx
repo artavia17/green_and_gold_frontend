@@ -7,6 +7,7 @@ import ImageCalendar from '@/assets/img/icons/calendar.svg';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+
 type UnavailableProps = {
     Date: string
 }
@@ -36,6 +37,10 @@ function DateComponent({ items } : CalendarItems){
     const [startDateString, setStartDateString] = useState('');
     const [endDateString, setEndDateString] = useState('');
     const [dateUnavailable, setDateUnavailable] = useState<Date[]>([new Date()])
+    const [viewMessage, setViewMessage] = useState<boolean>(false);
+    const [removeMessage, setRemoveMessage] = useState<boolean>(false);
+    const [alertCalendar, setAlertCalendar] = useState<boolean>(false);
+    const [consultText, setConsultText] = useState<string>('Send message')
     const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     const onChange = (dates : any) => {
@@ -48,7 +53,7 @@ function DateComponent({ items } : CalendarItems){
     const resentUpdate = (resentString : string, more? : boolean) => {
 
         const newDate : Date = new Date(resentString);
-        const dayNumber : number = more ? newDate.getDate() + 1 : newDate.getDate();
+        const dayNumber : number = newDate.getDate();
         const dayString : string = day[newDate.getDay()];
         const monthNumber : Number = newDate.getMonth() + 1;
         const yearNumber : Number = newDate.getFullYear();
@@ -82,6 +87,8 @@ function DateComponent({ items } : CalendarItems){
 
     const open_modal = () => {
 
+        exitConsult();
+
         const loadComponent : HTMLElement | null = document.querySelector('.location_section');
         
         if(loadComponent?.classList.contains('active')){
@@ -102,7 +109,63 @@ function DateComponent({ items } : CalendarItems){
     }
 
     const openMessages = () => {
-        alert("Hola")
+        if(viewMessage){
+            exitConsult();
+        }else{
+
+            setViewMessage(true);
+            setConsultText('Close message');
+
+            setTimeout(() => {
+                const scrollItem = document.querySelector('.location_section .caledar_select_day');
+
+                if(scrollItem){
+                    scrollItem.scrollTo(0, scrollItem.scrollHeight);
+                }  
+            }, 100)
+        }
+    }
+
+
+    const exitConsult = () => {
+        setRemoveMessage(true);
+        setConsultText('Send message')
+
+        setTimeout(() => {
+            setRemoveMessage(false);
+            setViewMessage(false);
+        }, 200)
+    }
+
+    const sendWhatsapp = () => {
+
+        const phone : string = '+50683715061';
+        const message : string = `Hello, what is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? Thank you. \n\n ${window.location}`;
+        let enlace : string = '';
+        enlace = `https://wa.me/${phone}?text=${encodeURI(message)}`;
+
+        window.open(enlace)
+
+    }
+
+
+    const sendEmail = () => {
+        const email = "info@gngcr.com";
+        const subject = `Check availability of the ${items.items.data.attributes.Title} house`;
+        const body = `Hello, \n\nWhat is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? \n\nThank you. \n\nHouse link: ${window.location} \n\n`;
+                    
+        window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURI(body)}`;
+    }
+
+    const selectCalendar = () => {
+        if(!alertCalendar){
+            setAlertCalendar(true);
+
+            setTimeout(() => {
+                setAlertCalendar(false);
+            }, 500)
+
+        }
     }
 
 
@@ -122,7 +185,7 @@ function DateComponent({ items } : CalendarItems){
                         </section>
                         <section className="date item">
                             <span>Pick-up Date</span>
-                            <div>
+                            <div onClick={selectCalendar}>
                                 <section className="icon">
                                     <Image src={ImageCalendar.src} alt="Icon of calendar" width={100} height={100}/>
                                 </section>
@@ -131,7 +194,7 @@ function DateComponent({ items } : CalendarItems){
                         </section>
                         <section className="date item">
                             <span>Drop-off Date</span>
-                            <div>
+                            <div onClick={selectCalendar}>
                                 <section className="icon">
                                     <Image src={ImageCalendar.src} alt="Icon of calendar" width={100} height={100}/>
                                 </section>
@@ -143,11 +206,18 @@ function DateComponent({ items } : CalendarItems){
                         <section className="content">
                             <p>Availability last updated on { resentUpdate(items.items.data.attributes.updatedAt, true) }. For the most recent updates, please send us a message.</p>
                             <section className="bottoms">
-                                <button onClick={openMessages}>Send message</button>
-                                <button className="close" onClick={open_modal}>Close</button>
+                                <button onClick={openMessages} title={consultText} >{consultText}</button>
+                                <button className="close" onClick={open_modal} title="Close">Close</button>
                             </section>
+                            {
+                                viewMessage ? (
+                                    <section className={`contact_message ${removeMessage ? 'remove' : ''}`}>
+                                        <p>Consult by:</p> <button onClick={sendWhatsapp} title="Send message by whatsapp">Whatsapp</button> <button onClick={sendEmail} title="Send email">Email</button>
+                                    </section>
+                                ) : ''
+                            }
                         </section>
-                        <section className="calendario">
+                        <section className={`calendario ${alertCalendar ? 'active' : ''}`}>
                             <DatePicker
                                 selected={startDate}
                                 onChange={onChange}

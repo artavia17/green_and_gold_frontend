@@ -75,6 +75,7 @@
                     background-color: $background-location;
                     padding: 15px 10px;
                     border-radius: 10px;
+                    cursor: pointer;
 
                     @include devices(tablet){
                         padding: 10px 15px;
@@ -209,12 +210,67 @@
                     }
                 }
 
+                .contact_message{
+                    background-color: $color_white;
+                    margin-top: 15px;
+                    border-radius: 20px;
+                    padding: 20px;
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    column-gap: 10px;
+                    opacity: 1;
+                    transition: .2s ease;
+
+                    @include keyframes(open_contact){
+                        0%{
+                            opacity: 0;
+                        }
+                        100%{
+                          opacity: 1;
+                        }
+                    }
+                    @include animate(open_contact, .2s, ease, 1);
+
+
+                    p{
+                        margin: 0px;
+                    }
+
+                    button{
+                        text-decoration: none;
+                        padding: 5px 10px;
+                        background-color: $background-location;
+                        border-radius: 10px;
+                        color: $color_principal;
+                        transition: .2s ease;
+                        font-size: $font-size-slider;
+
+                        &:hover{
+                            color: $background-location;
+                            background-color: $color_principal;
+                        }
+
+                        @include devices(tablet){
+                            font-size: $font-size-about-parrafo;
+                        }
+
+                    }
+
+                }
+
+
+                .contact_message.remove{
+                    opacity: 0;
+                }
+
             }
 
             .calendario{
                 background-color: $color_white;
                 padding: 15px;
                 border-radius: 20px;
+                transition: .5s ease;
 
                 @include devices(tablet){
                     grid-area: 1;
@@ -223,6 +279,7 @@
                 .react-datepicker{
                     display: flex;
                     border: none;
+                    transition: .5s ease;
 
                     @include devices(mobile){
                         flex-flow: column;
@@ -244,6 +301,8 @@
                     &::before{
                         border-color: $color_arrow_calendar;
                         border-width: 2px 2px 0 0;
+                        transition: .5s ease;
+                        
                     }
                 }
 
@@ -252,6 +311,7 @@
                     font-family: $font_principal;
                     font-weight: 700;
                     font-size: $font-size-text-tablet;
+                    transition: .5s ease;
 
                     @include devices(tablet){
                         font-size: $font-size-about-parrafo-mobile;
@@ -329,6 +389,19 @@
                     background-color: transparent;
                     color: $color_principal;
                 }
+
+            }
+
+            .calendario.active{
+
+                background-color: $color-comments-background;
+                transition: .5s ease;
+
+                .react-datepicker{
+                    background-color: $color-comments-background;
+                    transition: .5s ease;
+                }
+
 
             }
 
