@@ -333,7 +333,7 @@ function DateComponent({ items } : CalendarItems){
                                                     Available days
                                                 </h3>
                                             </div>
-                                            <p>Availability last updated on Sat 11/11/2023. For the most recent updates, please send us a message.</p>
+                                            <p>Availability last updated on Sat 11/11/2023. For the most recent updates, please send us a message.cl</p>
                                             <div className="consultar">
                                                 <button className="consult" onClick={viewSendMessage}>{consultTextView}</button>
                                                 {

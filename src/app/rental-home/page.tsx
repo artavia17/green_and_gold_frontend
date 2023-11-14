@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       absolute: 'Rental Homes | Green and Gold, Guanacaste, Costa Rica'
     },
     description: 'Experience the beauty of Costa Rica from the comfort of your own rental home. Choose from a variety of options, from beach houses to city apartments.',
-    metadataBase: new URL('https://www.gngcr.com'),
+    metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
     alternates: {
       canonical: '/',
       languages: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     openGraph: {
       title: 'Rental Homes | Green and Gold, Guanacaste, Costa Rica',
       description: 'Experience the beauty of Costa Rica from the comfort of your own rental home. Choose from a variety of options, from beach houses to city apartments.',
-      url: 'https://www.gngcr.com',
+      url: 'https://green-and-gold-frontend.vercel.app',
       siteName: 'Green and Gold',
       locale: 'en_US',
       type: 'website',
@@ -123,7 +123,7 @@ async function RetalHome(){
     const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      url: 'https://www.gngcr.com',
+      url: 'https://green-and-gold-frontend.vercel.app',
       name: 'Rental Homes | Green and Gold, Guanacaste, Costa Rica',
       image: '/favicon.ico',
       description: 'Experience the beauty of Costa Rica from the comfort of your own rental home. Choose from a variety of options, from beach houses to city apartments.',
