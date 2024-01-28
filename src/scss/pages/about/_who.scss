@@ -5,6 +5,8 @@
         justify-content: center;
         align-items: center;
 
+        padding: 8dvh 0px;
+
         @include devices(tablet){
             min-height: auto !important;
             padding-top: 60px;
@@ -21,7 +23,7 @@
             width: 85vw;
             // background-color: $color_green;
             margin: auto;
-            padding: 25vh 80px;
+            padding: 25dvh 80px;
             border-radius: 30px;
             background-size: cover;
             background-position: center;

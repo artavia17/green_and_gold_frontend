@@ -10,7 +10,7 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 8dvh;
 
     @include devices(tablet){
         margin-bottom: 0px;

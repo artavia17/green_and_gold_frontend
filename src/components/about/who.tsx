@@ -19,11 +19,11 @@ type ContentProps = {
 }
 
 const WhoComponent = ( { content } : ContentProps ) => {
-  const [heightWindow, setHeightWindow] = useState(0);
+  // const [heightWindow, setHeightWindow] = useState(0);
 
   useEffect(  () => {
 
-    setHeightWindow(SreeenHeight());
+    // setHeightWindow(SreeenHeight());
 
   }, []);
 
@@ -32,7 +32,7 @@ const WhoComponent = ( { content } : ContentProps ) => {
       <section
         className="who"
         style={{
-          minHeight: `${heightWindow}px`,
+          // minHeight: `${heightWindow}px`,
         }}
       >
         <div
