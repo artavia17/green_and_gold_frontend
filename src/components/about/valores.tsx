@@ -35,18 +35,18 @@ export default function ValoresComponent( { content } : ContentProps ) {
   return (
     <>
       <section className="valores">
-        <motion.div
-          initial={{
-            y: 200,
-            opacity: 0,
-          }}
-          whileInView={{
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{
-            type: "spring",
-          }}
+        <div
+          // initial={{
+          //   y: 200,
+          //   opacity: 0,
+          // }}
+          // whileInView={{
+          //   y: 0,
+          //   opacity: 1,
+          // }}
+          // transition={{
+          //   type: "spring",
+          // }}
         >
           <h2 title={ content.items.fourth.title }>{ content.items.fourth.title }</h2>
           <section
@@ -85,7 +85,7 @@ export default function ValoresComponent( { content } : ContentProps ) {
               )}
             </ul>
           </section>
-        </motion.div>
+        </div>
       </section>
     </>
   );
