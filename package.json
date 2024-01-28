@@ -16,6 +16,7 @@
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.43",
     "next": "13.5.4",
+    "nextjs-toploader": "^1.6.4",
     "number-to-words": "^1.2.4",
     "react": "^18",
     "react-check-in-out-calendar": "^0.1.2",
