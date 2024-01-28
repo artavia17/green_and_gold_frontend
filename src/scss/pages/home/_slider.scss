@@ -1,7 +1,7 @@
 
 .sliderHome{
 
-    height: calc(100vh - 75px);
+    height: calc(100dvh - 75px);
     position: relative;
 
     .item{
@@ -113,7 +113,7 @@
     .swiper-pagination{
         position: absolute;
         width: 100%;
-        bottom: 70px;
+        top: 80%;
         z-index: 1;
         display: flex;
         justify-content: center;

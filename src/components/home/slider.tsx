@@ -38,9 +38,30 @@ function SliderHome({ content } : DataProps){
 
     useEffect(  () => {
 
-        setHeight(HeightScreen());
+        setHeightItems();
+
+        window.onresize = () => {
+            setHeightItems();
+        }
 
     }, []);
+
+    const setHeightItems = () => {
+
+        setHeight(HeightScreen());
+
+        const pagination_position : HTMLElement | null = document.querySelector('.swiper-pagination');
+
+        if(pagination_position){
+
+            if(window.innerWidth <= 600){
+                pagination_position.style.top  = `${HeightScreen() - 30}px`;
+            }else{
+                pagination_position.style.top  = `${HeightScreen() - 50}px`;
+            }
+
+        }
+    }
 
 
     return (
@@ -63,7 +84,7 @@ function SliderHome({ content } : DataProps){
                         delay: 3000,
                     }}
                     style={{
-                        height: height > 0 ? `${height + 50}px` : ''
+                        height: height > 0 ? `${height + 200}px` : ''
                     }}
                 >
                     {
