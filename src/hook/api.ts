@@ -1,11 +1,11 @@
-const api : string = 'https://green-and-gold-api.alonsocr.com/api/';
-const img : string = 'https://green-and-gold-api.alonsocr.com';
+const api : string = 'https://gng-api.webdevgenius.tech/wp-json/wp/v2/';
+const img : string = 'https://gng-api.webdevgenius.tech/';
 
 const fethItem : Function = async (item: string, filters?: string | null ) => {
 
     try{
 
-        const apiURL = filters ? `${api}${item}?populate=deep${filters}` : `${api}${item}?populate=deep`
+        const apiURL = `${api}${item}`
 
         const response = await fetch(apiURL, { cache: 'reload', next: { revalidate  : 1800} });
 

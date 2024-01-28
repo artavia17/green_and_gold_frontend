@@ -9,64 +9,81 @@ import {
   forwardRef,
   useImperativeHandle,
   Ref,
+  useEffect
 } from "react";
 import { fethItem } from "@/hook/api";
 import FotosComponent from "./fotos";
 
-type arrayItems = {
-  attributes: {
-    Title: string;
-    Baths: string;
-    Beds: string;
-    SQ_FT: string;
-    Slug: string;
-    Images: {
-      data: any[];
-    };
-    Principal_Image: {
-      data: {
-        attributes: {
-          alternativeText: string;
-          name: string;
-          url: string;
-        };
-      };
-    };
-  };
-};
+type Filter = {
+  bedrooms: number | null,
+  bathrooms: number | null
+}
 
-type ContentItems = {
-  url: string;
-  items: {
-    data: arrayItems[];
-  };
-};
+type ImagesItems = {
+  filename: string,
+  name: string,
+  url: string
+}
+
+
 
 
 export interface RefType {
   updateFilter: () => void;
 }
 
-export interface PropsType {}
+type HousesItems = {
+  allImages: ImagesItems[] | undefined,
+  characteristics: {
+      bathrooms: number,
+      baths: number,
+      bedrooms: number,
+      beds: number,
+      sq_ft: number
+  },
+  main_image: string,
+  slug: string,
+  titulo: string
+}
 
-function HousesComponent(props: PropsType, ref: Ref<RefType>) {
+type HousesProbs = {
+  content: HousesItems[],
+}
+
+function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
+
   const [viewFotos, setViewFotos] = useState(false);
-  const [content, setContent] = useState<ContentItems>();
-  const [slug, setSlug] = useState<string>("");
+
+  const [information, setInformation] = useState<HousesItems[]>(content);
+
+  const [lengthFilter, setLengthFilter] = useState<number>(information.length)
+
+  const [allFotos, setAllFotos] = useState<ImagesItems[]>();
+
   const [load, setLoad] = useState<boolean>(false);
+
   const [update, setUpdate] = useState<boolean>(false);
-  const [filter, setFilter] = useState<boolean>(false);
 
-  const fetchContent = async (filters: string | null) => {
-    setContent(await fethItem(`rental-homes`, filters));
 
-    setLoad(true);
-    setUpdate(false);
-  };
+  const [newFilter, setNewFilter] = useState<Filter>({
+    bathrooms: null,
+    bedrooms: null
+  })
 
-  const openFotos = (slug: string) => {
+  useEffect( () => {
+
+    if(content){
+      setLoad(true)
+      setUpdate(false)
+    }
+
+  }, [content])
+
+  const openFotos = (allImages: ImagesItems[] | undefined) => {
+
     const main: HTMLElement | null = document.querySelector("body");
-    setSlug(slug);
+
+    setAllFotos(allImages);
 
     if (main) {
       if (viewFotos) {
@@ -86,33 +103,44 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
     const bedrooms = queryParams.get("bedrooms");
     const bathrooms = queryParams.get("bathrooms");
     const floors = queryParams.get("floors");
-    let filter = "&";
+    let filter : Filter = {
+      bedrooms: null,
+      bathrooms: null
+    };
+    let filterInformation = information;
 
     if (!price && !bedrooms && !bathrooms && !floors) {
-      fetchContent(filter);
-      setFilter(false);
+
+      setNewFilter({
+        bathrooms: null,
+        bedrooms: null
+      });
+
     } else {
 
-      if (price) {
-        filter += `filters[Price]=${price}&`;
-      }
-
       if (bedrooms) {
-        filter += `filters[Bedrooms]=${bedrooms}&`;
+        filter.bedrooms = bedrooms ? Number(bedrooms) : null;
       }
 
       if (bathrooms) {
-        filter += `filters[Bathrooms]=${bathrooms}&`;
+        filter.bathrooms = bathrooms ? Number(bathrooms) : null;
       }
 
-      if (floors) {
-        filter += `filters[Floors]=${floors}&`;
-      }
+      filterInformation = information.filter( e => {
+        if((!newFilter.bedrooms && !newFilter.bathrooms) || 
+        (newFilter.bathrooms == e.characteristics.bathrooms && !newFilter.bedrooms) ||
+        (newFilter.bedrooms == e.characteristics.bedrooms && !newFilter.bathrooms) ||
+        (newFilter.bathrooms == e.characteristics.bathrooms && newFilter.bedrooms == e.characteristics.bedrooms)){
+          return e;
+        }
+      })
 
-      fetchContent(filter);
-      setFilter(true);
-      setUpdate(true);
+      setNewFilter(filter);
+      
     }
+
+    setLengthFilter(filterInformation.length)
+
   };
 
   useImperativeHandle(ref, () => ({ updateFilter }));
@@ -121,126 +149,122 @@ function HousesComponent(props: PropsType, ref: Ref<RefType>) {
   return (
     <div>
       <section className="houses_component">
-        {content?.items.data.length && load ? (
-          content.items.data.map((item: arrayItems, key) => {
-            const attributes = item.attributes;
-            const title = attributes.Title;
+        {lengthFilter > 0  && load ? (
+          information.map((item, key) => {
+            const attributes = item.characteristics;
+            const title = item.titulo;
             const words = title.split(" ");
             const newWord =
               words.slice(0, 1).join(" ") + "<br/>" + words.slice(1).join(" ");
-            const principalImage = attributes.Principal_Image;
-            const alternativeText =
-              principalImage?.data?.attributes?.alternativeText ||
-              principalImage?.data?.attributes?.name ||
-              "";
-            const imageUrl = principalImage?.data?.attributes?.url || "";
+            const principalImage = item.main_image;
+            const allImages = item.allImages ? item.allImages : undefined
 
             return (
-              <section className="house" key={key} title={attributes.Title}>
-                <section className="img">
-                  <Image
-                    className="presentation"
-                    src={`${content.url}${imageUrl}`}
-                    alt={alternativeText}
-                    title={alternativeText}
-                    width={1000}
-                    height={1000}
-                    priority
-                  />
-                  <button
-                    title="Galery"
-                    onClick={() => openFotos(attributes.Slug)}
-                  >
-                    <Image
-                      src={MorePhotosIcons.src}
-                      alt="Ver mas fotos"
-                      width={100}
-                      height={100}
-                      priority
-                    />
-                  </button>
-                </section>
-                <section className="description">
-                  <h2
-                    title={attributes.Title}
-                    dangerouslySetInnerHTML={{ __html: newWord }}
-                  ></h2>
-                  <section className="caracteristicas">
-                    {attributes.Beds ? (
-                      <section
-                        className="item"
-                        title={`${attributes.Beds} beds`}
-                      >
-                        <Image
-                          src={CasaIcons.src}
-                          alt="Icono de casa"
-                          width={100}
-                          height={100}
-                          priority
-                        />
-                        <span>{attributes.Beds} beds</span>
-                      </section>
-                    ) : (
-                      ""
-                    )}
-
-                    {attributes.Baths ? (
-                      <section
-                        className="item"
-                        title={`${attributes.Baths} baths`}
-                      >
-                        <Image
-                          src={BookmarkIcons.src}
-                          alt="Icono de marcas de libro"
-                          width={100}
-                          height={100}
-                          priority
-                        />
-                        <span>{attributes.Baths} baths</span>
-                      </section>
-                    ) : (
-                      ""
-                    )}
-
-                    {attributes.SQ_FT ? (
-                      <section
-                        className="item"
-                        title={`${attributes.SQ_FT} sq ft`}
-                      >
-                        <Image
-                          src={SQIcons.src}
-                          alt="Icono de SQ"
-                          width={100}
-                          height={100}
-                          priority
-                        />
-                        <span>{attributes.SQ_FT} sq ft</span>
-                      </section>
-                    ) : (
-                      ""
-                    )}
+              (!newFilter.bedrooms && !newFilter.bathrooms) || 
+              (newFilter.bathrooms == attributes.bathrooms && !newFilter.bedrooms) ||
+              (newFilter.bedrooms == attributes.bedrooms && !newFilter.bathrooms) ||
+              (newFilter.bathrooms == attributes.bathrooms && newFilter.bedrooms == attributes.bedrooms) ? (
+                <section className="house" key={key} title={item.titulo}>
+                  <section className="img">
+                    <div className="presentation" dangerouslySetInnerHTML={{__html: principalImage}} ></div>
+                    <button
+                      title="Galery"
+                      onClick={() => openFotos(allImages)}
+                    >
+                      <Image
+                        src={MorePhotosIcons.src}
+                        alt="Ver mas fotos"
+                        width={100}
+                        height={100}
+                        priority
+                      />
+                    </button>
                   </section>
-                  <section className="view_more">
-                    <Link href={`/rental-home/${attributes.Slug}`}>
-                      View more
-                    </Link>
+                  <section className="description">
+                    <h2
+                      title={item.titulo}
+                      dangerouslySetInnerHTML={{ __html: newWord }}
+                    ></h2>
+                    <section className="caracteristicas">
+                      {attributes.beds ? (
+                        <section
+                          className="item"
+                          title={`${attributes.beds} beds`}
+                        >
+                          <Image
+                            src={CasaIcons.src}
+                            alt="Icono de casa"
+                            width={100}
+                            height={100}
+                            priority
+                          />
+                          <span>{attributes.beds} beds</span>
+                        </section>
+                      ) : (
+                        ""
+                      )}
+
+                      {attributes.baths ? (
+                        <section
+                          className="item"
+                          title={`${attributes.baths} baths`}
+                        >
+                          <Image
+                            src={BookmarkIcons.src}
+                            alt="Icono de marcas de libro"
+                            width={100}
+                            height={100}
+                            priority
+                          />
+                          <span>{attributes.baths} baths</span>
+                        </section>
+                      ) : (
+                        ""
+                      )}
+
+                      {attributes.sq_ft ? (
+                        <section
+                          className="item"
+                          title={`${attributes.sq_ft} sq ft`}
+                        >
+                          <Image
+                            src={SQIcons.src}
+                            alt="Icono de SQ"
+                            width={100}
+                            height={100}
+                            priority
+                          />
+                          <span>{attributes.sq_ft} sq ft</span>
+                        </section>
+                      ) : (
+                        ""
+                      )}
+                    </section>
+                    <section className="view_more">
+                      <Link href={`/rental-home/${item.slug}`}>
+                        View more
+                      </Link>
+                    </section>
                   </section>
                 </section>
-              </section>
+              ) : (
+                ''
+              )
             );
+
           })
-        ) : load && content == undefined && !filter ? (
+        ) : load && !information.length ? (
           <h5 className="not_house">Currently, no homes available.</h5>
-        ) : filter && !update ? (
+        ) : lengthFilter == 0 && !update && information.length ? (
           <h5 className="not_house">No houses matching the applied filters found.</h5>
         ) : !update ? (
           <h5 className="not_house">Loading...</h5>
         ) : (
-          <h5 className="not_house">Searching...</h5>
+          <h5 className="not_house">Problem showing houses.</h5>
         )}
       </section>
       {viewFotos ? (
-        <FotosComponent slug={slug} close={() => openFotos("")} />
+        <FotosComponent imagenes={allFotos} close={() => openFotos(allFotos)} />
       ) : (
         ""
       )}

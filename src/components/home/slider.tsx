@@ -12,29 +12,18 @@ import 'swiper/scss/navigation';
 import HeightScreen from '@/hook/screens/height';
 
 type ImageData = {
-    attributes: {
-        Title: string,
-        Action: string,
-        updatedAt: string,
-        Button: string,
-        Tab: boolean,
-        Background: {
-          data: {
-            attributes: {
-              name: string,
-              alternativeText: string,
-              url: string,
-            }
-          }
-        }
-    }
+    titulo: string,
+    button: {
+        external: boolean,
+        link: string,
+        title: string
+    },
+    background: string
 }
   
 type SliderType = {
     url: string;
-    items: {
-        data: ImageData[];
-    };
+    items: ImageData[];
 };
 
 type DataProps = {
@@ -58,9 +47,7 @@ function SliderHome({ content } : DataProps){
         
         <>  
             
-            <section className='sliderHome top_screen' data-scroll-section style={{
-                height: `${height}px` 
-            }}>
+            <section className='sliderHome top_screen' data-scroll-section>
                 <Swiper
                     modules={[Pagination, EffectCoverflow, Autoplay]}
                     grabCursor={true}
@@ -76,27 +63,26 @@ function SliderHome({ content } : DataProps){
                         delay: 3000,
                     }}
                     style={{
-                        height: `${height + 50}px` 
+                        height: height > 0 ? `${height + 50}px` : ''
                     }}
                 >
                     {
-                        content && content.items.data.length > 0 ? (
-                            content.items.data.map( (item, key) =>{
+                        content && content.items.length > 0 ? (
+                            content.items.map( (item, key) =>{
                                 return (
                                     <SwiperSlide 
                                         className='item' 
                                         key={key}
                                         style={{
-                                            backgroundImage: `url(${content.url + item.attributes.Background.data.attributes.url})`,
                                             height: `${height + 50}px`     
                                         }}
-                                        title={item.attributes.Background.data.attributes.alternativeText ? item.attributes.Background.data.attributes.alternativeText : item.attributes.Background.data.attributes.name}
                                     >
                                         <div className='content'>
-                                            <h2 title={item.attributes.Title} data-scroll data-scroll-speed="1">{item.attributes.Title}</h2>
-                                            <a title={item.attributes.Button ? item.attributes.Button : 'Check our rental homes'} href={item.attributes.Action} target={item.attributes.Tab ? '_blank' : ''} data-scroll data-scroll-speed="1"> 
+                                            <div dangerouslySetInnerHTML={{__html: item.background}}></div>
+                                            <h2 title={item.titulo} data-scroll data-scroll-speed="1">{item.titulo}</h2>
+                                            <a title={item.button.link ? item.titulo : 'Check our rental homes'} href={item.button.link} target={item.button.external ? '_blank' : ''} data-scroll data-scroll-speed="1"> 
                                                 {
-                                                    item.attributes.Button ? item.attributes.Button : 'Check our rental homes'
+                                                    item.button.title ? item.button.title : 'Check our rental homes'
                                                 }
                                             </a>
                                         </div>

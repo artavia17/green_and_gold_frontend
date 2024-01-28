@@ -13,12 +13,12 @@ module.exports = {
         remotePatterns: [
             {
               protocol: 'https',
-              hostname: 'green-and-gold-api.alonsocr.com',
+              hostname: 'gng-api.webdevgenius.tech',
               port: '',
               pathname: '/api/**',
             },
         ],
-        domains: ['green-and-gold-api.alonsocr.com'],
+        domains: ['gng-api.webdevgenius.tech'],
     },
 }
 

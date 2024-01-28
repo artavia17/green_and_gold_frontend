@@ -6,14 +6,17 @@ import { motion } from "framer-motion";
 type ContentType = {
     url: string,
     items: {
-      data: {
-        attributes: {
-          History: string;
-          Our_Mission: string;
-          Our_Vision: string;
-        };
-      };
-    };
+        second_section: {
+            title: string,
+            content: string
+        },
+        third_section: {
+            first_title: string,
+            first_content: string,
+            second_title: string,
+            second_content: string,
+        }
+    }
 };
 
 type ContentProps = {
@@ -22,27 +25,26 @@ type ContentProps = {
 
 export default function HistoryComponent ({content} : ContentProps){
 
-
     return (
         <>
             <section className='content_history_vision'>
-                <motion.div  
+                <div  
                     className="history"
-                    initial={{
-                        y: 200,
-                        opacity: 0
-                    }}
-                    whileInView={{
-                        y: 0,
-                        opacity: 1,
-                    }}
-                    transition={{
-                        type: 'spring'
-                    }}
+                    // initial={{
+                    //     y: 200,
+                    //     opacity: 0
+                    // }}
+                    // whileInView={{
+                    //     y: 0,
+                    //     opacity: 1,
+                    // }}
+                    // transition={{
+                    //     type: 'spring'
+                    // }}
                 >
-                    <h2 title="History">History</h2>
-                    <div className='content' dangerouslySetInnerHTML={{__html: (content?.items.data.attributes.History ? content?.items.data.attributes.History : '')}}></div>
-                </motion.div >
+                    <h2 title={ content.items.second_section.title }>{ content.items.second_section.title }</h2>
+                    <div className='content' dangerouslySetInnerHTML={{__html: (content?.items.second_section.content ? content?.items.second_section.content : '')}}></div>
+                </div >
                 <VisionMisionComponent items={content} />
             </section>
         </>

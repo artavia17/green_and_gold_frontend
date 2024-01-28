@@ -6,19 +6,11 @@ import SreeenHeight from "@/hook/screens/height";
 type ContentType = {
   url: string,
   items: {
-    data: {
-      attributes: {
-        Description: string;
-        Title: string;
-        Background: {
-          data: {
-            attributes: {
-              url: string;
-            };
-          };
-        };
-      };
-    };
+    first_section: {
+      title: string,
+      content: string,
+      background: string
+    }
   };
 };
 
@@ -35,7 +27,6 @@ const WhoComponent = ( { content } : ContentProps ) => {
 
   }, []);
 
-
   return (
     <>
       <section
@@ -44,36 +35,36 @@ const WhoComponent = ( { content } : ContentProps ) => {
           minHeight: `${heightWindow}px`,
         }}
       >
-        <motion.div
+        <div
           className="item"
           style={{
-            backgroundImage: `url(${content?.url}${content?.items.data.attributes.Background.data.attributes.url})`,
+            backgroundImage: `url(${content?.items.first_section.background})`,
           }}
-          initial={{
-            y: 200,
-            opacity: 0,
-          }}
-          whileInView={{
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{
-            type: "spring",
-          }}
+          // initial={{
+          //   y: 200,
+          //   opacity: 0,
+          // }}
+          // whileInView={{
+          //   y: 0,
+          //   opacity: 1,
+          // }}
+          // transition={{
+          //   type: "spring",
+          // }}
         >
           <section className="title">
             <h2 title="About Us">About Us</h2>
-            <h1 title={content?.items.data.attributes.Title}>{content?.items.data.attributes.Title}</h1>
+            <h1 title={content?.items.first_section.title}>{content?.items.first_section.title}</h1>
           </section>
           <section
             className="content"
             dangerouslySetInnerHTML={{
-              __html: content?.items.data.attributes.Description
-                ? content?.items.data.attributes.Description
+              __html: content?.items.first_section.content
+                ? content?.items.first_section.content
                 : "",
             }}
           ></section>
-        </motion.div>
+        </div>
       </section>
     </>
   );

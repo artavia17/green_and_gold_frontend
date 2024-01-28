@@ -6,6 +6,10 @@ body{
     scroll-behavior: smooth;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 @import './variables';
 @import './components/header';
 @import './components/footer';

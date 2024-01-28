@@ -3,30 +3,25 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+
+type IconsType = {
+  icon: {
+    name: string
+    filename: string,
+    url: string,
+  },
+  title: string,
+}
+
 type ContentData = {
   url: string;
   items: {
-    data: {
-      attributes: {
-        Description: string;
-        History: string;
-        Title: string;
-        Our_Mission: string;
-        Our_Values: string;
-        Our_Values_Items: any[];
-        Our_Vision: string;
-        Background: {
-          data: {
-            attributes: {
-              url: string;
-              alternativeText: string;
-              name: string;
-            };
-          };
-        };
-      };
-    };
-  };
+    fourth: {
+      title: string,
+      content: string,
+      icons: IconsType[]
+    }
+  }
 };
 
 type ContentProps = {
@@ -36,8 +31,6 @@ type ContentProps = {
 }
 
 export default function ValoresComponent( { content } : ContentProps ) {
-
-
 
   return (
     <>
@@ -55,38 +48,37 @@ export default function ValoresComponent( { content } : ContentProps ) {
             type: "spring",
           }}
         >
-          <h2>Our Values</h2>
+          <h2 title={ content.items.fourth.title }>{ content.items.fourth.title }</h2>
           <section
             dangerouslySetInnerHTML={{
-              __html: content?.items.data.attributes.Our_Values
-                ? content?.items.data.attributes.Our_Values
-                : "",
+              __html: content?.items.fourth.content
             }}
           ></section>
 
           <section className="icons">
             <ul>
-              {content?.items.data.attributes.Our_Values_Items.map(
+              {content?.items.fourth.icons.map(
                 (item, key) => {
 
                   return (
                     <li key={key}>
+
                       <Image
-                        src={`${content.url}${item.Icon.data[0].attributes.url}`}
+                        src={item.icon.url}
                         title={
-                          item.Icon.data[0].attributes.alternativeText
-                            ? item.Icon.data[0].attributes.alternativeText
-                            : item.Icon.data[0].attributes.name
+                          item.icon.name
+                            ? item.icon.name
+                            : item.icon.filename
                         }
                         alt={
-                          item.Icon.data[0].attributes.alternativeText
-                            ? item.Icon.data[0].attributes.alternativeText
-                            : item.Icon.data[0].attributes.name
+                          item.icon.name
+                            ? item.icon.name
+                            : item.icon.filename
                         }
                         width={100}
                         height={100}
                       />
-                      <h3 title={item.Title}>{item.Title}</h3>
+                      <h3 title={item.title}>{item.title}</h3>
                     </li>
                   );
                 }

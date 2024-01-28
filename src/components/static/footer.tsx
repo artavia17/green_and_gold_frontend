@@ -4,15 +4,22 @@
 import { fethItem } from "@/hook/api";
 import FooterClient from "./footer/footer_client";
 
+type Number = {
+  code: string,
+  country: string,
+  number: string,
+  whatsapp: boolean
+}
+
 type FooterType = {
   items: {
-    data: {
-      attributes: {
-        Email: string;
-        Address: string;
-        Phone: any[];
-      };
-    };
+    instagram: {
+      user: string,
+      url: string
+    },
+    address: string,
+    email: string,
+    number: Number[]
   };
 };
 

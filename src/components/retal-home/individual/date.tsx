@@ -8,21 +8,17 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-type UnavailableProps = {
-    Date: string
+type Unabailable = {
+    date: string,
 }
 
 type CalendarItems = {
     items: {
         url: string;
         items: {
-            data: {
-                attributes: {
-                    Title: string,
-                    updatedAt: string,
-                    Unavailable: UnavailableProps[]
-                }
-            };
+            titulo: string,
+            update: string,
+            unabailable: Unabailable[] | null
         };
     }   
 };
@@ -58,7 +54,7 @@ function DateComponent({ items } : CalendarItems){
         setStartDate(start);
         setEndDate(end);
 
-        if(end){
+        if(end && items.items.unabailable){
 
             const arrayDate : DateDisponibleProps[] = [];
             const validateStartDate = new Date(start);
@@ -70,8 +66,8 @@ function DateComponent({ items } : CalendarItems){
                 const currentDateString = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`;
                 let disponibilidadDate = true;
 
-                items.items.data.attributes.Unavailable.forEach(e => {
-                    const date = new Date(e.Date);
+                items.items.unabailable.forEach(e => {
+                    const date = new Date(e.date);
                     date.setDate(date.getDate() + 1);
                     const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
                 
@@ -133,13 +129,17 @@ function DateComponent({ items } : CalendarItems){
         const arrayUnavailable = [];
         arrayUnavailable.push(new Date());
 
-        items.items.data.attributes.Unavailable.forEach( (e) =>  {
+        if(items.items.unabailable){
 
-            const newDateUnavailable = new Date(e.Date);
-            const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
-            arrayUnavailable.push(setNewDate);
-            
-        });
+            items.items.unabailable.forEach( (e) =>  {
+
+                const newDateUnavailable = new Date(e.date);
+                const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
+                arrayUnavailable.push(setNewDate);
+                
+            });
+
+        }
 
 
         setDateUnavailable(arrayUnavailable);
@@ -221,7 +221,7 @@ function DateComponent({ items } : CalendarItems){
     const sendWhatsapp = () => {
 
         const phone : string = '+50683715061';
-        const message : string = `Hello, what is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? Thank you. \n\n${window.location}`;
+        const message : string = `Hello, what is the availability of the house "${items.items.titulo}" from "${startDateString}" to "${endDateString}"? Thank you. \n\n${window.location}`;
         let enlace : string = '';
         enlace = `https://wa.me/${phone}?text=${encodeURI(message)}`;
 
@@ -232,8 +232,8 @@ function DateComponent({ items } : CalendarItems){
 
     const sendEmail = () => {
         const email = "info@gngcr.com";
-        const subject = `Check availability of the ${items.items.data.attributes.Title} house`;
-        const body = `Hello, \n\nWhat is the availability of the house "${items.items.data.attributes.Title}" from "${startDateString}" to "${endDateString}"? \n\nThank you. \n\nHouse link: ${window.location} \n\n`;
+        const subject = `Check availability of the ${items.items.titulo} house`;
+        const body = `Hello, \n\nWhat is the availability of the house "${items.items.titulo}" from "${startDateString}" to "${endDateString}"? \n\nThank you. \n\nHouse link: ${window.location} \n\n`;
                     
         window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURI(body)}`;
     }
@@ -266,7 +266,7 @@ function DateComponent({ items } : CalendarItems){
                                 <section className="icon">
                                     <Image src={ImageLocation.src} alt="Icon of location" width={100} height={100}/>
                                 </section>
-                                <h5>{items.items.data.attributes.Title}</h5>
+                                <h5>{items.items.titulo}</h5>
                             </div>
                         </section>
                         <section className="date item">
@@ -290,7 +290,7 @@ function DateComponent({ items } : CalendarItems){
                     </section>
                     <section className="calendar">
                         <section className="content">
-                            <p>Availability last updated on { resentUpdate(items.items.data.attributes.updatedAt, true) }. For the most recent updates, please send us a message.</p>
+                            <p>Availability last updated on { resentUpdate(items.items.update, true) }. For the most recent updates, please send us a message.</p>
                             <section className="bottoms">
                                 <button onClick={openMessages} title={consultText} >{consultText}</button>
                                 <button className="close" onClick={open_modal} title="Close">Close</button>
@@ -333,7 +333,7 @@ function DateComponent({ items } : CalendarItems){
                                                     Available days
                                                 </h3>
                                             </div>
-                                            <p>Availability last updated on Sat 11/11/2023. For the most recent updates, please send us a message.cl</p>
+                                            <p>Availability last updated on {resentUpdate(items.items.update, true)}. For the most recent updates, please send us a message or email</p>
                                             <div className="consultar">
                                                 <button className="consult" onClick={viewSendMessage}>{consultTextView}</button>
                                                 {

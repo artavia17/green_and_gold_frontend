@@ -3,21 +3,29 @@ import React, { useId, useEffect, useState } from 'react';
 import Select, { SingleValue } from 'react-select';
 import NumberToWords from 'number-to-words';
 
-type FilterProbs = {
-    attributes: {
-        Bathrooms: string,
-        Bedrooms: string,
-        Price: string,
-        Floors: string,
-        Type_of_currency: string
-    }
+type ImagesItems = {
+    filename: string,
+    name: string,
+    url: string
+}
+  
+type HousesItems = {
+    allImages: ImagesItems[],
+    characteristics: {
+        bathrooms: number,
+        baths: number,
+        bedrooms: number,
+        beds: number,
+        sq_ft: number
+    },
+    main_image: string,
+    slug: string,
+    titulo: string
 }
 
 type FiltersItems = {
     url: string,
-    items: {
-        data: FilterProbs[];
-    }
+    items: HousesItems[],
 }
 
 
@@ -103,25 +111,27 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
         const filter = () => {
 
             // const { items } : FiltersItems = await fethItem('rental-homes');
-            const dataArray = filters.items.data;
+            const dataArray = filters.items;
 
-            dataArray.forEach( (e : FilterProbs) => {
+            dataArray.forEach( (e) => {
+
+                const attributes = e.characteristics;
+
+            //     const prices : string = attributes.Price; - null
+            //     const floors : string = attributes.Floors; - null
+            //     const type_currency : string = attributes.Type_of_currency; - null
+
+                const bedrooms : number = attributes.bedrooms;
+                const bathrooms : number = attributes.bathrooms;
 
 
-                // const attributes = e.attributes;
-                const prices : string = e.attributes.Price;
-                const bedrooms : string = e.attributes.Bedrooms;
-                const bathrooms : string = e.attributes.Bathrooms;
-                const floors : string = e.attributes.Floors;
-                const type_currency : string = e.attributes.Type_of_currency;
-
-                if(!filterPrice.some(item => item.value === prices)){
-                    const arrayPrices = [...filterPrice, {
-                        value: prices,
-                        label: type_currency == 'Colones' ? `₡${prices}` : `$${prices}`
-                    }]
-                    setFilterPrice(arrayPrices);
-                }
+            //     if(!filterPrice.some(item => item.value === prices)){
+            //         const arrayPrices = [...filterPrice, {
+            //             value: prices,
+            //             label: type_currency == 'Colones' ? `₡${prices}` : `$${prices}`
+            //         }]
+            //         setFilterPrice(arrayPrices);
+            //     }
 
                 if(!filterBedrooms.some(item => item.value === bedrooms)){
                     const arrayBedrooms = [...filterBedrooms, {
@@ -139,14 +149,14 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                     setFilterBathrooms(arrayBathrooms);
                 }
 
-                if(!filterFloors.some(item => item.value === floors)){
+            //     if(!filterFloors.some(item => item.value === floors)){
 
-                    const arrayFloors = [...filterFloors, {
-                        value: floors,
-                        label: capitalizeString(NumberToWords.toWords(Number(floors)))
-                    }]
-                    setFilterFloors(arrayFloors);
-                }
+            //         const arrayFloors = [...filterFloors, {
+            //             value: floors,
+            //             label: capitalizeString(NumberToWords.toWords(Number(floors)))
+            //         }]
+            //         setFilterFloors(arrayFloors);
+            //     }
 
                 
             });
@@ -261,7 +271,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                         onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'bathrooms') }
                     />
                 </section>
-                <section className='filter'>
+                {/* <section className='filter'>
                     <Select
                         placeholder="Floors"
                         value={floorsDefault?.value ? floorsDefault : null}
@@ -272,7 +282,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                         instanceId={useId()}
                         onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'floors') }
                     />
-                </section>
+                </section> */}
                
             </section>
         </>

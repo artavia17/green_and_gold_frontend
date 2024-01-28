@@ -45,73 +45,50 @@ export const metadata: Metadata = {
     category: 'House rentals'
   };
 
-
-type HousesItems = {
-    attributes: {
-        Title: string;
-        Baths: string;
-        Beds: string;
-        SQ_FT: string;
-        Slug: string;
-        Images: {
-            data: any[];
-        };
-        Principal_Image: {
-            data: {
-            attributes: {
-                alternativeText: string;
-                name: string;
-                url: string;
-            };
-            };
-        };
-        Bathrooms: string,
-        Bedrooms: string,
-        Price: string,
-        Floors: string,
-        Type_of_currency: string
-    }
+type ImagesItems = {
+  filename: string,
+  name: string,
+  url: string
 }
 
-type ExperiencyItem = {
-    Content: string;
-    Icon: {
-      data: {
-        attributes: {
-          alternativeText: string;
-          name: string;
-          url: string;
-        };
-      };
-    };
-  };
+type HousesItems = {
+  allImages: ImagesItems[],
+  characteristics: {
+    bathrooms: number,
+    baths: number,
+    bedrooms: number,
+    beds: number,
+    sq_ft: number
+  },
+  main_image: string,
+  slug: string,
+  titulo: string
+}
+
+
+type ExperienceItems = {
+  icon: string,
+  text: string,
+  titulo: string
+}
   
 type ExperienceProps = {
     url: string;
-    items: {
-      data: {
-        attributes: {
-          Title: string;
-          Experience: ExperiencyItem[];
-        };
-      };
-    };
+    items: ExperienceItems[]
 };
 
 type HousesProbs = {
     url: string,
-    items: {
-        data: HousesItems[];
-    }
+    items: HousesItems[],
 }
 
 async function HomeData(){
-    const items : HousesProbs = await fethItem(`rental-homes`);
+    const items : HousesProbs = await fethItem(`rental-home`);
     return items;
 }
 
 async function ExperienceData(){
-    const items : ExperienceProps = await fethItem(`rental-home-experience`);
+    const items : ExperienceProps = await fethItem(`rental-experience`);
     return items;
 }
 

@@ -10,33 +10,35 @@ type CaracteristicasItems = {
     items: {
         url: string;
         items: {
-            data: {
-                attributes: {
-                Beds: string,
-                Baths: string,
-                SQ_FT: string
-                };
-            };
+            characteristics: {
+                bathrooms: number,
+                bedrooms: number,
+                beds: number,
+                baths: number,
+                sq_ft: number
+              },
         };
     }   
   };
 
 function CaracteristicasComponent({ items } : CaracteristicasItems){
 
+    console.log(items);
+
     return (
         <>
             <section className="caracteristicas">
-                <section className="item" title={`${items.items.data.attributes.Beds} beds`}>
+                <section className="item" title={`${items.items.characteristics.beds} beds`}>
                     <Image src={BedGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
-                    <span>{items.items.data.attributes.Beds} beds</span>
+                    <span>{items.items.characteristics.beds} beds</span>
                 </section>
-                <section className="item" title={`${items.items.data.attributes.Baths} baths`}>
+                <section className="item" title={`${items.items.characteristics.baths} baths`}>
                     <Image src={TagGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
-                    <span>{items.items.data.attributes.Baths} baths</span>
+                    <span>{items.items.characteristics.baths} baths</span>
                 </section>
-                <section className="item" title={`${items.items.data.attributes.SQ_FT} sq ft`}>
+                <section className="item" title={`${items.items.characteristics.sq_ft} sq ft`}>
                     <Image src={SQGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
-                    <span>{items.items.data.attributes.SQ_FT} sq ft</span>
+                    <span>{items.items.characteristics.sq_ft} sq ft</span>
                 </section>
             </section>
         </>

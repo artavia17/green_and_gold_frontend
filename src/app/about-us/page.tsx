@@ -43,30 +43,40 @@ export const metadata: Metadata = {
     category: 'House rentals'
 };
 
+  
+type IconsType = {
+
+    icon: {
+        name: string
+        filename: string,
+        url: string,
+    },
+    title: string,
+}
 
 type ContentType = {
     url: string,
     items: {
-        data: {
-            attributes: {
-                Description: string;
-                Title: string;
-                Background: {
-                    data: {
-                        attributes: {
-                            url: string;
-                            alternativeText: string;
-                            name: string;
-                        };
-                    };
-                };
-                History: string;
-                Our_Mission: string;
-                Our_Values: string;
-                Our_Values_Items: any[];
-                Our_Vision: string;
-            };
-        };
+        first_section: {
+            title: string,
+            content: string,
+            background: string
+        },
+        second_section: {
+            title: string,
+            content: string
+        },
+        third_section: {
+            first_title: string,
+            first_content: string,
+            second_title: string,
+            second_content: string,
+        },
+        fourth: {
+            title: string,
+            content: string,
+            icons: IconsType[]
+        }
     };
 };
 

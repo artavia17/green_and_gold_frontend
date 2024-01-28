@@ -75,6 +75,14 @@
             }
         }
 
+        section{
+
+            color: $color_white;
+            font-family: $font_principal;
+            font-size: $font-size-slider;
+
+        }
+
         p,
         div,
         ul{
@@ -92,6 +100,7 @@
                 font-size: $font-size-about-parrafo-mobile;
             }
         }
+
 
         ul{
             transform: translateX(20px);

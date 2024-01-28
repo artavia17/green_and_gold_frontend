@@ -1,4 +1,13 @@
+// Metas
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+    title: {
+      template: 'Not Found | Green and Gold',
+      default: 'Not Found | Green and Gold',
+      absolute: 'Not Found | Green and Gold'
+    },
+  };
 
 function NotFound(){
 

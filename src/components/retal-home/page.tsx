@@ -7,65 +7,41 @@ import { useState, useRef } from "react";
 import HousesComponent, { RefType } from "@/components/retal-home/houses";
 import ExperienciaComponent from "@/components/retal-home/experiencia";
 
-// Filtros
+type ImagesItems = {
+    filename: string,
+    name: string,
+    url: string
+}
+  
 type HousesItems = {
-    attributes: {
-        Title: string;
-        Baths: string;
-        Beds: string;
-        SQ_FT: string;
-        Slug: string;
-        Images: {
-            data: any[];
-        };
-        Principal_Image: {
-            data: {
-            attributes: {
-                alternativeText: string;
-                name: string;
-                url: string;
-            };
-            };
-        };
-        Bathrooms: string,
-        Bedrooms: string,
-        Price: string,
-        Floors: string,
-        Type_of_currency: string
-    }
+    allImages: ImagesItems[],
+    characteristics: {
+        bathrooms: number,
+        baths: number,
+        bedrooms: number,
+        beds: number,
+        sq_ft: number
+    },
+    main_image: string,
+    slug: string,
+    titulo: string
 }
 
 type HousesProbs = {
     url: string,
-    items: {
-        data: HousesItems[];
-    }
+    items: HousesItems[],
 }
 
 
-type ExperiencyItem = {
-    Content: string;
-    Icon: {
-      data: {
-        attributes: {
-          alternativeText: string;
-          name: string;
-          url: string;
-        };
-      };
-    };
-};
-  
+type ExperienceItems = {
+    icon: string,
+    text: string,
+    titulo: string
+}
+    
 type ExperienceProps = {
     url: string;
-    items: {
-      data: {
-        attributes: {
-          Title: string;
-          Experience: ExperiencyItem[];
-        };
-      };
-    };
+    items: ExperienceItems[]
 };
 
 
@@ -117,7 +93,7 @@ function RentalHomeComponent( { content, experiences } : RentalPrps ){
                 <section className="content_filters">
                     <section className="titles">
                         <h1>Rental Homes</h1>
-                        <h2>Book your Costa Rican vacation</h2>
+                        <h2>Book your Cossta Rican vacation</h2>
                     </section>
                     <section className="filter_component">
                         <section className="open_filters">
@@ -134,7 +110,7 @@ function RentalHomeComponent( { content, experiences } : RentalPrps ){
                         </section>
                     </section>
                 </section>
-                <HousesComponent ref={HouseRef}/>
+                <HousesComponent ref={HouseRef} content={content.items}/>
                 <ExperienciaComponent content={experiences}/>
             </section>
         </>

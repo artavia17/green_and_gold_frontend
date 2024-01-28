@@ -2,29 +2,15 @@ import Image from "next/image";
 import EstrellasImage from "@/assets/img/icons/estrellas.svg";
 
 
-type ExperiencyItem = {
-  Content: string;
-  Icon: {
-    data: {
-      attributes: {
-        alternativeText: string;
-        name: string;
-        url: string;
-      };
-    };
-  };
-};
-
+type ExperienceItems = {
+  icon: string,
+  text: string,
+  titulo: string
+}
+  
 type ExperienceProps = {
-  url: string;
-  items: {
-    data: {
-      attributes: {
-        Title: string;
-        Experience: ExperiencyItem[];
-      };
-    };
-  };
+    url: string;
+    items: ExperienceItems[]
 };
 
 type ContentProsp = {
@@ -44,32 +30,16 @@ function ExperienciaComponent({content} : ContentProsp) {
             height={100}
           />
         </section>
-        <h3 title={content?.items.data.attributes.Title}>
-          {content?.items.data.attributes.Title}
-        </h3>
+        <h3 title="Experience the 'Pura Vida' essence that sets Costa Rica apart!">{"Experience the 'Pura Vida' essence that sets Costa Rica apart!"}</h3>
         <section className="items">
-          {content?.items.data.attributes.Experience.map(
-            (item: ExperiencyItem, key) => {
+          {content.items.map(
+            (item, key) => {
               return (
                 <section className="item" key={key}>
-                  <Image
-                    src={`${content.url}${item.Icon.data.attributes.url}`}
-                    alt={
-                      item.Icon.data.attributes.alternativeText
-                        ? item.Icon.data.attributes.alternativeText
-                        : item.Icon.data.attributes.name
-                    }
-                    title={
-                        item.Icon.data.attributes.alternativeText
-                          ? item.Icon.data.attributes.alternativeText
-                          : item.Icon.data.attributes.name
-                      }
-                    width={100}
-                    height={100}
-                  />
+                  <div dangerouslySetInnerHTML={{__html: item.icon}}></div>
                   <section
                     className="content"
-                    dangerouslySetInnerHTML={{ __html: item.Content }}
+                    dangerouslySetInnerHTML={{ __html: item.text }}
                   ></section>
                 </section>
               );

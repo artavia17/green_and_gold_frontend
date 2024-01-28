@@ -4,41 +4,17 @@ import Image from "next/image";
 import { fethItem } from "@/hook/api";
 import SliderComponent from "./slider";
 
+type ImagesItems = {
+    filename: string,
+    name: string,
+    url: string
+  }
 
 type PropsData = {
-    slug: string,
+    imagenes: ImagesItems[] | undefined,
     close: () => void
 }
 
-type FiltersItems = {
-    url: string;
-    items: {
-        data: {
-            attributes: {
-                Principal_Image: {
-                    data: {
-                        attributes: {
-                            alternativeText: string,
-                            name: string,
-                            url: string
-                        }
-                    }
-                },
-                Images: {
-                    data: any[]
-                }
-            }
-        };
-    };
-};
-
-type ImageItems = {
-    attributes: {
-        alternativeText: string,
-        name: string,
-        url: string
-    }
-}
 
 type ImageNewProps = {
     img: string,
@@ -46,7 +22,7 @@ type ImageNewProps = {
     name: string
 }
 
-function FotosComponent({ slug, close }: PropsData) {
+function FotosComponent({ imagenes, close }: PropsData) {
 
     const [images, setImages] = useState<ImageNewProps[]>();
     const [imagesName, setImagesName] = useState<string>('');
@@ -57,50 +33,49 @@ function FotosComponent({ slug, close }: PropsData) {
     const [viewSlider, setViewSlider] = useState(false);
     const [closeSliderAnimation, setCloseSliderAnimation] = useState(false);
 
-
     useEffect(() => {
 
 
-        if (!images?.length) {
 
-            const fetchContent = async () => {
-                const fethItems: FiltersItems = await fethItem(`rental-homes/${slug}`);
-                const allImages: ImageItems[] = fethItems.items.data.attributes.Images.data;
-                let imageItems = [
-                    {
-                        img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
-                        name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
-                        alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
-                    }
-                ]
+        // if (!images?.length) {
 
-                setImages([{
-                    img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
-                    name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
-                    alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
-                }]);
+        //     const fetchContent = async () => {
+        //         const allImages: ImageItems[] = fethItems.items.data.attributes.Images.data;
+        //         let imageItems = [
+        //             {
+        //                 img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+        //                 name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
+        //                 alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
+        //             }
+        //         ]
 
-                allImages.forEach(e => {
+        //         setImages([{
+        //             img: fethItems.url + fethItems.items.data.attributes.Principal_Image.data.attributes.url,
+        //             name: fethItems.items.data.attributes.Principal_Image.data.attributes.name,
+        //             alt: fethItems.items.data.attributes.Principal_Image.data.attributes.alternativeText
+        //         }]);
 
-
-                    imageItems = [...imageItems, {
-                        img: fethItems.url + e.attributes.url,
-                        name: e.attributes.name,
-                        alt: e.attributes.alternativeText
-                    }]
-                })
+        //         allImages.forEach(e => {
 
 
-                setImages(imageItems);
+        //             imageItems = [...imageItems, {
+        //                 img: fethItems.url + e.attributes.url,
+        //                 name: e.attributes.name,
+        //                 alt: e.attributes.alternativeText
+        //             }]
+        //         })
 
 
-            };
+        //         setImages(imageItems);
 
-            fetchContent();
 
-        }
+        //     };
 
-    }, [slug, images]);
+        //     fetchContent();
+
+        // }
+
+    }, [imagenes, images]);
 
 
 
@@ -111,6 +86,7 @@ function FotosComponent({ slug, close }: PropsData) {
     }
 
     const openModal = (imgName : string | null) => {
+
         if(viewSlider){
             setCloseSliderAnimation(true);
             setTimeout(() => {
@@ -125,7 +101,8 @@ function FotosComponent({ slug, close }: PropsData) {
 
     return (
         <>
-            <section className={'fotosComponent' + ' ' + (remove ? 'remove' : '')} key={slug}>
+
+            <section className={'fotosComponent' + ' ' + (remove ? 'remove' : '')} key={imagenes?.length}>
 
                 <section className="items">
 
@@ -144,12 +121,12 @@ function FotosComponent({ slug, close }: PropsData) {
 
                     <section className="galery" ref={fatherElement}>
                         {
-                            images ? (
-                                images.map((item, key) => {
+                            imagenes?.length ? (
+                                imagenes.map((item, key) => {
 
                                     return (
                                         <section onClick={() => openModal(item.name)} className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
-                                            <Image src={item.img} alt={item.alt ? item.alt : item.name} title={item.alt ? item.alt : item.name} width={1000} height={1000} priority  />
+                                            <Image src={item.url} alt={item.name ? item.name : item.filename} title={item.name ? item.name : item.filename} width={1000} height={1000} priority  />
                                         </section>
                                     )
                                 })
@@ -160,7 +137,7 @@ function FotosComponent({ slug, close }: PropsData) {
             </section>
             {
                 viewSlider ? (<section className={`slider_item ${closeSliderAnimation ? 'remove' : ''}`} onClick={() => openModal(null)}>
-                                <SliderComponent name={imagesName} images={images} />
+                                <SliderComponent name={imagesName} images={imagenes} />
                             </section>) : ''
             }
         </>

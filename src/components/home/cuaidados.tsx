@@ -10,19 +10,31 @@ import "swiper/css/effect-cards";
 
 import Image from "next/image";
 
+type GaleryImage = {
+  filename: string,
+  url: string,
+  name: string,
+  sizes: {
+    full: {
+      url: string,
+    },
+    medium: {
+      url: string,
+    },
+    thumbnail: {
+      url: string
+    }
+  }
+}
 
 type SliderType = {
   url: string;
   items: {
-    data: {
-      attributes: {
-        Caring_For_Your_Home_Title: string;
-        Caring_For_Your_Home_Content: string;
-        Caring_For_Your_Home_Slider: {
-          data: any[];
-        };
-      };
-    };
+    first_section: {
+      title: string,
+      content: string,
+      galery: GaleryImage[]
+    }
   };
 };
 
@@ -32,35 +44,32 @@ type HomeProps = {
 
 function Cuidados({ content } : HomeProps) {
 
-
   return (
     <>
       <section className="cuidados_home" data-scroll-section>
         <section className="max">
           <section className="content">
-            <h1 title={content.items.data.attributes.Caring_For_Your_Home_Title}>{content.items.data.attributes.Caring_For_Your_Home_Title}</h1>
+            <h1 title={content.items.first_section.title}>{content.items.first_section.title}</h1>
             <section
               dangerouslySetInnerHTML={{
-                __html: content.items.data.attributes.Caring_For_Your_Home_Content
-                  ? content.items.data.attributes.Caring_For_Your_Home_Content
-                  : "",
+                __html: content.items.first_section.content
               }}
             ></section>
           </section>
           <section className="contentSlider">
-            <motion.div
+            <div
               className="slider"
-              initial={{
-                y: 200,
-                opacity: 0,
-              }}
-              whileInView={{
-                y: 0,
-                opacity: 1,
-              }}
-              transition={{
-                type: "spring",
-              }}
+              // initial={{
+              //   y: 200,
+              //   opacity: 0,
+              // }}
+              // whileInView={{
+              //   y: 0,
+              //   opacity: 1,
+              // }}
+              // transition={{
+              //   type: "spring",
+              // }}
             >
               <Swiper
                 effect={"cards"}
@@ -69,9 +78,8 @@ function Cuidados({ content } : HomeProps) {
                 className="mySwiper"
               >
                 {content &&
-                content.items.data.attributes.Caring_For_Your_Home_Slider.data
-                  .length > 0
-                  ? content.items.data.attributes.Caring_For_Your_Home_Slider.data.map(
+                content.items.first_section.galery.length > 0
+                  ? content.items.first_section.galery.map(
                       (item, key) => {
 
                         return (
@@ -79,16 +87,16 @@ function Cuidados({ content } : HomeProps) {
                             <div>
                               <Image
                                 fill={true}
-                                src={`${content.url}${item.attributes.url}`}
+                                src={`${item.url}`}
                                 title={
-                                  item.attributes.alternativeText
-                                    ? item.attributes.alternativeText
-                                    : item.attributes.name
+                                  item.name
+                                    ? item.name
+                                    : item.filename
                                 }
                                 alt={
-                                  item.attributes.alternativeText
-                                    ? item.attributes.alternativeText
-                                    : item.attributes.name
+                                  item.name
+                                    ? item.name
+                                    : item.filename
                                 }
                                 sizes="(max-width: 500px) 600px, 700px"
                                 priority
@@ -100,7 +108,7 @@ function Cuidados({ content } : HomeProps) {
                     )
                   : ""}
               </Swiper>
-            </motion.div>
+            </div>
           </section>
         </section>
       </section>

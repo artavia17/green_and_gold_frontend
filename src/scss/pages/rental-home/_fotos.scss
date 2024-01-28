@@ -3,13 +3,14 @@
   top: 0px;
   left: 0px;
   width: 100vw;
-  height: calc(100vh - 100px);
+  height: calc(100dvh - 100px);
   background-color: $color-background-body;
   z-index: 999;
   padding-top: 100px;
   overflow: auto;
   opacity: 1;
   transition: .2s ease;
+  scrollbar-gutter: stable;
 
   @include keyframes(open_modal){
       0%{
@@ -23,7 +24,7 @@
 
   @include devices(tablet) {
     padding-top: 100px;
-    height: calc(100vh - 75px);
+    height: calc(100dvh - 75px);
   }
 
   .items {
@@ -232,7 +233,7 @@
     top: 80px;
     left: 0px;
     width: 100vw;
-    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
     background: $color-black-transparent;
     z-index: 99999;
     backdrop-filter: blur(10px);
@@ -435,7 +436,7 @@
     
     .swiper-slide img {
       display: block;
-      width: 100%;
+      width: auto;
       max-width: 80%;
       max-height: 80%;
       height: 100%;
@@ -443,8 +444,9 @@
       border-radius: 30px;
 
       @include devices(mobile){
-        max-width: 95%;
-        max-height: 95%;
+        height: auto;
+        width: 100%;
+        border-radius: 20px;
       }
 
     }

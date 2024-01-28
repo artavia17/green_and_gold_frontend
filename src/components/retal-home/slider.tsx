@@ -12,14 +12,14 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 
-type ImageItems = {
-    img: string,
-    alt: string,
-    name: string
+type ImagesItems = {
+    filename: string,
+    name: string,
+    url: string
 }
 
 type ImageProps = {
-    images: ImageItems[] | undefined,
+    images: ImagesItems[] | undefined,
     name: string
 }
 
@@ -29,6 +29,9 @@ function SliderComponent({ name, images } : ImageProps){
     const [viewSlider, setViewSlider] = useState<boolean>(false);
 
     useEffect(() => {
+
+        console.log(images);
+
         images?.forEach((item, key) => {
             if(item.name == name){
                 setInitialSwiper(key);
@@ -64,7 +67,7 @@ function SliderComponent({ name, images } : ImageProps){
                                 images ? images.map((item, key) => {
                                     return (
                                         <SwiperSlide key={key}>
-                                            <Image src={item.img} title={item.alt ? item.alt : item.name} alt={item.alt ? item.alt : item.name} width={1000} height={1000} />
+                                            <Image src={item.url} title={item.name ? item.name : item.filename} alt={item.name ? item.name : item.filename} width={1000} height={1000} />
                                         </SwiperSlide>
                                     )
                                 }) : ''

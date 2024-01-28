@@ -50,68 +50,65 @@ export const metadata: Metadata = {
 // Type of slider
 
 type ImageData = {
-  attributes: {
-      Title: string,
-      Action: string,
-      updatedAt: string,
-      Button: string,
-      Tab: boolean,
-      Background: {
-        data: {
-          attributes: {
-            name: string,
-            alternativeText: string,
-            url: string,
-          }
-        }
-      }
-  }
+  titulo: string,
+  button: {
+      external: boolean,
+      link: string,
+      title: string
+  },
+  background: string
 }
 
 
 type SliderType = {
   url: string;
-  items: {
-    data: ImageData[];
-  };
+  items: ImageData[];
 };
 
 // Get slider
 
 async function sliderData(){
-  const items : SliderType = await fethItem(`home-sliders`);
+  const items : SliderType = await fethItem(`sliders`);
   return items;
 }
 
-
-
 // Type Home
+
+type GaleryImage = {
+  filename: string,
+  url: string,
+  name: string,
+  sizes: {
+    full: {
+      url: string,
+    },
+    medium: {
+      url: string,
+    },
+    thumbnail: {
+      url: string
+    }
+  }
+}
 
 type HomeType = {
   url: string;
   items: {
-    data: {
-      attributes: {
-        Caring_For_Your_Home_Title: string;
-        Caring_For_Your_Home_Content: string;
-        Caring_For_Your_Home_Slider: {
-          data: any[];
-        };
-        Full_Management_Plus_Title: string;
-        Full_Management_Plus_Content: string;
-        Full_Management_Plus_Image: {
-          data: {
-            attributes: {
-              name: string;
-              alternativeText: string | null;
-              url: string;
-            };
-          };
-        };
-        Full_Management_Plus_Button_Title: string;
-        Full_Management_Plus_Button_Action: string;
-      };
-    };
+    first_section: {
+      title: string,
+      content: string,
+      galery: GaleryImage[]
+    },
+    second_section: {
+      title: string,
+      content: string,
+      image: string,
+      button: {
+        external: boolean,
+        link: string,
+        title: string
+      }
+    }
   };
 };
 

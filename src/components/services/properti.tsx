@@ -14,78 +14,67 @@ type ArrayImage = {
 }
 
 type ArrayServices = {
-    Title: string,
-    Image: ArrayImage,
-    // subContent: string,
-    Content: string
+  titulo: string,
+  image: string,
+  content: string
 }
 
 type ContentType = {
   content: {
     url: string;
-    items: {
-      data: {
-        attributes: {
-          All_Services: ArrayServices[];
-        };
-      };
-    };
+    items: ArrayServices[]
   };
 };
 
 export default function PropertyComponent({ content }: ContentType) {
 
-
   return (
     <>
       <section className="servicios">
-        <motion.section
-          initial={{
-            y: 200,
-            opacity: 0,
-          }}
-          whileInView={{
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{
-            type: "spring",
-          }}
+        <section
+          // initial={{
+          //   y: 200,
+          //   opacity: 0,
+          // }}
+          // whileInView={{
+          //   y: 0,
+          //   opacity: 1,
+          // }}
+          // transition={{
+          //   type: "spring",
+          // }}
         >
           <h4>Let us take care of everything</h4>
           <h1>Our Services</h1>
-        </motion.section>
+        </section>
 
         {
-                    content.items.data.attributes.All_Services.map( (item : ArrayServices, key : number ) => {
+                    content.items.map( (item, key : number ) => {
 
                         return (
-                            <motion.section 
+                            <section 
                                 className={`property ` +  ((key + 1) % 2 == 0  ? 'reverse' : '')}
-                                initial={{
-                                    y: 200,
-                                    opacity: 0
-                                }}
-                                whileInView={{
-                                    y: 0,
-                                    opacity: 1,
-                                }}
-                                transition={{
-                                    type: 'spring'
-                                }}
+                                // initial={{
+                                //     y: 200,
+                                //     opacity: 0
+                                // }}
+                                // whileInView={{
+                                //     y: 0,
+                                //     opacity: 1,
+                                // }}
+                                // transition={{
+                                //     type: 'spring'
+                                // }}
                                 key={key}
                             >
                                 
-                                <section className="image">
-                                    <Image src={ content.url + item.Image.data.attributes.url} alt={item.Image.data.attributes.alternativeText ? item.Image.data.attributes.alternativeText : item.Image.data.attributes.name } title={item.Image.data.attributes.alternativeText ? item.Image.data.attributes.alternativeText : item.Image.data.attributes.name } width={500} height={500} priority/>
-                                </section>
+                                <section className="image" dangerouslySetInnerHTML={{__html: item.image}}></section>
                                 <section className="second-item">
-                                    <h2>{item.Title}</h2>
-                                    {/* <div className="subcontent" dangerouslySetInnerHTML={{__html: item.subContent}}></div> */}
-                                    <div className="content" dangerouslySetInnerHTML={{__html: item.Content}}></div>
+                                    <h2>{item.titulo}</h2>
+                                    <div className="content" dangerouslySetInnerHTML={{__html: item.content}}></div>
                                 </section>
 
-                            </motion.section>
+                            </section>
                         )
                     })
                 }

@@ -10,28 +10,32 @@ type Images = {
       url: string;
     };
   };
+
+  type ImageAll = {
+    name: string,
+    filename: string,
+    url: string
+  }
   
   type SlugItems = {
     items: {
         url: string;
         items: {
+            titulo: string,
+            description: string,
+            content: string,
+            characteristics: {
+            bathrooms: number,
+            bedrooms: number,
+            beds: number,
+            baths: number,
+            sq_ft: number
+            },
+            main_image: string,
+            allImages: ImageAll[]
             data: {
-                attributes: {
-                Title: string;
-                Images: {
-                    data: Images[];
-                };
-                Principal_Image: {
-                    data: {
-                    attributes: {
-                        name: string;
-                        alternativeText: string;
-                        url: string;
-                    };
-                    };
-                };
-                };
-            };
+                status: number
+            }
         };
     },
     params: string
@@ -40,8 +44,10 @@ type Images = {
 function Fotos( {items, params} : SlugItems){
 
     const [viewFotos, setViewFotos] = useState(false);
+    const [allFotos, setAllFotos] = useState<ImageAll[]>(items.items.allImages);
 
-    const openFotos = () => {
+
+    const openFotos = (allImages: ImageAll[] | undefined) => {
 
         const main: HTMLElement | null = document.querySelector("body");
 
@@ -61,77 +67,38 @@ function Fotos( {items, params} : SlugItems){
         <>
             <section className="more">
                 <section className="content_images">
-                    <section className="image">
-                        <Image
-                        src={
-                            items.url +
-                            items.items.data.attributes.Principal_Image.data.attributes.url
-                        }
-
-                        alt={
-                            items.items.data.attributes.Principal_Image.data
-                            .attributes.alternativeText
-                            ? items.items.data.attributes.Principal_Image.data
-                                .attributes.alternativeText
-                            : items.items.data.attributes.Principal_Image.data
-                                .attributes.name
-                        }
-
-                        title={
-                            items.items.data.attributes.Principal_Image.data
-                            .attributes.alternativeText
-                            ? items.items.data.attributes.Principal_Image.data
-                                .attributes.alternativeText
-                            : items.items.data.attributes.Principal_Image.data
-                                .attributes.name
-                        }
-
-                        width={800}
-
-                        height={800}
-
-                        />
-                    </section>
+                    <section className="image" dangerouslySetInnerHTML={{__html: items.items.main_image}}></section>
 
                     {
-                        items.items.data.attributes.Images.data.map( (e, key: number) => { 
-                            if(key <= 1){
-                                return (
-                                    <section className="image" key={key}>
-                                        <Image
-                                            src={
-                                                items.url +
-                                                e.attributes.url
-                                            }
-                
-                                            alt={
-                                                e.attributes.alternativeText
-                                                ? e.attributes.alternativeText
-                                                : e.attributes.name
-                                            }
-                
-                                            title={
-                                                e.attributes.alternativeText
-                                                ? e.attributes.alternativeText
-                                                : e.attributes.name
-                                            }
-                
-                                            width={600}
-                
-                                            height={600}
-                
-                                        />
-                                    </section>
-                                )
-                            }
-                        })
+                        items.items.allImages && items.items.allImages.length ? 
+                            items.items.allImages.map( (e, key: number) => { 
+                                if(key <= 1){
+                                    return (
+                                        <section className="image" key={key}>
+                                            <Image
+                                                src={e.url}
+                    
+                                                alt={e.name ? e.name : e.filename}
+                    
+                                                title={e.name ? e.name : e.filename}
+                    
+                                                width={600}
+                    
+                                                height={600}
+                    
+                                            />
+                                        </section>
+                                    )
+                                }
+                            })
+                        : ''
                     }
 
                 </section>
-                <button title="Show all photos" onClick={openFotos}>Show all photos</button>
+                <button title="Show all photos" onClick={() => openFotos(allFotos)}>Show all photos</button>
             </section>
             {viewFotos ? (
-                <FotosComponent slug={params} close={() => openFotos()} />
+                <FotosComponent imagenes={allFotos} close={() => openFotos(allFotos)} />
             ) : (
                 ""
             )}

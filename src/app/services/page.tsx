@@ -9,31 +9,16 @@ import { fethItem } from "@/hook/api";
 // Metas
 import type { Metadata } from "next";
 
-type ArrayImage = {
-    data: {
-        attributes: {
-            alternativeText: string,
-            name: string,
-            url: string
-        }
-    }
-}
 
 type ArrayServices = {
-    Title: string,
-    Image: ArrayImage,
-    Content: string
+    titulo: string,
+    image: string,
+    content: string
 }
 
 type ContentType = {
     url: string,
-    items: {
-        data: {
-            attributes: {
-                All_Services: ArrayServices[],
-            }
-        }
-    }
+    items: ArrayServices[]
 }
 
 export const metadata: Metadata = {
@@ -74,7 +59,7 @@ export const metadata: Metadata = {
 
 
 async function ContentData(){
-    const items : ContentType = await fethItem(`service`);
+    const items : ContentType = await fethItem(`services`);
     return items;
 }
 
@@ -92,7 +77,7 @@ async function Services(){
         description: 'In Green and Gold We have been in the market for 10 years and we specialize in the management of properties of customers who wish to enjoy their home without any additional worries. We have experience in the administrative field and we have learned the best way to integrate a series of services that allow us to provide you with greater comfort. Green and Gold has the most professional and experienced property management team in the Península de Papagayo area. Each team member has been trained in home maintenance needs and complex management systems. We personally take care of our customer`s properties by helping those who do not have time to take care of the property maintenance, follow up on the payment of services, taxes, the processing of different documents, or performing cleaning, cooking and gardening services, among others. In this way, our customers can stop worrying about all the tedious home maintenance tasks and enjoy all the benefits offered by this beautiful area of Guanacaste.',
     }
 
-
+    
     return (
         <>
             <script
