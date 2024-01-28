@@ -135,11 +135,11 @@ function FotosComponent({ imagenes, close }: PropsData) {
                     </section>
                 </section>
             </section>
-            {
+            {/* {
                 viewSlider ? (<section className={`slider_item ${closeSliderAnimation ? 'remove' : ''}`} onClick={() => openModal(null)}>
                                 <SliderComponent name={imagesName} images={imagenes} />
                             </section>) : ''
-            }
+            } */}
         </>
     )
 
