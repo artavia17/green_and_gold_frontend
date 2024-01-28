@@ -69,11 +69,42 @@
                 height: 100%;
                 overflow: hidden;
                 border-radius: 30px;
+
+                @include animate(loadingImageContainer, 1.5s, linear, infinite);
+                @include keyframes(loadingImageContainer){
+                    0%{
+                        background-color: #3b3b3b85;
+                    }
+
+                    50%{
+                        background-color: #adadad85;
+                    }
+
+                    100%{
+                        background-color: #3b3b3b85;
+                    }
+                }
     
                 img{
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+
+                    @include animate(loadingImage, 1.5s, linear, infinite);
+                    @include keyframes(loadingImage){
+                        0%{
+                            background-color: #3b3b3b85;
+                        }
+
+                        50%{
+                            background-color: #adadad85;
+                        }
+
+                        100%{
+                            background-color: #3b3b3b85;
+                        }
+                    }
+
                 }
                 
                 &:first-of-type{

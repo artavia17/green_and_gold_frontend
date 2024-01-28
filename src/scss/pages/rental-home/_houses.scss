@@ -73,7 +73,21 @@
                     height: 100%;
                     border-radius: 30px;
                     object-fit: cover;
-                    z-index: -1;
+                    
+                    @include animate(loadingImage, 1.5s, linear, infinite);
+                    @include keyframes(loadingImage){
+                        0%{
+                            background-color: #ffffff85;
+                        }
+        
+                        50%{
+                            background-color: #adadad85;
+                        }
+        
+                        100%{
+                            background-color: #ffffff85;
+                        }
+                    }
 
                     @include devices(mobile){
                         border-radius: 20px;

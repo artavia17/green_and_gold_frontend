@@ -19,7 +19,7 @@
         .item{
             max-width: 1400px;
             width: 85vw;
-            background-color: $color_green;
+            // background-color: $color_green;
             margin: auto;
             padding: 25vh 80px;
             border-radius: 30px;
@@ -30,6 +30,21 @@
             grid-template-columns: 30% 70%;
             color: $color_white;
             font-family: $font_principal;
+
+            @include keyframes(loadingImage){
+                0%{
+                    background-color: rgba(255, 255, 255, 0.055);
+                }
+
+                50%{
+                    background-color: rgba(0, 0, 0, 0.123);
+                }
+
+                100%{
+                    background-color: rgba(255, 255, 255, 0.055);
+                }
+            }
+            @include animate(loadingImage, 1.5s, linear, infinite);
 
             @include devices(laptop){
                 max-width: 1100px;
