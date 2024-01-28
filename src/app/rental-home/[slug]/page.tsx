@@ -82,9 +82,6 @@ async function data(slug: string) {
 export async function generateMetadata({ params : {slug} } : PageProps ) {
 
   const items = await data(slug);
-  // `${items.items.titulo} | Green and Gold`
-
-  console.log(items);
 
   return {
     title: {
@@ -121,8 +118,6 @@ export async function generateMetadata({ params : {slug} } : PageProps ) {
 async function SlugPage({ params: { slug } }: PageProps) {
 
   const items = await data(slug);
-
-  console.log(items);
 
   const jsonLd = {
     '@context': 'https://schema.org',

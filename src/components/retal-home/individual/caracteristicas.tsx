@@ -23,8 +23,6 @@ type CaracteristicasItems = {
 
 function CaracteristicasComponent({ items } : CaracteristicasItems){
 
-    console.log(items);
-
     return (
         <>
             <section className="caracteristicas">

@@ -54,7 +54,7 @@ function DateComponent({ items } : CalendarItems){
         setStartDate(start);
         setEndDate(end);
 
-        if(end && items.items.unabailable){
+        if(end){
 
             const arrayDate : DateDisponibleProps[] = [];
             const validateStartDate = new Date(start);
@@ -63,20 +63,21 @@ function DateComponent({ items } : CalendarItems){
 
             while(currentDate <= validateEndDate){
 
-                const currentDateString = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`;
+                const currentDateString = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
                 let disponibilidadDate = true;
 
-                items.items.unabailable.forEach(e => {
+                items.items.unabailable?.forEach(e => {
                     const date = new Date(e.date);
                     date.setDate(date.getDate() + 1);
-                    const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+                    const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
                 
                     if (dateString === currentDateString) {
+
                         disponibilidadDate = false;
                         return;
                     }
 
-                    disponibilidadDate = true;
+                    // disponibilidadDate = true;
                 });
 
                 arrayDate.push({
@@ -88,12 +89,12 @@ function DateComponent({ items } : CalendarItems){
 
             }
 
-            // items.items.data.attributes.Unavailable.forEach( e => {
-            //     const fechaConsulta = new Date(e.Date);
+            // items.items.unabailable?.forEach( e => {
+            //     const fechaConsulta = new Date(e.date);
             //     fechaConsulta.setDate(fechaConsulta.getDate() + 1);
 
             //     if(fechaConsulta > validateStartDate && fechaConsulta < validateEndDate){
-            //         arrayDate.push(`${fechaConsulta.getDate()}/${fechaConsulta.getMonth()}/${fechaConsulta.getFullYear()}`)
+            //         arrayDate.push(`${fechaConsulta.getDate()}/${fechaConsulta.getMonth()}/${fechaConsulta.getFullYear()}`);
             //     }
 
             // })

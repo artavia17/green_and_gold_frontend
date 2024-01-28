@@ -30,8 +30,6 @@ function SliderComponent({ name, images } : ImageProps){
 
     useEffect(() => {
 
-        console.log(images);
-
         images?.forEach((item, key) => {
             if(item.name == name){
                 setInitialSwiper(key);

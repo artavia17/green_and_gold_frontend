@@ -39,8 +39,6 @@ type CommentsProps = {
 
 function CommentsComponent({ items } : CommentsProps ) {
 
-    console.log(items);
-
     const open_modal = () => {
 
         const loadComponent : HTMLElement | null = document.querySelector('.location_section');
