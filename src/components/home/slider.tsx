@@ -38,6 +38,8 @@ function SliderHome({ content } : DataProps){
 
     useEffect(  () => {
 
+        document.body.style.overflow = 'initial';
+
         setHeightItems();
 
         window.onresize = () => {

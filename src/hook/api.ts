@@ -7,7 +7,7 @@ const fethItem : Function = async (item: string, filters?: string | null ) => {
 
         const apiURL = `${api}${item}`
 
-        const response = await fetch(apiURL, { cache: 'reload', next: { revalidate  : 1800} });
+        const response = await fetch(apiURL, { next: { revalidate: 3600 } });
 
         const data = await response.json();
 

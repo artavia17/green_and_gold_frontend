@@ -23,7 +23,7 @@ const WhoComponent = ( { content } : ContentProps ) => {
 
   useEffect(  () => {
 
-    // setHeightWindow(SreeenHeight());
+    document.body.style.overflow = 'initial';
 
   }, []);
 

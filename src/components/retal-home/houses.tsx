@@ -72,6 +72,8 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
 
   useEffect( () => {
 
+    document.body.style.overflow = 'initial';
+
     if(content){
       setLoad(true)
       setUpdate(false)

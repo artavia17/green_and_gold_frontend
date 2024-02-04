@@ -102,7 +102,14 @@ function FotosComponent({ imagenes, close }: PropsData) {
     return (
         <>
 
-            <section className={'fotosComponent' + ' ' + (remove ? 'remove' : '')} key={imagenes?.length}>
+            <section onClick={() => {
+                            setRemove(true);
+
+                            setTimeout(() => {
+                                close();
+                            }, 200)
+
+                        }} className={'fotosComponent' + ' ' + (remove ? 'remove' : '')} key={imagenes?.length}>
 
                 <section className="items">
 
@@ -125,7 +132,7 @@ function FotosComponent({ imagenes, close }: PropsData) {
                                 imagenes.map((item, key) => {
 
                                     return (
-                                        <section onClick={() => openModal(item.name)} className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
+                                        <section onClick={(e) => e.stopPropagation()} className={'photo' + ' ' + (key == 0 ? 'big' : '') + ' ' + (key % 5 == 0 ? 'big' : '')} key={key} ref={addPhoto}>
                                             <Image src={item.url} alt={item.name ? item.name : item.filename} title={item.name ? item.name : item.filename} width={1000} height={1000} priority  />
                                         </section>
                                     )

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+
 
 type ArrayImage = {
     data: {
@@ -27,6 +27,11 @@ type ContentType = {
 };
 
 export default function PropertyComponent({ content }: ContentType) {
+
+  useEffect(()=>{
+    document.body.style.overflow = 'initial';
+  }, [])
+
 
   return (
     <>
