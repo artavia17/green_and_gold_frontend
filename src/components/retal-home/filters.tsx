@@ -14,8 +14,8 @@ type HousesItems = {
     characteristics: {
         bathrooms: number,
         baths: number,
-        bedrooms: number,
         beds: number,
+        bedrooms: number,
         sq_ft: number
     },
     main_image: string,
@@ -38,7 +38,7 @@ type FiltersComponentProps = {
 function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComponentProps ){
 
     const [priceDefault, setPriceDefault] = useState({ value: '', label: '' });
-    const [bedroomsDefault, setBedroomsDefault] = useState({ value: '', label: '' });
+    const [bedsDefault, setbedsDefault] = useState({ value: '', label: '' });
     const [bathroomsDefault, setBathroomsDefault] = useState({ value: '', label: '' });
     const [floorsDefault, setFloorsDefault] = useState({ value: '', label: '' });
 
@@ -46,7 +46,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
 
     // Filtros finales
     const [filterPrice, setFilterPrice] = useState<any[]>([]);
-    const [filterBedrooms, setFilterBedrooms] = useState<any[]>([]);
+    const [filterBeds, setFilterBeds] = useState<any[]>([]);
     const [filterBathrooms, setFilterBathrooms] = useState<any[]>([]);
     const [filterFloors, setFilterFloors] = useState<any[]>([]);
 
@@ -77,12 +77,12 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
 
                     });
                     
-                }else if(item == 'bedrooms'){
+                }else if(item == 'beds'){
 
-                    filterBedrooms.forEach( (e, key) => {
+                    filterBeds.forEach( (e, key) => {
                         
                         if(e.value == allFilters[item]){
-                            setBedroomsDefault(filterBedrooms[key]);
+                            setbedsDefault(filterBeds[key]);
                         }
 
                     });
@@ -110,35 +110,21 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
 
         const filter = () => {
 
-            // const { items } : FiltersItems = await fethItem('rental-homes');
             const dataArray = filters.items;
 
             dataArray.forEach( (e) => {
 
                 const attributes = e.characteristics;
 
-            //     const prices : string = attributes.Price; - null
-            //     const floors : string = attributes.Floors; - null
-            //     const type_currency : string = attributes.Type_of_currency; - null
-
-                const bedrooms : number = attributes.bedrooms;
+                const beds : number = attributes.beds;
                 const bathrooms : number = attributes.bathrooms;
 
-
-            //     if(!filterPrice.some(item => item.value === prices)){
-            //         const arrayPrices = [...filterPrice, {
-            //             value: prices,
-            //             label: type_currency == 'Colones' ? `₡${prices}` : `$${prices}`
-            //         }]
-            //         setFilterPrice(arrayPrices);
-            //     }
-
-                if(!filterBedrooms.some(item => item.value === bedrooms)){
-                    const arrayBedrooms = [...filterBedrooms, {
-                        value: bedrooms,
-                        label: capitalizeString(NumberToWords.toWords(Number(bedrooms)))
+                if(!filterBeds.some(item => item.value === beds)){
+                    const arrayBeds = [...filterBeds, {
+                        value: beds,
+                        label: capitalizeString(NumberToWords.toWords(Number(beds)))
                     }]
-                    setFilterBedrooms(arrayBedrooms);
+                    setFilterBeds(arrayBeds);
                 }
 
                 if(!filterBathrooms.some(item => item.value === bathrooms)){
@@ -149,22 +135,12 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                     setFilterBathrooms(arrayBathrooms);
                 }
 
-            //     if(!filterFloors.some(item => item.value === floors)){
-
-            //         const arrayFloors = [...filterFloors, {
-            //             value: floors,
-            //             label: capitalizeString(NumberToWords.toWords(Number(floors)))
-            //         }]
-            //         setFilterFloors(arrayFloors);
-            //     }
-
-                
             });
         }
 
         filter();
 
-    }, [actualesFilters, filterPrice, filterBedrooms, filterBathrooms, filterFloors, filters]);
+    }, [actualesFilters, filterPrice, filterBeds, filterBathrooms, filterFloors, filters]);
 
     const loadSelect = (e : SingleValue<{ value: string; label: string;}>, type : string) => {
 
@@ -190,8 +166,8 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                 value: '',
                 label: ''
             })
-        }else if(type == 'bedrooms' && !e?.value){
-            setBedroomsDefault({
+        }else if(type == 'beds' && !e?.value){
+            setbedsDefault({
                 value: '',
                 label: ''
             })
@@ -236,27 +212,17 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
     return (
         <>
             <section className="filters" onClick={ ( event : React.MouseEvent ) => event.stopPropagation() }>
-                {/* <section className='filter'>
-                    <Select
-                        placeholder="Price"
-                        value={priceDefault?.value ? priceDefault : null}
-                        isClearable
-                        instanceId={useId()}
-                        options={filterPrice}
-                        onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'price') }
-                    />
-                </section> */}
-
+ 
                 <section className='filter'>
                     <Select
-                        placeholder="Bedrooms"
-                        value={bedroomsDefault?.value ? bedroomsDefault : null}
-                        options={filterBedrooms}
+                        placeholder="Beds"
+                        value={bedsDefault?.value ? bedsDefault : null}
+                        options={filterBeds}
                         isClearable
-                        inputId='bedrooms_id'
-                        id='bedrooms_id'
+                        inputId='beds_id'
+                        id='beds_id'
                         instanceId={useId()}
-                        onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'bedrooms') }
+                        onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'beds') }
                     />
                 </section>
                 <section className='filter'>
@@ -271,18 +237,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
                         onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'bathrooms') }
                     />
                 </section>
-                {/* <section className='filter'>
-                    <Select
-                        placeholder="Floors"
-                        value={floorsDefault?.value ? floorsDefault : null}
-                        options={filterFloors}
-                        isClearable
-                        inputId='floors_id'
-                        id='floors_id'
-                        instanceId={useId()}
-                        onChange={ (e: SingleValue<{ value: string; label: string;}>) => loadSelect(e, 'floors') }
-                    />
-                </section> */}
+
                
             </section>
         </>

@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Map from "@/assets/img/icons/map.svg";
 import Phone from "@/assets/img/icons/phone.circle.svg";
+import Whatsapp from "@/assets/img/icons/whatsapp.svg";
 import Email from "@/assets/img/icons/envelope.svg";
 import LogoFooter from "@/assets/img/icons/logo_footer.png";
 import Instagram from "@/assets/img/icons/instagram.svg";
@@ -100,27 +101,54 @@ function FooterClient({ footer } : FooterProps) {
               {
                 footer.items.number.length ? (
                   <section className="contact">
-                    <Image
-                      src={Phone.src}
-                      alt="Logo del contacto"
-                      width={100}
-                      height={100}
-                    />
-                    <div>
-                      {
-                          footer?.items.number.map( (item, key)  => {
-                              return (
-                                  <a 
-                                    href={item.whatsapp ?  `https://api.whatsapp.com/send?phone=${item.code.replace('+', '')}${item.number}` : `tel:${item.code}${item.number}`}
-                                    title={ item.whatsapp ? `Whatsapp ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}` : `Phone ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}`} key={key}
-                                    target={item.whatsapp ? '_blank' : ''}
-                                  >
-                                      {item.country}: {item.code} {item.number}
-                                  </a>
-                              )
-                          })
-                      }
-                    </div>
+                    <section>
+                      <Image
+                        src={Whatsapp.src}
+                        alt="Logo del contacto"
+                        width={100}
+                        height={100}
+                      />
+                      <div>
+                        {
+                            footer?.items.number.map( (item, key)  => {
+
+                                return  item.whatsapp ?  (
+                                    <a 
+                                      href={item.whatsapp ?  `https://api.whatsapp.com/send?phone=${item.code.replace('+', '')}${item.number}` : `tel:${item.code}${item.number}`}
+                                      title={ item.whatsapp ? `Whatsapp ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}` : `Phone ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}`} key={key}
+                                      target={item.whatsapp ? '_blank' : ''}
+                                    >
+                                        {item.country}: {item.code} {item.number}
+                                    </a>
+                                ) : ''
+                            })
+                        }
+                      </div>
+                    </section>
+                    <section>
+                      <Image
+                        src={Phone.src}
+                        alt="Logo del contacto"
+                        width={100}
+                        height={100}
+                      />
+                      <div>
+                        {
+                            footer?.items.number.map( (item, key)  => {
+
+                                return  !item.whatsapp ?  (
+                                    <a 
+                                      href={item.whatsapp ?  `https://api.whatsapp.com/send?phone=${item.code.replace('+', '')}${item.number}` : `tel:${item.code}${item.number}`}
+                                      title={ item.whatsapp ? `Whatsapp ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}` : `Phone ${item.country == 'CR' ? 'Costa Rica' : 'USA'}: ${item.code} ${item.number}`} key={key}
+                                      target={item.whatsapp ? '_blank' : ''}
+                                    >
+                                        {item.country}: {item.code} {item.number}
+                                    </a>
+                                ) : ''
+                            })
+                        }
+                      </div>
+                    </section>
                   </section>                  
                 ) : ''
               }

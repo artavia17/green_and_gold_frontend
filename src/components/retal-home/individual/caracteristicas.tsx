@@ -34,10 +34,14 @@ function CaracteristicasComponent({ items } : CaracteristicasItems){
                     <Image src={TagGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
                     <span>{items.items.characteristics.baths} baths</span>
                 </section>
-                <section className="item" title={`${items.items.characteristics.sq_ft} sq ft`}>
-                    <Image src={SQGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
-                    <span>{items.items.characteristics.sq_ft} sq ft</span>
-                </section>
+                {
+                    items.items.characteristics.sq_ft ? (
+                        <section className="item" title={`${items.items.characteristics.sq_ft} sq ft`}>
+                            <Image src={SQGreen.src} alt="Icon of Bed" title="Icon of Bed" width={100} height={100}/>
+                            <span>{items.items.characteristics.sq_ft} sq ft</span>
+                        </section>
+                    ) : ''
+                }
             </section>
         </>
     )

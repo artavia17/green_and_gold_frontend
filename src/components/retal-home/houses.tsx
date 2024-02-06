@@ -15,7 +15,7 @@ import { fethItem } from "@/hook/api";
 import FotosComponent from "./fotos";
 
 type Filter = {
-  bedrooms: number | null,
+  beds: number | null,
   bathrooms: number | null
 }
 
@@ -37,8 +37,8 @@ type HousesItems = {
   characteristics: {
       bathrooms: number,
       baths: number,
-      bedrooms: number,
       beds: number,
+      bedrooms: number,
       sq_ft: number
   },
   main_image: string,
@@ -67,7 +67,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
 
   const [newFilter, setNewFilter] = useState<Filter>({
     bathrooms: null,
-    bedrooms: null
+    beds: null
   })
 
   useEffect( () => {
@@ -102,26 +102,26 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
 
     const queryParams = new URLSearchParams(window.location.search);
     const price = queryParams.get("price");
-    const bedrooms = queryParams.get("bedrooms");
+    const beds = queryParams.get("beds");
     const bathrooms = queryParams.get("bathrooms");
     const floors = queryParams.get("floors");
     let filter : Filter = {
-      bedrooms: null,
+      beds: null,
       bathrooms: null
     };
     let filterInformation = information;
 
-    if (!price && !bedrooms && !bathrooms && !floors) {
+    if (!price && !beds && !bathrooms && !floors) {
 
       setNewFilter({
         bathrooms: null,
-        bedrooms: null
+        beds: null
       });
 
     } else {
 
-      if (bedrooms) {
-        filter.bedrooms = bedrooms ? Number(bedrooms) : null;
+      if (beds) {
+        filter.beds = beds ? Number(beds) : null;
       }
 
       if (bathrooms) {
@@ -129,10 +129,10 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
       }
 
       filterInformation = information.filter( e => {
-        if((!newFilter.bedrooms && !newFilter.bathrooms) || 
-        (newFilter.bathrooms == e.characteristics.bathrooms && !newFilter.bedrooms) ||
-        (newFilter.bedrooms == e.characteristics.bedrooms && !newFilter.bathrooms) ||
-        (newFilter.bathrooms == e.characteristics.bathrooms && newFilter.bedrooms == e.characteristics.bedrooms)){
+        if((!newFilter.beds && !newFilter.bathrooms) || 
+        (newFilter.bathrooms == e.characteristics.bathrooms && !newFilter.beds) ||
+        (newFilter.beds == e.characteristics.beds && !newFilter.bathrooms) ||
+        (newFilter.bathrooms == e.characteristics.bathrooms && newFilter.beds == e.characteristics.beds)){
           return e;
         }
       })
@@ -162,10 +162,10 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
             const allImages = item.allImages ? item.allImages : undefined
 
             return (
-              (!newFilter.bedrooms && !newFilter.bathrooms) || 
-              (newFilter.bathrooms == attributes.bathrooms && !newFilter.bedrooms) ||
-              (newFilter.bedrooms == attributes.bedrooms && !newFilter.bathrooms) ||
-              (newFilter.bathrooms == attributes.bathrooms && newFilter.bedrooms == attributes.bedrooms) ? (
+              (!newFilter.beds && !newFilter.bathrooms) || 
+              (newFilter.bathrooms == attributes.bathrooms && !newFilter.beds) ||
+              (newFilter.beds == attributes.beds && !newFilter.bathrooms) ||
+              (newFilter.bathrooms == attributes.bathrooms && newFilter.beds == attributes.beds) ? (
                 <section className="house" key={key} title={item.titulo}>
                   <section className="img">
                     <div className="presentation" dangerouslySetInnerHTML={{__html: principalImage}} ></div>

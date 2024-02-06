@@ -83,7 +83,7 @@ function SliderHome({ content } : DataProps){
                     centeredSlides={true}
                     effect="coverflow"
                     autoplay={{
-                        delay: 3000,
+                        delay: 8000,
                     }}
                     style={{
                         height: height > 0 ? `${height + 200}px` : ''
