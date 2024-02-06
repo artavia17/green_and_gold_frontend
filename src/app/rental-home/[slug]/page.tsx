@@ -92,7 +92,7 @@ export async function generateMetadata({ params : {slug} } : PageProps ) {
     description: !items.items.data ? items.items.description : '',
     metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
     alternates: {
-      canonical: '/',
+      canonical: 'https://www.gngcr.com',
       languages: {
         'en-US': '/',
       },

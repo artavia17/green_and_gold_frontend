@@ -51,7 +51,7 @@ function Header(){
                         priority
                     />
                 </Link>
-                <button className={`menu_item ${activeMenu ? 'active' : ''} ${activeRemove ? 'remove_menu_item' : ''}`} onClick={handleMenuClick}>
+                <button className={`menu_item ${activeMenu ? 'active' : ''} ${activeRemove ? 'remove_menu_item' : ''}`} onClick={handleMenuClick} aria-label='Open Menu' title='Open menu'>
                     <hr />
                     <hr />
                     <hr />

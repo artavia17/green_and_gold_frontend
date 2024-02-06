@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
   metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.gngcr.com',
     languages: {
       'en-US': '/',
     },

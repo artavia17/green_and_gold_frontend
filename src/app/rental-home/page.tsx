@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: 'Experience the beauty of Costa Rica from the comfort of your own rental home. Choose from a variety of options, from beach houses to city apartments.',
     metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
     alternates: {
-      canonical: '/',
+      canonical: 'https://www.gngcr.com',
       languages: {
         'en-US': '/',
       },
