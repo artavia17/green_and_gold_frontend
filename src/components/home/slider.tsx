@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 // Aqui vamos a utilizar la libreria de swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -102,9 +101,7 @@ function SliderHome({ content } : DataProps){
                                         }}
                                     >
                                         <div className='content'>
-                                            <div>
-                                                <Image src={item.background} width={700} height={700} alt={item.titulo} loading='eager'/>
-                                            </div>
+                                            <div dangerouslySetInnerHTML={{__html: item.background}}></div>
                                             <h2 title={item.titulo} data-scroll data-scroll-speed="1">{item.titulo}</h2>
                                             <a title={item.button.link ? item.titulo : 'Check our rental homes'} href={item.button.link} target={item.button.external ? '_blank' : ''} data-scroll data-scroll-speed="1"> 
                                                 {
