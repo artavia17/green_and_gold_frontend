@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Logo from '@/assets/img/Green-and-gold.png';
 import Image from 'next/image';
+import NextTopLoader from 'nextjs-toploader';
 
 import NavComponent from './nav';
 
@@ -43,6 +44,19 @@ function Header(){
 
     return (
         <>
+
+            <NextTopLoader
+                color="#37B34A"
+                initialPosition={0.08}
+                crawlSpeed={200}
+                height={3}
+                crawl={true}
+                showSpinner={false}
+                easing="ease"
+                speed={200}
+                shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            />
+
             <header>
                 <Link href="/" title="Volver a inicio" className='logo'>
                     <Image

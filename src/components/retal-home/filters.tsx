@@ -190,7 +190,7 @@ function FiltersComponent( { closeFilters, updateFilter, filters } : FiltersComp
 
     useEffect(() => {
         updateFilter();
-    }, [loadSelect])
+    }, [updateFilter]);
     
 
     const setValueFilter = (type: string, value: string | undefined) => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import ImageLocation from '@/assets/img/icons/mappin.svg';
 import ImageCalendar from '@/assets/img/icons/calendar.svg';
@@ -47,7 +47,7 @@ function DateComponent({ items } : CalendarItems){
     const [consultText, setConsultText] = useState<string>('Send message')
     const [consultTextView, setConsultTextView] = useState<string>('Send message')
     const [diasNoDisponibles, setDiasNoDisponibles] = useState<DateDisponibleProps[]>([])
-    const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const day = useMemo(() => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], []);
 
     const onChange = (dates : any) => {
         const [start, end] = dates;
@@ -108,17 +108,17 @@ function DateComponent({ items } : CalendarItems){
     };
 
 
-    const resentUpdate = (resentString : string, more? : boolean) => {
 
+    const resentUpdate = useCallback((resentString : string, more? : boolean) => {
         const newDate : Date = new Date(resentString);
         const dayNumber : number = newDate.getDate();
         const dayString : string = day[newDate.getDay()];
         const monthNumber : Number = newDate.getMonth() + 1;
         const yearNumber : Number = newDate.getFullYear();
         const dayThreeLetters = dayString.substring(0, 3);
-
         return `${dayThreeLetters} ${ Number(dayNumber) <= 9 ? '0' + dayNumber : dayNumber }/${ Number(monthNumber) <= 9 ? '0' + monthNumber : monthNumber }/${yearNumber}`;
-    }
+
+    }, [day]);
 
 
 
@@ -145,7 +145,7 @@ function DateComponent({ items } : CalendarItems){
 
         setDateUnavailable(arrayUnavailable);
 
-    }, [startDate, endDate]);
+    }, [startDate, endDate, items.items.unabailable, resentUpdate]);
 
 
     const open_modal = () => {

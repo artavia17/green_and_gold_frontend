@@ -5,7 +5,7 @@ import Header from "@/components/static/header";
 import Footer from "@/components/static/footer";
 
 // Loader
-import NextTopLoader from 'nextjs-toploader';
+// import NextTopLoader from 'nextjs-toploader';
 
 
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextTopLoader
+        {/* <NextTopLoader
           color="#37B34A"
           initialPosition={0.08}
           crawlSpeed={200}
@@ -27,7 +27,7 @@ export default function RootLayout({
           easing="ease"
           speed={200}
           shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        />
+        /> */}
         <Header />
         <main>{children}</main>
         <Footer />
