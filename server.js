@@ -1,6 +1,8 @@
 const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
+const fs = require('fs');
+const path = require('path');
  
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
@@ -9,6 +11,8 @@ const port = 3000
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
  
+const homePagePath = path.join(__dirname, 'static', '../out/index.html');
+
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {
@@ -17,7 +21,18 @@ app.prepare().then(() => {
       const parsedUrl = parse(req.url, true)
       const { pathname, query } = parsedUrl
  
-      if (pathname === '/a') {
+      if(pathname === '/'){
+        fs.readFile(homePagePath, 'utf8', (err, html) => {
+          if (err) {
+            console.error('Error reading the home page file', err);
+            res.statusCode = 500;
+            res.end('Internal server error');
+            return;
+          }
+          res.setHeader('Content-Type', 'text/html');
+          res.end(html);
+        });
+      }else if (pathname === '/a') {
         await app.render(req, res, '/a', query)
       } else if (pathname === '/b') {
         await app.render(req, res, '/b', query)

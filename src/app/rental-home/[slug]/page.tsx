@@ -79,6 +79,11 @@ async function data(slug: string) {
   return items;
 }
 
+// Esto se utilizar para exportar de forma dinamica el sitio web
+export function generateStaticParams() {
+  return [{ slug: 'villa-magayon' }, { slug: 'villa-esperanza' }, { slug: 'casa-tres-monos' }]
+}
+
 export async function generateMetadata({ params : {slug} } : PageProps ) {
 
   const items = await data(slug);

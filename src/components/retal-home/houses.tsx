@@ -79,6 +79,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
       setUpdate(false)
     }
 
+
   }, [content])
 
   const openFotos = (allImages: ImagesItems[] | undefined) => {
@@ -105,6 +106,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
     const beds = queryParams.get("beds");
     const bathrooms = queryParams.get("bathrooms");
     const floors = queryParams.get("floors");
+
     let filter : Filter = {
       beds: null,
       bathrooms: null
@@ -143,9 +145,16 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
 
     setLengthFilter(filterInformation.length)
 
+
   };
 
   useImperativeHandle(ref, () => ({ updateFilter }));
+
+  useEffect(()=>{
+    setTimeout(() => {
+      updateFilter();
+    }, 100)
+  }, [])
 
 
   return (

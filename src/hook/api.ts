@@ -1,5 +1,5 @@
-const api : string = 'https://gng-api.webdevgenius.tech/wp-json/wp/v2/';
-const img : string = 'https://gng-api.webdevgenius.tech/';
+const api : string = 'https://gngcr.com/api/wp-json/wp/v2/';
+const img : string = 'https://gngcr.com/api/';
 
 const fethItem : Function = async (item: string, filters?: string | null ) => {
 
