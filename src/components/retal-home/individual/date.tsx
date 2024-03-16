@@ -52,9 +52,12 @@ function DateComponent({ items } : CalendarItems){
     const day = useMemo(() => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], []);
 
 
-    const onChange = (dates : any) => {
+    const onChange = async (dates : any) => {
 
         const [start, end] = dates;
+        const unabailableAll = await getDate();
+        const unabailable = unabailableAll.dates;
+
         setStartDate(start);
         setEndDate(end);
 
@@ -69,11 +72,11 @@ function DateComponent({ items } : CalendarItems){
                 const currentDateString = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
                 let disponibilidadDate = true;
 
-                items.items.unabailable?.forEach(e => {
-                    const date = new Date(e.date);
+                unabailable?.forEach(e => {
+                    const date = new Date(e);
                     date.setDate(date.getDate() + 1);
-                    const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-                
+                    const dateString = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
                     if (dateString === currentDateString) {
 
                         disponibilidadDate = false;
