@@ -123,15 +123,15 @@ function DateComponent({ items } : CalendarItems){
 
         if(items.items.titulo == 'Villa Magayón'){
 
-            dates = await GoogleEvent('9ff4ac92d0bc7b0c9e26fcb0b4e71a5e89b9063471a27ecb040fc77e3afb02de@group.calendar.google.com');
+            dates = await GoogleEvent('gngcr.com_u2ot3u3l7v76o0b5d35saonumk@group.calendar.google.com');
 
         }else if(items.items.titulo == 'Villa Esperanza'){
 
-            dates = await GoogleEvent('1155da5e7ec3b6aec7afa15d05ed7d4e0954f4c0dfe87f4a155147aaf6ad8187@group.calendar.google.com');
+            dates = await GoogleEvent('gngcr.com_o3n6v187bppp7u919q0qbmo85c@group.calendar.google.com');
 
         }else if(items.items.titulo == 'Casa Tres Monos'){
 
-            dates = await GoogleEvent('0d2597710c70ee22829d6b94560ab7abe917745b52bb3f108a21be14b04e7b21@group.calendar.google.com');
+            dates = await GoogleEvent('c_13qvnr1l9v3h04m98urv4mov8g@group.calendar.google.com');
 
         }
 

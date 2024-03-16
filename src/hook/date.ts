@@ -1,6 +1,6 @@
 import { update } from "lodash";
 
-const key : string = 'AIzaSyAI_F0qqq_wL-w3VAQab1vjOKdnsJpC2aI'
+const key : string = 'AIzaSyBu82zH1sdTJs3nYI1Gre9OzqM3fNcDl90'
 
 interface date {
     date: string
