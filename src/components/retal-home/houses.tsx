@@ -9,9 +9,9 @@ import {
   forwardRef,
   useImperativeHandle,
   Ref,
-  useEffect
+  useEffect,
+  useCallback
 } from "react";
-import { fethItem } from "@/hook/api";
 import FotosComponent from "./fotos";
 
 type Filter = {
@@ -99,7 +99,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
     }
   };
 
-  const updateFilter = () => {
+  const updateFilter = useCallback(() => {
 
     const queryParams = new URLSearchParams(window.location.search);
     const price = queryParams.get("price");
@@ -146,7 +146,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
     setLengthFilter(filterInformation.length)
 
 
-  };
+  }, [information, newFilter.bathrooms, newFilter.beds]);
 
   useImperativeHandle(ref, () => ({ updateFilter }));
 
@@ -154,7 +154,7 @@ function HousesComponent({content} : HousesProbs, ref : Ref<RefType>) {
     setTimeout(() => {
       updateFilter();
     }, 100)
-  }, [])
+  }, [updateFilter])
 
 
   return (

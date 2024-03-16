@@ -112,7 +112,7 @@ function DateComponent({ items } : CalendarItems){
 
     }, [day]);
 
-    const getDate = async () => {
+    const getDate = useCallback(async () => {
 
         let dates : { status: number, update: any, msg: string, dates: Date [] } = {
             status: 400,
@@ -139,7 +139,7 @@ function DateComponent({ items } : CalendarItems){
 
         return dates
 
-    }
+    }, [items.items.titulo]);
 
     useEffect(()=>{
 
@@ -170,18 +170,6 @@ function DateComponent({ items } : CalendarItems){
 
         }
 
-        // if(items.items.unabailable){
-
-        //     items.items.unabailable.forEach( (e) =>  {
-
-        //         const newDateUnavailable = new Date(e.date);
-        //         const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
-        //         arrayUnavailable.push(setNewDate);
-                
-        //     });
-
-        // }
-
         dateUnabailable().catch( err => {
             console.error(`Error: ${err}`);
         });
@@ -189,7 +177,7 @@ function DateComponent({ items } : CalendarItems){
 
         // setDateUnavailable(arrayUnavailable);
 
-    }, [startDate, endDate, items.items.unabailable, resentUpdate, items.items.titulo]);
+    }, [startDate, endDate, items.items.unabailable, resentUpdate, items.items.titulo, getDate]);
 
 
     const open_modal = () => {
