@@ -175,8 +175,6 @@ function DateComponent({ items } : CalendarItems){
         });
 
 
-        // setDateUnavailable(arrayUnavailable);
-
     }, [startDate, endDate, items.items.unabailable, resentUpdate, items.items.titulo, getDate]);
 
 
