@@ -10,7 +10,9 @@
     "export": "next export"
   },
   "dependencies": {
+    "@googleapis/calendar": "^9.7.0",
     "framer-motion": "^10.16.4",
+    "googleapis": "^133.0.0",
     "gsap": "^3.12.2",
     "gsap-trial": "^3.12.2",
     "locomotive-scroll": "^4.1.4",

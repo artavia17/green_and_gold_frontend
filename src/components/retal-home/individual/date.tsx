@@ -6,6 +6,7 @@ import ImageLocation from '@/assets/img/icons/mappin.svg';
 import ImageCalendar from '@/assets/img/icons/calendar.svg';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import GoogleEvent from "@/hook/date";
 
 
 type Unabailable = {
@@ -46,10 +47,13 @@ function DateComponent({ items } : CalendarItems){
     const [validarDisponibilidad, setValidarDisponibilidad] = useState<boolean>(false);
     const [consultText, setConsultText] = useState<string>('Send message')
     const [consultTextView, setConsultTextView] = useState<string>('Send message')
+    const [lastUpdate, setLastUpdate] = useState<string>('')
     const [diasNoDisponibles, setDiasNoDisponibles] = useState<DateDisponibleProps[]>([])
     const day = useMemo(() => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], []);
 
+
     const onChange = (dates : any) => {
+
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
@@ -57,7 +61,6 @@ function DateComponent({ items } : CalendarItems){
         if(end){
 
             const arrayDate : DateDisponibleProps[] = [];
-            const validateStartDate = new Date(start);
             const validateEndDate = new Date(end);
             const currentDate = new Date(start);
 
@@ -77,7 +80,6 @@ function DateComponent({ items } : CalendarItems){
                         return;
                     }
 
-                    // disponibilidadDate = true;
                 });
 
                 arrayDate.push({
@@ -89,17 +91,6 @@ function DateComponent({ items } : CalendarItems){
 
             }
 
-            // items.items.unabailable?.forEach( e => {
-            //     const fechaConsulta = new Date(e.date);
-            //     fechaConsulta.setDate(fechaConsulta.getDate() + 1);
-
-            //     if(fechaConsulta > validateStartDate && fechaConsulta < validateEndDate){
-            //         arrayDate.push(`${fechaConsulta.getDate()}/${fechaConsulta.getMonth()}/${fechaConsulta.getFullYear()}`);
-            //     }
-
-            // })
-
-
             setDiasNoDisponibles(arrayDate);
             setValidarDisponibilidad(true);
 
@@ -110,6 +101,7 @@ function DateComponent({ items } : CalendarItems){
 
 
     const resentUpdate = useCallback((resentString : string, more? : boolean) => {
+
         const newDate : Date = new Date(resentString);
         const dayNumber : number = newDate.getDate();
         const dayString : string = day[newDate.getDay()];
@@ -120,32 +112,84 @@ function DateComponent({ items } : CalendarItems){
 
     }, [day]);
 
+    const getDate = async () => {
 
+        let dates : { status: number, update: any, msg: string, dates: Date [] } = {
+            status: 400,
+            update: null,
+            msg: '',
+            dates: []
+        };
+
+        if(items.items.titulo == 'Villa Magayón'){
+
+            dates = await GoogleEvent('9ff4ac92d0bc7b0c9e26fcb0b4e71a5e89b9063471a27ecb040fc77e3afb02de@group.calendar.google.com');
+
+        }else if(items.items.titulo == 'Villa Esperanza'){
+
+            dates = await GoogleEvent('1155da5e7ec3b6aec7afa15d05ed7d4e0954f4c0dfe87f4a155147aaf6ad8187@group.calendar.google.com');
+
+        }else if(items.items.titulo == 'Casa Tres Monos'){
+
+            dates = await GoogleEvent('0d2597710c70ee22829d6b94560ab7abe917745b52bb3f108a21be14b04e7b21@group.calendar.google.com');
+
+        }
+
+        setLastUpdate(dates.update);
+
+        return dates
+
+    }
 
     useEffect(()=>{
 
         setStartDateString(resentUpdate(startDate.toString()));
         endDate ? setEndDateString(resentUpdate(endDate.toString())) : setEndDateString(resentUpdate(startDate.toString()));
 
-        const arrayUnavailable = [];
-        arrayUnavailable.push(new Date());
+        const dateUnabailable = async () => {
 
-        if(items.items.unabailable){
+            const unabailableAll = await getDate();
+            const unabailable = unabailableAll.dates;
+            const arrayUnavailable = [];
+            arrayUnavailable.push(new Date());
 
-            items.items.unabailable.forEach( (e) =>  {
+            if(unabailable.length){
 
-                const newDateUnavailable = new Date(e.date);
-                const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
-                arrayUnavailable.push(setNewDate);
-                
-            });
+                unabailable.forEach( (e) =>  {
+
+                    const newDateUnavailable = new Date(e);
+                    const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
+                    arrayUnavailable.push(setNewDate);
+                    
+                });
+
+            }
+
+            setDateUnavailable(arrayUnavailable);
+
 
         }
 
+        // if(items.items.unabailable){
 
-        setDateUnavailable(arrayUnavailable);
+        //     items.items.unabailable.forEach( (e) =>  {
 
-    }, [startDate, endDate, items.items.unabailable, resentUpdate]);
+        //         const newDateUnavailable = new Date(e.date);
+        //         const setNewDate = newDateUnavailable.setDate(newDateUnavailable.getDate() + 1);
+        //         arrayUnavailable.push(setNewDate);
+                
+        //     });
+
+        // }
+
+        dateUnabailable().catch( err => {
+            console.error(`Error: ${err}`);
+        });
+
+
+        // setDateUnavailable(arrayUnavailable);
+
+    }, [startDate, endDate, items.items.unabailable, resentUpdate, items.items.titulo]);
 
 
     const open_modal = () => {
@@ -172,6 +216,7 @@ function DateComponent({ items } : CalendarItems){
     }
 
     const openMessages = () => {
+
         if(viewMessage){
             exitConsult();
         }else{
@@ -187,15 +232,18 @@ function DateComponent({ items } : CalendarItems){
                 }  
             }, 100)
         }
+
     }
 
     const viewSendMessage = () => {
+
         if(viewMessageItem){
             exitConsultView();
         }else{
             setViewMessageItem(true);
             setConsultTextView('Close message')
         }
+
     }
 
 
@@ -291,7 +339,7 @@ function DateComponent({ items } : CalendarItems){
                     </section>
                     <section className="calendar">
                         <section className="content">
-                            <p>Availability last updated on { resentUpdate(items.items.update, true) }. For the most recent updates, please send us a message.</p>
+                            <p>Availability last updated on { lastUpdate.length && resentUpdate(lastUpdate, true)}. For the most recent updates, please send us a message.</p>
                             <section className="bottoms">
                                 <button onClick={openMessages} title={consultText} >{consultText}</button>
                                 <button className="close" onClick={open_modal} title="Close">Close</button>
@@ -334,7 +382,7 @@ function DateComponent({ items } : CalendarItems){
                                                     Available days
                                                 </h3>
                                             </div>
-                                            <p>Availability last updated on {resentUpdate(items.items.update, true)}. For the most recent updates, please send us a message or email</p>
+                                            <p>Availability last updated on { lastUpdate.length && resentUpdate(lastUpdate, true)}. For the most recent updates, please send us a message or email</p>
                                             <div className="consultar">
                                                 <button className="consult" onClick={viewSendMessage}>{consultTextView}</button>
                                                 {
@@ -367,7 +415,7 @@ function DateComponent({ items } : CalendarItems){
                                             </table>
                                         </section>
                                     ) : (
-                                        <h1>Todos los dias disponibesl</h1>
+                                        <h1>Every day available</h1>
                                     )
                                 }
                             </div>
