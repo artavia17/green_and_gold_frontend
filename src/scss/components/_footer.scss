@@ -71,10 +71,10 @@ footer{
                     display: flex;
                     flex-flow: column;
 
-                    a,
-                    span {
-                        font-weight: bold;
-                    }
+                    // a,
+                    // span {
+                        // font-weight: bold;
+                    // }
 
                 }
 
@@ -91,7 +91,7 @@ footer{
                     margin-bottom: 5px;
                     font-size: $font-size-text-tablet;
                     transition: .2s ease;
-                    font-weight: bold;
+                    // font-weight: bold;
 
                     &:hover{
                         color: $color_hover_menu;                        
@@ -113,7 +113,7 @@ footer{
                     font-size: $font-size-text-tablet;
                     transition: .2s ease;
                     cursor: default;
-                    font-weight: bold;
+                    // font-weight: bold;
 
                     @include devices(mobile){
 

@@ -93,7 +93,7 @@ function RentalHomeComponent( { content, experiences } : RentalPrps ){
                 <section className="content_filters">
                     <section className="titles">
                         <h1>Rental Homes</h1>
-                        <h2>Book your Cossta Rican vacation</h2>
+                        <h2>Book your Costa Rican vacation</h2>
                     </section>
                     <section className="filter_component">
                         <section className="open_filters">
