@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     absolute: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.'
   },
   description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
-  metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
+  metadataBase: new URL('https://gngcr.com'),
   alternates: {
     canonical: 'https://www.gngcr.com',
     languages: {
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.',
     description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',
-    url: 'https://green-and-gold-frontend.vercel.app',
+    url: 'https://gngcr.com',
     siteName: 'Green and Gold',
     locale: 'en_US',
     type: 'website',
     images: [
       {
-          url: 'https://green-and-gold-frontend.vercel.app/favicon.ico',
+          url: 'https://gngcr.com/favicon.ico',
           width: 250,
           height: 250
       }
@@ -123,7 +123,7 @@ async function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    url: 'https://green-and-gold-frontend.vercel.app',
+    url: 'https://gngcr.com',
     name: 'Property management and luxury homes ,Península de Papagayo, Guanacaste. Green and Gold, Costa Rica.',
     image: '/favicon.ico',
     description: 'Green and Gold is a property management company in the Papagayo Peninsula, Guanacaste, Costa Rica. We offer a wide range of services, from home maintenance to bill payment and paperwork. Contact us today and enjoy your property worry-free!',

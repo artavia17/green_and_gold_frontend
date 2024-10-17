@@ -95,7 +95,7 @@ export async function generateMetadata({ params : {slug} } : PageProps ) {
       absolute: !items.items.data ? `${items.items.titulo} | Green and Gold` : `Not Found | Green and Gold`,
     },
     description: !items.items.data ? items.items.description : '',
-    metadataBase: new URL('https://green-and-gold-frontend.vercel.app'),
+    metadataBase: new URL('https://gngcr.com'),
     alternates: {
       canonical: 'https://www.gngcr.com',
       languages: {
@@ -105,7 +105,7 @@ export async function generateMetadata({ params : {slug} } : PageProps ) {
     openGraph: {
       title: !items.items.data ? `${items.items.titulo} | Green and Gold` : `Not Found | Green and Gold`,
       description: !items.items.data ? items.items.description : '',
-      url: 'https://green-and-gold-frontend.vercel.app',
+      url: 'https://gngcr.com',
       siteName: 'Green and Gold',
       locale: 'en_US',
       type: 'website',
@@ -127,7 +127,7 @@ async function SlugPage({ params: { slug } }: PageProps) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    url: 'https://green-and-gold-frontend.vercel.app',
+    url: 'https://gngcr.com',
     name: !items.items.data ? `${items.items.titulo} | Green and Gold` : `Not Found | Green and Gold`,
     image: '/favicon.ico',
     description: !items.items.data ? items.items.description : '',

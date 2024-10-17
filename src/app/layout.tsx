@@ -1,12 +1,9 @@
 import "../scss/global.scss";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 // Importamos el header y el footer
 import Header from "@/components/static/header";
 import Footer from "@/components/static/footer";
-
-// Loader
-// import NextTopLoader from 'nextjs-toploader';
-
 
 
 export default function RootLayout({
@@ -17,17 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <NextTopLoader
-          color="#37B34A"
-          initialPosition={0.08}
-          crawlSpeed={200}
-          height={3}
-          crawl={true}
-          showSpinner={false}
-          easing="ease"
-          speed={200}
-          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        /> */}
+        <GoogleAnalytics ga_id="G-3HPHPLYNZX" />
         <Header />
         <main>{children}</main>
         <Footer />
